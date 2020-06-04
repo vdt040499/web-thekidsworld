@@ -1,11 +1,447 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+    <% include ./partials/head %>
+</head>
+<body>
+    <% include ./partials/header %>
+
+    <img src="/images/banner.png" alt="banner-simple" width="100%" style="margin-top: 20px;">
+
+    <div class="container">
+        <p class="title">THE KID'S WORLD</p>
+        <p class="subtitle">Tất cả mọi thứ bạn cần cho các thiên thần nhỏ của bạn.</p>
+    </div>
+
+    <div class="container" style="margin-bottom: 30px ;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="cardinfo">
+                    <div class="cardinformation">
+                        <img src="/images/fashioncard.png" class="img-fluid" alt="About products">
+                        <p class="card-text">Chúng tôi cung cấp từ thời trang, đồ chơi đến thực phẩm.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="cardinfo">
+                    <div class="cardinformation">
+                        <img src="/images/agecard.png" class="img-fluid" alt="About ages">
+                        <p class="card-text">Phù hợp cho tất cả trẻ em trong độ tuổi từ 2 đến 10 tuổi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="cardinfo">
+                    <div class="cardinformation">
+                        <img src="/images/amazingcard.png" class="img-fluid" alt="Promise more">
+                        <p class="card-text">Đảm bảo thương hiệu và chất lượng trong từng sản phẩm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container" style="justify-content: center; display: flex; float: inline-start;
+        align-items: center;">
+            <img width="50px" style="padding-right: 10px;" src="/images/sparkle.png" alt="sparkle">
+            <p class="title">BÁN CHẠY</p>
+            <img width="50px" style="padding-left: 10px;"  src="/images/sparkle.png" alt="sparkle">
+        </div>
+        <p class="subtitle">Những sản phẩm này đã được chính các khách hàng của chúng tôi lựa chọn và tin dùng. 
+        Bạn hãy xem thử nhé!</p>
+        <div class="container" style="text-align: center;">
+            <a style="background-color: #FFE09E; padding: 10px 30px; margin: 10px 0px 40px 0px;" class="btn btn-default btn-lg text-white" href="#" role="button">MUA NGAY</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4">
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                  <div class="container" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
+                  </div>
+                  <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
+                      <div class="star-rate">
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star"></span>
+                          <span class="fa fa-star"></span>
+                      </div>
+                      <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
+                      <p class="product-price">200.000 VNĐ</p>
+                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-md text-white" href="#" role="button">Thêm vào giỏ</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 40px;">
+        <p class="title">BÁN CHẠY</p>
+        <p class="subtitle">Giá tốt nhất cho sản phẩm chất lượng nhất. Đừng bỏ lỡ cơ hội!</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="margin-top: 31px;">
+                <a href=""><img src="/images/sale1.png" alt="" style="width: 100%;"></a>
+            </div>
+    
+            <div class="col-md-6" style="margin-top: 31px;">
+               <a href=""><img src="/images/sale2.png" alt="" style="width :100%"></a>
+               <a href=""><img src="/images/sale3.png" alt="" style="width :100%; margin-top: 31px;" ></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 70px;">
+        <p class="title">DANH MỤC</p>
+        <p class="subtitle">Các mặt hàng chúng tôi đang cung cấp.</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/bear.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">QUẦN ÁO</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/accessories.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">PHỤ KIỆN</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/milk.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">SỮA</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/shoe.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">GIÀY DÉP</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/diaper.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">TÃ</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/kid-and-baby.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">ĐỒ CHƠI</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/toy.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">TRANG TRÍ</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="cate">
+                    <img src="/images/spoon.png" style="height: 100px;" alt="" >
+                    <p class="cate-title">THỰC PHẨM</p>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="text-align: center;">
+            <a style="background-color: #FFE09E; padding: 10px 30px; margin: 10px 0px 40px 0px;" class="btn btn-default btn-lg text-white" href="#" role="button">MUA NGAY</a>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 40px; margin-bottom: 20px;">
+        <p class="title">VÌ SAO NÊN CHỌN CHÚNG TÔI?</p>
+        <p class="subtitle">Vì chúng tôi là những người xuất sắc trong lĩnh vực của mình!</p>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" >
+                <div class="adven">
+                    <img src="/images/pay.png" alt="" style="width: 100px;">
+                    <p class="adven-title">THANH TOÁN</p>
+                    <p class="adven-sub">Thanh toán trực tiếp khi nhận hàng không cần cọc hay thanh toán trước.</p>
+                </div>
+            </div>
+    
+            <div class="col-md-4">
+                <div class="adven">
+                    <img src="/images/deli.png" alt="" style="width: 100px;">
+                    <p class="adven-title">GIAO HÀNG MIỄN PHÍ</p>
+                    <p class="adven-sub">Nhiều hình thức thanh toán tùy thuộc vào lựa chọn của bạn</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="adven">
+                    <img src="/images/warranty.png" alt="" style="width: 100px;">
+                    <p class="adven-title">BẢO HÀNH</p>
+                    <p class="adven-sub">Bảo hành 1 tháng cho tất cả các mặt hàng.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="adven">
+                    <img src="/images/return.png" alt="" style="width: 100px;">
+                    <p class="adven-title">ĐỔI TRẢ</p>
+                    <p class="adven-sub">Đổi trả hoàn tiền trong vòng 30 ngày.</p>
+                </div>
+            </div>
+    
+            <div class="col-md-4">
+                <div class="adven" >
+                    <img src="/images/product.png" alt="" style="width: 100px;">
+                    <p class="adven-title">CHẤT LƯỢNG</p>
+                    <p class="adven-sub">Chúng tôi tự tin bảo đảm chất lượng hàng hóa của mình.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="adven">
+                    <img src="/images/cusser.png" alt="" style="width: 100px;">
+                    <p class="adven-title">CHĂM SÓC KHÁCH HÀNG</p>
+                    <p class="adven-sub">Liên hệ và chúng tôi sẽ giải đáp cho bạn trong vòng 24 giờ làm việc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="margin-top: 40px; margin-bottom: 30px;">
+        <p style="margin-bottom: 20px;font-size: 45px; color:rgb(98, 200, 211);
+        font-weight: bold;">KHÁCH HÀNG ĐÁNH GIÁ</p>
+        <div class="row">
+            <div class="col-md-3">
+                <img src="/images/ava.jpg" style="border-radius: 50%; border: 2px solid cadetblue; width: 100%;" alt="">
+            </div>
+            <div class="col-md-9">
+                <p style="margin-bottom: 0; font-size: 30px; font-weight: bold ; color: rgb(69, 178, 190);">Chị Phương</p>
+                <div class="star-rate" style="margin-bottom: 0px; margin-left: 30px;">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+                <div class="comt">
+                    <p class="comt-detail">"Tôi thấy đồ rất xinh, website thiết kế cũng rất đẹp, chất lượng rất tốt. Mọi người nên thử mua một lần xem sao nhé!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="background-color: #D1FFFD; padding-top: 60px;" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p id="nameweb">The Kid's World</p>
+                    <ul class="contactinfo">
+                        <li>Điện thoại : 17520811</li>
+                        <li>Email : 17520811@gm.uit.edu.vn</li>
+                        <li>Địa chỉ : 12345, Somewhere Street, Vietnam</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Hệ thống</p>
+                    <ul>
+                        <li>Trang chủ</li>
+                        <li>Sản phẩm</li>
+                        <li>Giảm giá</li>
+                        <li>Về chúng tôi</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Hỗ trợ</p>
+                    <ul>
+                        <li>FAQ</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Chúng tôi ở</p>
+                    <ul>
+                        <li>Twitter</li>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Kết nối</p>
+                    <ul>
+                        <li>Đăng ký</li>
+                        <li>Đăng nhập</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="note">Website được xây dựng cho mục đích học tập.<br>Không có thông tin nào ở trang web này là thật.</p>
+        </div>
+    </footer>
+    <script src="/javacripts/hover.js"></script>
+</body>
 </html>
