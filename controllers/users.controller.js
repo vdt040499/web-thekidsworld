@@ -102,3 +102,10 @@ module.exports.signinPost = (req, res, next) => {
     })(req, res, next);
 
 }
+
+module.exports.logout = (req, res) => {
+    req.logout();
+
+    req.flash('success', 'You are logged out!');
+    res.redirect('/users/signin');
+}
