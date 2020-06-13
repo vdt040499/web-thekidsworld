@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <form action="/users/signup" class="signinform" novalidate>
+                <form action="/users/signup" class="signinform" novalidate method="POST">
                     <p style="text-align: center; color: rgb(117, 228, 222); font-size: 30px; font-weight: bold;">Đ Ă N
                         G K Ý</p>
                     <div class="row mt-2 mx-2">
@@ -29,7 +29,7 @@
                         <div class="col-sm-9">
                             <input type="text" style="border: none; outline: none;
                                 background: transparent; border-bottom: 1px solid black;" name="username"
-                                class="form-control" id="username" value="" required>
+                                class="form-control" id="username" value="<%= username %>" required>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                         <div class="col-sm-9">
                             <input style="border: none; outline: none;
                                 background: transparent; border-bottom: 1px solid black;" type="email" name="email"
-                                class="form-control" id="email" value="" required>
+                                class="form-control" id="email" value="<%= email %>" required>
                         </div>
                     </div>
                     <div class="row mt-2 mx-2">
@@ -58,11 +58,11 @@
                         </div>
                     </div>
                     <div class="row mt-2 mx-2">
-                        <label class="col-sm-3 col-form-label" for="phonenumber">Phone number:</label>
+                        <label class="col-sm-3 col-form-label" for="phone">Phone number:</label>
                         <div class="col-sm-9">
                             <input style="border: none; outline: none;
-                                background: transparent; border-bottom: 1px solid black;" type="tel"
-                                class="form-control" name="phonenumber" id="phonenumber" value="">
+                                background: transparent; border-bottom: 1px solid black;" type="text"
+                                class="form-control" name="phone" id="phone" value="<%= phone %>">
                         </div>
                     </div>
                     <div class="row mt-2 mx-2">
