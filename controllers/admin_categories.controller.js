@@ -7,7 +7,7 @@ module.exports.getCates = (req, res) => {
             console.log(err);
         } else {
             res.render('admin/categories', {
-                title: "Admin categories",
+                headTitle: "Admin categories",
                 cates: cates
             });
         }
@@ -21,7 +21,7 @@ module.exports.addCate = (req, res) => {
     var prelevel = "";
 
     res.render('admin/add_category', {
-        headtitle: 'Add category',
+        headTitle: 'Add category',
         title: title,
         level: level,
         prelevel: prelevel
@@ -43,7 +43,7 @@ module.exports.addCatePost = (req, res) => {
 
     if(errors) {
         res.render('admin/add_category', {
-            headtitle: 'Add category',
+            headTitle: 'Add category',
             title: title,
             level: level,
             prelevel: prelevel
@@ -89,5 +89,39 @@ module.exports.addCatePost = (req, res) => {
                 }
             }
         });
+    }
+}
+
+//GET edit category
+module.exports.editCate = (req, res) => {
+    Category.findById(req.params.id, (err, cate) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('admin/edit_category', {
+                headTitle: "Edit category",
+                title: cate.title,
+                level: cate.level,
+                prelevel: cate.prelevel,
+                id: cate._id
+            });
+        }
+    });
+}
+
+//POST edit category
+module.exports.editCatePost = (req, res) => {
+    req.checkBody('title', 'Title is required!').notEmpty();
+
+    var title = req.body.title;
+    var slug = title.replace(/\s+/g, '-').toLowerCase();
+    var id = req.params.id;
+
+    var errors = req.validationErrors();
+
+    if(errors) {
+        res.render('admin/edit_category', {
+            
+        })
     }
 }

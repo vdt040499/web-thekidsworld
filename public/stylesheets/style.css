@@ -292,4 +292,12 @@ footer ul li{
   border-color: #f5c6cb;
 }
 
+.button {
+  background-color: #51BCB1;
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 8px;
+}
+
 

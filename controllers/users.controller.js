@@ -10,7 +10,7 @@ module.exports.signup = (req, res) => {
     var phone = "";
 
     res.render('users/signup', {
-        title: "Sign Up",
+        headTitle: "Sign Up",
         username: username,
         email: email,
         phone: phone
@@ -35,7 +35,7 @@ module.exports.signupPost = (req, res) => {
 
     if(errors) {
         res.render('users/signup', {
-            title: 'Sign Up',
+            headTitle: 'Sign Up',
             username: username,
             email: email,
             phone: phone,
@@ -87,7 +87,7 @@ module.exports.signin = (req, res) => {
     var username = "";
 
     res.render('users/signin', {
-        title: 'Sign In',
+        headTitle: 'Sign In',
         username: username
     });
 }
