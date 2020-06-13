@@ -6,11 +6,15 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const validator = require('express-validator');
+const passport = require('passport');
 
 var app = express();
 
+//Get database
+const config = require('./config/database');
+
 //Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/TheKidsWorld', {
+mongoose.connect(config.database, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, err => {
@@ -81,8 +85,21 @@ app.use(function (req, res, next) {
   next();
 });
 
+//Passport config
+require('./config/passport')(passport);
+
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Set global errors variable
 app.locals.errors = null;
+
+app.get('*', (req, res, next) => {
+  res.locals.cart = req.session.cart;
+  res.locals.user = req.user || null;
+  next();
+});
 
 //Set routes
 var indexRouter = require('./routes/index');

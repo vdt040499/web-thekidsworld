@@ -4,7 +4,7 @@
     <% include ./head %>
 </head>
 <body>
-    <header>
+    <header class="mb-3">
         <nav class="navbar sticky-top navbar-expand-lg " style="background-color: #D1FFFD;">
             <a class="navbar-brand ml-2" href="/">
                 <img src="/images/logo.png" width="60px" alt="The Kid's World logo" loading="lazy">
@@ -67,12 +67,25 @@
                         aria-haspopup="true" aria-expanded="false">
                             <img src="/images/useravatar.png" alt="account" width="25px">
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: rgb(133, 210, 255); 
-                        outline: none; border: none; padding: 7px; border-radius: 10px;">
-                          <a class="dropdown-item" id="btn-in" href="/users/signin">ĐĂNG NHẬP</a>
-                          <a class="dropdown-item" id="btn-up" href="/users/signup">ĐĂNG KÝ</a>
-                        </div>
+                        <% if (user) { %>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: rgb(133, 210, 255); 
+                                                    outline: none; border: none; padding: 7px; border-radius: 10px;">
+                                <a class="nav-link" href="#"><%= user.username %></a>
+                                <a class="dropdown-item" id="btn-up" href="/users/logout">ĐĂNG XUẤT</a>
+                            </div>
+                        <% } else {%>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: rgb(133, 210, 255); 
+                                                    outline: none; border: none; padding: 7px; border-radius: 10px;">
+                                <a class="dropdown-item" id="btn-in" href="/users/signin">ĐĂNG NHẬP</a>
+                                <a class="dropdown-item" id="btn-up" href="/users/signup">ĐĂNG KÝ</a>
+                            </div>
+                        <% } %>
                     </div>
+                    <% if (user && user.admin == 1) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">ADMIN AREA</a>
+                        </li>
+                    <% } %>
                 </div>
             </div>
         </nav>

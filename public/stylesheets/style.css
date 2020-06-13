@@ -281,6 +281,15 @@ footer ul li{
   -webkit-transform: scale(1.05);
   -ms-transform: scale(1.05);
    transform: scale(1.05);
+
+}
+
+/* ERROR MESSAGES */
+
+.alert-error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 
 

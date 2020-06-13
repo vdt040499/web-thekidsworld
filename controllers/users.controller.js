@@ -1,6 +1,9 @@
-const User = require('../models/user.model');
+const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
+const User = require('../models/user.model');
+
+//GET signup
 module.exports.signup = (req, res) => {
     var username = "";
     var email = "";
@@ -14,6 +17,7 @@ module.exports.signup = (req, res) => {
     });
 }
 
+//POST signup
 module.exports.signupPost = (req, res) => {
     var username = req.body.username;
     var email = req.body.email;
@@ -75,8 +79,11 @@ module.exports.signupPost = (req, res) => {
     }
 }
 
+//GET signin
 module.exports.signin = (req, res) => {
     
+    if(res.locals.user) res.redirect('/');
+
     var username = "";
 
     res.render('users/signin', {
@@ -85,6 +92,13 @@ module.exports.signin = (req, res) => {
     });
 }
 
-module.exports.signinPost = (req, res) => {
-    
+//POST signin
+module.exports.signinPost = (req, res, next) => {
+
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/users/signin',
+        failureFlash: true
+    })(req, res, next);
+
 }
