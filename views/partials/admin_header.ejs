@@ -34,6 +34,8 @@
                                 <a class="nav-link" href="#"><%= user.username %></a>
                                 <a class="dropdown-item" id="btn-up" href="/users/logout">ĐĂNG XUẤT</a>
                             </div>
+                            <% } else { %>
+                                
                             <% } %>
                     </div>
                 </div>
@@ -41,7 +43,7 @@
         </nav>
     </header>
     <div class="container">
-        
+
     <%- messages('messages', locals) %>
     
     <% if (errors) { %>

@@ -304,6 +304,10 @@
     border-radius: 8px;
     text-decoration: none; 
   }
+
+  table.alignmiddle td {
+    vertical-align: middle !important;
+  }
   
 
   

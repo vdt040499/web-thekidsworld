@@ -1,0 +1,28 @@
+<% include ../partials/admin_header %>
+
+<div class="row">
+    <div class="col-12 col-md-10">
+        <h1 class="title">THÊM DANH MỤC</h1>
+    </div>
+    <div class="col-12 col-md-2">
+        <a class="button btn btn-md" href="/admin/categories/">DANH MỤC</a>
+    </div>
+</div>
+
+<form action="/admin/categories/add-category" method="POST">    
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" type="text" id="title" name="title" value="<%= title %>" placeholder="Title">
+    </div>
+    <div class="form-group">
+        <label for="title">Level</label>
+        <input class="form-control" type="number" id="level" name="level" max=100 value="<%= level %>">
+    </div>
+    <div class="form-group">
+        <label for="title">Prelevel</label>
+        <input class="form-control" type="text" id="prelevel" name="prelevel" value="<%= prelevel %>" placeholder="Prelevel">
+    </div>
+    <button type="submit" class="btn btn-md button">Thêm</button>
+</form>
+
+<% include ../partials/admin_footer %>
