@@ -115,13 +115,62 @@ module.exports.editCatePost = (req, res) => {
 
     var title = req.body.title;
     var slug = title.replace(/\s+/g, '-').toLowerCase();
+    var level = req.body.level;
+    var prelevel = req.body.prelevel;
     var id = req.params.id;
 
     var errors = req.validationErrors();
 
     if(errors) {
         res.render('admin/edit_category', {
+            headTitle: 'Edit category',
+            title: title,
+            level: level,
+            prelevel: prelevel
+        });
+    } else {
+        Category.findOne({slug: slug, _id: {'$ne': id}}, (err, existCate) =>  {
+            if(err) {
+                console.log(err);
+            } else {
+                if(existCate) {
+                    req.flash('danger', 'Category slug exists, choose another!');
+                    res.render('admin/edit-category', {
+                        headTitle: 'Edit category',
+                        title: title,
+                        level: level,
+                        prelevel: prelevel
+                    });
+                } else {
+                    Category.findById(id, (err, cate) => {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            cate.title = title;
+                            cate.slug = slug;
+                            cate.level = parseInt(level);
+                            cate.prelevel = prelevel;
             
-        })
+                            cate.save((err) => {
+                                if(err) {
+                                    console.log(err) 
+                                } else {
+                                    Category.find((err, cates) => {
+                                        if(err) {
+                                            console.log(err);
+                                        } else {
+                                            req.app.locals.cates = cates;
+                                        }
+                                    });
+    
+                                    req.flash('success', 'Category edited!');
+                                    res.redirect('/admin/categories');
+                                }
+                            });
+                        }
+                    });
+                }    
+            }
+        });
     }
 }
