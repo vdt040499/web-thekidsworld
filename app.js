@@ -102,11 +102,13 @@ app.get('*', (req, res, next) => {
 });
 
 //Set routes
+const adminCategoriesRoute = require('./routes/admin_categories.route');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users.route');
 
-app.use('/', indexRouter);
+app.use('/admin/categories', adminCategoriesRoute);
 app.use('/users', usersRouter);
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

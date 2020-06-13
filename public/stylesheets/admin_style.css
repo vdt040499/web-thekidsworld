@@ -1,0 +1,310 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  /*--------------------------------------------------------------*/
+  .navbar-toggler {
+    border: none;
+    outline: none;
+  }
+  
+  .megamenu-li {
+  position: static;
+  }
+  
+  .megamenu {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  }
+  /*--------------------------SEARCH BOX-----------------------*/
+  #search {
+    border: none;
+    outline: none;
+    width:75px;
+    transition: width .5s ease
+  }
+  #search:hover{
+    width:200px
+  }
+  #btn-in, #btn-up{
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(88, 167, 163);
+  }
+  #btn-in {
+    margin-bottom: 5px;
+  }
+  ul li a {
+    font-size: 18px;
+    font-weight: bold;
+    color: #5A8B8F;
+  }
+  
+  .navbar-nav li:hover>.dropdown-menu {
+    display: block;
+  }
+  
+  .navbar-nav .dropdown:hover>.dropdown-menu-right {
+    display: block;
+  }
+  h5{
+    font-size: 18px;
+    color: skyblue;
+  }
+  .dropdown-item{
+    font-size: 16px;
+  }
+  /*------------------Title and Subtitle----------------*/
+  .title{
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  .subtitle{
+    text-align: center;
+    font-style: italic;
+    font-size: 18px;
+  }
+  .title, .subtitle {
+    color: rgb(98, 200, 211);
+  }
+  /*------------------CARD-------------------*/
+  .cardinformation{
+    border-radius: 10px;
+    border: 3px solid #88C3C9;
+    text-align: center;
+    margin: 20px 10px;
+  }
+  .card {
+    border-radius: 20px;
+    border: 2px solid skyblue;
+  }
+  
+  .card-img{
+    width: 75%;
+    margin-bottom: 0;
+  }
+  
+  /* .img-thumbnail{
+    padding: 20px 20px 0px 20px;
+    margin-bottom: 0;
+  } */
+  .card-text {
+    margin: 10px 40px;
+    padding-bottom: 10px;
+  }
+  .card-title{
+    font-size: 12px;
+    color: teal;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+  .checked {
+    color: orange;
+  }
+  .original-price{
+    color: rgb(156, 156, 156);
+    padding: 0;
+    margin: 0;
+  }
+  .product-price{
+    color: rgb(255, 122, 122);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0;
+    margin: -5px 0px 3px 0px;
+  }
+  
+  .card:hover{
+    box-shadow: -1px 9px 20px -12px rgba(0, 0, 0, 75);
+    -moz-box-shadow: -1px 9px 20px -12px rgba(0, 0, 0, 75);;
+    -webkit-box-shadow: -1px 9px 20px -12px rgba(0, 0, 0, 75);;
+  }
+  
+  .cate{
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 5px;
+    margin: 15px 5px;
+    background-color: #EBFCFF;
+    border-radius: 70px;
+  }
+  .cate-title{
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #60C1CB;
+  }
+  .adven{
+    text-align: center;
+    padding: 10px 0px;
+    margin: 30px;
+  }
+  .adven-title{
+    margin-top: 5px;
+    font-weight: bold;
+    padding: 0;
+    margin-bottom: 0;
+    color: rgb(99, 138, 197);
+  }
+  .adven-sub{
+    font-style: italic;
+    color: rgb(62, 94, 146);
+    margin-bottom: 0;
+  }
+  
+  .comt{
+    margin-top: 20px;
+    border: 2px skyblue dashed;
+    border-radius: 20px;
+  }
+  .comt-detail{
+    text-align: center;
+    font-size: 20px;
+    padding: 30px 20px;
+    margin-bottom: 0;
+    font-style: italic;
+    color: #559CA4;
+  }
+  /*------------FOOTER------------*/
+  .note{
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 50px;
+    font-family: Cambria,serif;
+    color: #57AEB9;
+    padding-top: 50px;
+    margin-bottom: 0;
+  }
+  footer ul li{
+    list-style-type: none;
+    font-size: 20px;
+    color: rgb(60, 136, 145);
+    font-family: 'Centaur';
+    padding-left: 5px;
+    margin-bottom: 0;
+    padding-top: 5px;
+  }
+  
+  .footerinfo{
+    font-weight: bold;
+    font-size: 20px;
+    color: #4BA7B1;
+    margin-bottom: 0;
+  }
+  
+  #nameweb{
+    margin-bottom: 0;
+    font-size: 35px;
+    color: #4BA7B1;
+    font-family: 'Bernard MT Condensed';
+  }
+  /**/
+  .main-search {
+    width: 96%;
+    margin-left:13px;
+    font-size: medium;
+    border: none;
+    outline: none;
+    -webkit-transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s;
+  }
+  
+  .main-search:focus {
+    outline: none;
+    box-shadow: -8px 10px 0px -7px #4EA6EA, -8px 10px 0px -7px #4EA6EA;
+  }
+  .mainsearch:hover{
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    transform: scale(1.03);
+  }
+  .form-card{
+    padding: 50px 30px;
+    border-radius: 20px;
+    background-image: linear-gradient(to bottom right, rgb(223, 253, 255), rgb(140, 255, 169));
+    transition: linear 0.3s;
+  }
+  .form-card:hover{
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+     transform: scale(1.05);
+  }
+  .signinform:hover, .infocard:hover{
+    outline: 1px solid;
+    box-shadow:
+    3px 3px #53a7ea,
+    4px 4px #53a7ea,
+    5px 5px #53a7ea;
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+  }
+  .signinform, .infocard{
+    box-shadow: 0px 0px 10px 1px rgb(215, 216, 216);
+    background-color: rgb(255, 255, 255); 
+    padding: 30px 20px;
+    transition: ease 0.3s;
+  }
+  .infocard{
+    box-shadow: 0px 0px 5px 1px rgb(230, 230, 230);
+    margin: 0px 40px;
+  }
+  .billcheck, .payedcheck {
+    border: 2px solid #53a7ea;
+    margin-bottom: 5px;
+    transition: ease 0.3s;
+  }
+  
+  .billcheck:hover, .payedcheck:hover {
+    border: 2px dashed #22a7ff;
+    background-color: #b0dcff ;
+    font-weight: bold;
+    color: white;
+  }
+  .editinfo{
+    box-shadow: 0px 0px 5px 1px rgb(230, 230, 230);
+    padding: 20px 30px;
+    transition: ease 0.3s;
+  }
+  
+  .editinfo:hover{
+    /* background-color: rgb(221, 243, 255); */
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+     transform: scale(1.05);
+  
+  }
+  
+  /* ERROR MESSAGES */
+  
+  .alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  table th {
+      color: #5A8B8F;
+  }
+
+  .button {
+    background-color: #51BCB1;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 8px;
+    text-decoration: none; 
+  }
+  
+
+  
+  

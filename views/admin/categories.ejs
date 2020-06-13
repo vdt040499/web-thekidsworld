@@ -1,0 +1,35 @@
+<% include ../partials/admin_header %>
+
+<div class="row">
+    <div class="col-12 col-md-10">
+        <h1 class="title">DANH MỤC</h1>
+    </div>
+    <div class="col-12 col-md-2">
+        <a class="button btn btn-md" href="/admin/categories/add-category">THÊM DANH MỤC</a>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr class="home">
+            <th>Category</th>
+            <th>Level</th>
+            <th>PreLevel</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% cates.forEach(function(cat) {%>
+        <tr>
+            <td><%= cat.title %></td>
+            <td><%= cat.level %></td>
+            <td><%= cat.prelevel %></td>
+            <td><a href="/admin/categories/edit-category/<%= cat._id %>">Edit</a></>
+            <td><a class="confirmDeletion" href="/admin/categories/delete-category/<%= cat._id %>">Delete</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<% include ../partials/admin_footer %>
