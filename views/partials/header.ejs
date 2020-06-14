@@ -118,14 +118,17 @@
             </a>
         </div>
     </header>
+
+    <div class="container">
+        <%- messages('messages', locals) %>
     
-    <%- messages('messages', locals) %>
+        <% if (errors) { %>
+            <% errors.forEach((error) => { %>
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong><%= error.msg %></strong>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
     
-    <% if (errors) { %>
-        <% errors.forEach((error) => { %>
-            <div class="alert alert-danger alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong><%= error.msg %></strong>
-            </div>
-        <% }); %>
-    <% } %>
