@@ -314,6 +314,10 @@
     height: 100px;
     border-radius: 50%;
 }
+
+#imgPreview {
+  margin: 20px;
+}
   
 
   

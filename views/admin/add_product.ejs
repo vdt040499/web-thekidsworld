@@ -1,0 +1,72 @@
+<% include ../partials/admin_header %>
+
+<div class="row">
+    <div class="col-12 col-md-10">
+        <h1 class="title">THÊM SẢN PHẨM</h1>
+    </div>
+    <div class="col-12 col-md-2">
+        <a class="button btn btn-md" href="/admin/categories/">SẢN PHẨM</a>
+    </div>
+</div>
+
+<form action="/admin/products/add-product" method="POST" enctype="multipart/form-data">    
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" value="<%= name %>" placeholder="Name">
+    </div>
+
+    <div class="form-group">
+        <label for="ta">Description</label>
+        <textarea class="form-control" type="text" rows="10" cols="30" id="ta" name="desc" placeholder="Description"><%= desc %></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="category">Categories</label>
+        <select name="category" class="form-control">
+            <% cates.forEach((cat) => { %>
+                <option value="<%= cat.slug %>"><%= cat.title %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input class="form-control" type="text" id="price" name="price" value="<%= price %>" placeholder="Price">
+    </div>
+
+    <!-- <div class="form-group">
+        <label for="image">Image</label>
+        <input class="form-control" type="file" id="image" name="image">
+        <img src="#" id="imgPreview" alt="imgPreview">
+    </div> -->
+    <div class="form-group">
+        <label>Image</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="image" name="image">
+            <label class="custom-file-label" for="image">Choose file</label>
+        </div>
+        <img src="#" id="imgPreview" alt="imgPreview">
+    </div>
+    
+    <button type="submit" class="btn btn-md button">Thêm</button>
+</form>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#imgPreview').attr('src', e.target.result).width(100).height(100);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#image').change(function() {
+        readURL(this);
+    });
+</script>
+
+<% include ../partials/admin_footer %>

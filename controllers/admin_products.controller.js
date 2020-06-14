@@ -35,14 +35,21 @@ module.exports.addProduct = (req, res) => {
     var ratingAverage = "";
     var totalQuantity = "";
 
-    res.render('admin/add_category', {
-        headTitle: 'Add category',
-        name: name,
-        desc: desc,
-        price: price,
-        category: category,
-        ratingAverage: ratingAverage,
-        totalQuantity: totalQuantity
+    Category.find((err, cates) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('admin/add_product', {
+                headTitle: 'Add product',
+                name: name,
+                desc: desc,
+                price: price,
+                category: category,
+                ratingAverage: ratingAverage,
+                totalQuantity: totalQuantity, 
+                cates: cates
+            });
+        }
     });
 }
 
