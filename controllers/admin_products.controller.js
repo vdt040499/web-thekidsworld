@@ -32,8 +32,7 @@ module.exports.addProduct = (req, res) => {
     var desc = "";
     var price = "";
     var category = "";
-    var ratingAverage = "";
-    var totalQuantity = "";
+    var totalQuantity = 50;
 
     Category.find((err, cates) => {
         if(err) {
@@ -45,7 +44,6 @@ module.exports.addProduct = (req, res) => {
                 desc: desc,
                 price: price,
                 category: category,
-                ratingAverage: ratingAverage,
                 totalQuantity: totalQuantity, 
                 cates: cates
             });
@@ -53,64 +51,100 @@ module.exports.addProduct = (req, res) => {
     });
 }
 
-//POST add category
-module.exports.addCatePost = (req, res) => {
+//POST add product
+module.exports.addProductPost = (req, res) => {
+
+    if (!req.files) { 
+        imageFile =""; 
+    }
     
-    var title = req.body.title;
-    var slug = title.replace(/\s+/g, '-').toLowerCase();
-    var level = parseInt(req.body.level);
-    var prelevel = req.body.prelevel;
+    if (req.files) {
+        var imageFile = typeof(req.files.image) !== "undefined" ? req.files.image.name : "";
+    }
+    
+    req.checkBody('name', 'Name is required!').notEmpty();
+    req.checkBody('desc', 'Description is required!').notEmpty();
+    req.checkBody('price', 'Price is required!').isDecimal();
+    req.checkBody('image', 'You must upload an image').isImage(imageFile);
 
-    req.checkBody('title', 'Title is required!').notEmpty();
-    req.checkBody('prelevel', 'Prelevel is required!').notEmpty();
-
+    var name = req.body.name;
+    var slug = name.replace(/\s+/g, '-').toLowerCase();
+    var desc = req.body.desc;
+    var price = req.body.price;
+    var category = req.body.category;
+    var totalQuantity = req.body.totalQuantity;
+    
     var errors = req.validationErrors();
 
     if(errors) {
-        res.render('admin/add_category', {
-            headTitle: 'Add category',
-            errors: errors,
-            title: title,
-            level: level,
-            prelevel: prelevel
+        Category.find((err, cates) => {
+            res.render('admin/add_product', {
+                headTitle: 'Add product',
+                errors: errors,
+                name: name,
+                desc: desc,
+                price: price,
+                totalQuantity: totalQuantity,
+                cates: cates
+            });
         });
     } else {
-        Category.findOne({slug: slug}, (err, existCate) => {
+        Product.findOne({slug: slug}, (err, existProduct) => {
             if(err) {
                 console.log(err);
             } else {
-                if(existCate) {
-                    req.flash('danger', 'Category slug exists, choose another!');
-                    res.render('admin/add_category', {
-                        headtitle: 'Add category',
-                        title: title,
-                        level: level,
-                        prelevel: prelevel
+                if(existProduct) {
+                    Category.find((err, cates) => {
+                        req.flash('danger', 'Product title exists, choose another!');
+                        res.render('admin/add_product', {
+                            headTitle: 'Add product',
+                            name: name,
+                            desc: desc,
+                            price: price,
+                            totalQuantity: totalQuantity,
+                            cates: cates
+                        });
                     });
                 } else {
-                    const category = new Category({
-                        title: title,
+                    const product = new Product({
+                        name: name,
                         slug: slug,
-                        level: level,
-                        prelevel: prelevel
+                        desc: desc,
+                        price: parseInt(price),
+                        category: category,
+                        totalQuantity: totalQuantity,
+                        image: imageFile
                     });
 
-                    category.save((err) => {
+                    product.save((err) => {
                         if(err) {
                             console.log(err);
                         } else {
-                            Category.find((err, cates) => {
-                                if(err) {
-                                    console.log(err);
-                                } else {
-                                    req.app.locals.cates = cates;
-                                }
+                            mkdirp('public/product_images/' + product._id, function (err) {
+                                return console.log(err);
                             });
 
-                            req.flash('success', 'Category added!');
-                            res.redirect('/admin/categories');
+                            mkdirp('public/product_images/' + product._id + '/gallery', function (err) {
+                                return console.log(err);
+                            });
+
+                            mkdirp('public/product_images/' + product._id + '/gallery/thumbs', function (err) {
+                                return console.log(err);
+                            });
+
+                            if(imageFile != "") {
+                                var productImage = req.files.image;
+                                var path = 'public/product_images/' + product._id + '/' + imageFile;
+                                
+                                productImage.mv(path, (err) => {
+                                    return console.log(err);
+                                });
+                            }
+
+                            req.flash('success', 'Product added!');
+                            res.redirect('/admin/products');
                         }
-                    })
+                    });
                 }
             }
         });
