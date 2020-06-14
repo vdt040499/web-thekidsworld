@@ -31,19 +31,20 @@ module.exports.addCate = (req, res) => {
 //POST add category
 module.exports.addCatePost = (req, res) => {
     
-    req.checkBody('title', 'Title is required!');
-    req.checkBody('prelevel', 'Prelevel is required!');
-
     var title = req.body.title;
     var slug = title.replace(/\s+/g, '-').toLowerCase();
     var level = parseInt(req.body.level);
     var prelevel = req.body.prelevel;
+
+    req.checkBody('title', 'Title is required!').notEmpty();
+    req.checkBody('prelevel', 'Prelevel is required!').notEmpty();
 
     var errors = req.validationErrors();
 
     if(errors) {
         res.render('admin/add_category', {
             headTitle: 'Add category',
+            errors: errors,
             title: title,
             level: level,
             prelevel: prelevel
@@ -59,8 +60,7 @@ module.exports.addCatePost = (req, res) => {
                         headtitle: 'Add category',
                         title: title,
                         level: level,
-                        prelevel: prelevel,
-                        user: null
+                        prelevel: prelevel
                     });
                 } else {
                     const category = new Category({
@@ -111,7 +111,6 @@ module.exports.editCate = (req, res) => {
 
 //POST edit category
 module.exports.editCatePost = (req, res) => {
-    req.checkBody('title', 'Title is required!').notEmpty();
 
     var title = req.body.title;
     var slug = title.replace(/\s+/g, '-').toLowerCase();
@@ -119,14 +118,20 @@ module.exports.editCatePost = (req, res) => {
     var prelevel = req.body.prelevel;
     var id = req.params.id;
 
+    req.checkBody('title', 'Title is required!').notEmpty();
+    req.checkBody('prelevel', 'Prelevel is required!').notEmpty();
+
     var errors = req.validationErrors();
 
     if(errors) {
         res.render('admin/edit_category', {
             headTitle: 'Edit category',
+            errors: errors,
+            id: id,
             title: title,
             level: level,
-            prelevel: prelevel
+            prelevel: prelevel,
+            user: req.user
         });
     } else {
         Category.findOne({slug: slug, _id: {'$ne': id}}, (err, existCate) =>  {
@@ -173,4 +178,24 @@ module.exports.editCatePost = (req, res) => {
             }
         });
     }
+}
+
+//GET delete category
+module.exports.deleteCate = (req, res) => {
+    Category.findByIdAndRemove(req.params.id, (err, cate) => {
+        if(err) {
+            console.log(err);
+        } else {
+            Category.find((err, cates) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    req.app.locals.cates = cates;
+                }
+            });
+
+            req.flash('success', 'Category deleted!');
+            res.redirect('/admin/categories');
+        }
+    });
 }
