@@ -39,8 +39,8 @@
             <td><%= product.category %></td>
             <td><%= product.ratingAverage %></td>
             <td><%= product.totalQuantity %></td>
-            <td><a class="btn btn-md button" href="/admin/categories/edit-category/<%= product._id %>">Edit</a></>
-            <td><a class="btn btn-md button confirmDeletion" href="/admin/categories/delete-category/<%= product._id %>">Delete</a></td>
+            <td><a class="btn btn-md button" href="/admin/products/edit-product/<%= product._id %>">Edit</a></>
+            <td><a class="btn btn-md button confirmDeletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
         </tr>
         <% }); %>
     </tbody>

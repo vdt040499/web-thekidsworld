@@ -6,8 +6,8 @@ const adminProductsController = require('../controllers/admin_products.controlle
 router.get('/', adminProductsController.getProducts);
 router.get('/add-product', adminProductsController.addProduct);
 router.post('/add-product', adminProductsController.addProductPost);
-// router.get('/edit-category/:id', adminCategoriesController.editCate);
-// router.post('/edit-category/:id', adminCategoriesController.editCatePost);
+router.get('/edit-product/:id', adminProductsController.editProduct);
+router.post('/edit-product/:id', adminProductsController.editProductPost);
 // router.get('/delete-category/:id', adminCategoriesController.deleteCate);
 
 module.exports = router;
