@@ -62,11 +62,11 @@
                         <input id="search" class="form-control mr-sm-2" type="text" placeholder="Bạn tìm gì?" aria-label="Search">
                         <button class="btn my-2 my-sm-0" type="submit"><img src="/images/magnifying-glass.png" width="25px" alt="search button"></button>
                     </form>
-                    
+
                     <% if (typeof cart !== "undefined") { %>
                         <a class="btn my-2 my-sm-0" type="button" href="/cart/checkout"><img src="/images/the-cart.png" width="25px" alt="search button"></a>
                         <div class="d-flex align-items-center mr-3">
-                            <span class="badge badge-pill badge-info">1</span>
+                            <span class="badge badge-pill badge-info"><%= cart.length %></span>
                         </div>
                     <% } else { %>
                         <a class="btn my-2 my-sm-0" type="button" href="/cart/checkout"><img src="/images/the-cart.png" width="25px" alt="search button"></a>
