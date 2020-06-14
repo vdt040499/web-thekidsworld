@@ -24,6 +24,10 @@ const productSchema = mongoose.Schema({
     image: {
         type: String
     },
+    sold: {
+        type: Number,
+        default: 0
+    },
     ratingAverage: {
         type: Number,
         default: 0
