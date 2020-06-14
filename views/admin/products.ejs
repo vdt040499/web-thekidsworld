@@ -9,6 +9,8 @@
     </div>
 </div>
 
+<% if (count > 0) { %>
+
 <table class="table table-striped alignmiddle">
     <thead>
         <tr class="home">
@@ -44,4 +46,9 @@
     </tbody>
 </table>
 
+<% } else { %>
+    <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
+        <h3 class="text-center title">Hiện tại không có sản phẩm nào!</h3>
+    </div>
+<% } %>
 <% include ../partials/admin_footer %>

@@ -1,17 +1,26 @@
-const Product = require('../models/product.model');
 const mkdirp = require('mkdirp');
 const fs = require('fs-extra');
 const resizeImg = require('resize-img');
 
+const Product = require('../models/product.model');
+const Category = require('../models/category.model');
+
 //GET products index
 module.exports.getProducts = (req, res) => {
+    var count;
+
+    Product.count((err, c) => {
+        count = c;
+    });
+
     Product.find((err, products) => {
         if(err) {
             console.log(err);
         } else {
             res.render('admin/products', {
                 headTitle: 'Admin products',
-                products: products
+                products: products,
+                count: count
             });
         }
     });
