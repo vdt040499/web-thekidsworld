@@ -51,7 +51,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sales.html">Giảm giá</a>
+                        <a class="nav-link" href="#">Giảm giá</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Về chúng tôi</a>
@@ -62,7 +62,16 @@
                         <input id="search" class="form-control mr-sm-2" type="text" placeholder="Bạn tìm gì?" aria-label="Search">
                         <button class="btn my-2 my-sm-0" type="submit"><img src="/images/magnifying-glass.png" width="25px" alt="search button"></button>
                     </form>
-                    <button class="btn my-2 my-sm-0" type="button"><img src="/images/the-cart.png" width="25px" alt="search button"></button>
+                    
+                    <% if (typeof cart !== "undefined") { %>
+                        <a class="btn my-2 my-sm-0" type="button" href="/cart/checkout"><img src="/images/the-cart.png" width="25px" alt="search button"></a>
+                        <div class="d-flex align-items-center mr-3">
+                            <span class="badge badge-pill badge-info">1</span>
+                        </div>
+                    <% } else { %>
+                        <a class="btn my-2 my-sm-0" type="button" href="/cart/checkout"><img src="/images/the-cart.png" width="25px" alt="search button"></a>
+                    <% } %>
+                    
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" onclick="window.location.href='account.html'"
                         aria-haspopup="true" aria-expanded="false">

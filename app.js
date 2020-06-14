@@ -108,11 +108,13 @@ app.get('*', (req, res, next) => {
 //Set routes
 const adminCategoriesRoute = require('./routes/admin_categories.route');
 const adminProductsRoute = require('./routes/admin_products.route');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users.route');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users.route');
+const cartRouter = require('./routes/cart.route');
 
 app.use('/admin/categories', adminCategoriesRoute);
 app.use('/admin/products', adminProductsRoute);
+app.use('/cart', cartRouter);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 
