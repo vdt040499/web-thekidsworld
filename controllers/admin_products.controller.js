@@ -317,22 +317,21 @@ module.exports.deleteImage = (req, res) => {
     });
 }
 
-//GET delete category
-module.exports.deleteCate = (req, res) => {
-    Category.findByIdAndRemove(req.params.id, (err, cate) => {
+//GET delete product
+module.exports.deleteProduct = (req, res) => {
+    var id = req.params.id;
+    var path = 'public/product_images/' + id;
+
+    fs.remove(path, function(err) {
         if(err) {
             console.log(err);
         } else {
-            Category.find((err, cates) => {
-                if(err) {
-                    console.log(err);
-                } else {
-                    req.app.locals.cates = cates;
-                }
+            Product.findByIdAndRemove(id, function(err) {
+                console.log(err);
             });
 
-            req.flash('success', 'Category deleted!');
-            res.redirect('/admin/categories');
+            req.flash('success', 'Product deleted!');
+            res.redirect('/admin/products');
         }
     });
 }
