@@ -5,7 +5,7 @@
         <h1 class="title">CHỈNH SỬA SẢN PHẨM</h1>
     </div>
     <div class="col-12 col-md-2">
-        <a class="button btn btn-md" href="/admin/categories/">SẢN PHẨM</a>
+        <a class="button btn btn-md" href="/admin/products/">SẢN PHẨM</a>
     </div>
 </div>
 
@@ -81,7 +81,7 @@
     <% if (image != "thumbs") { %>
     <li>
         <img src="/product_images/<%= id %>/gallery/thumbs/<%= image %>" alt="">&nbsp;
-        <a class="confirmDeletion" href="/admin/products/delete-image/<%= image %>?id=<%= id %>">delete</a>
+        <a class="btn btn-md button confirmDeletion" href="/admin/products/delete-image/<%= image %>?id=<%= id %>">xóa</a>
     </li>
     <% } %>
     <% }); %>
