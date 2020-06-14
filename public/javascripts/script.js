@@ -9,7 +9,7 @@ $(function () {
     }
 
     $('a.confirmDeletion').on('click', function() {
-        if(!confirm('Confirm deletion')) return false; 
+        if(!confirm('Bạn thực sự muốn xóa ?')) return false; 
     });
 
     if ($('[data-fancybox]').length) {

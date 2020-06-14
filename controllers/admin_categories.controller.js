@@ -130,8 +130,7 @@ module.exports.editCatePost = (req, res) => {
             id: id,
             title: title,
             level: level,
-            prelevel: prelevel,
-            user: req.user
+            prelevel: prelevel
         });
     } else {
         Category.findOne({slug: slug, _id: {'$ne': id}}, (err, existCate) =>  {
