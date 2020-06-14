@@ -1,0 +1,47 @@
+<% include ../partials/admin_header %>
+
+<div class="row">
+    <div class="col-12 col-md-10">
+        <h1 class="title">DANH SÁCH SẢN PHẨM</h1>
+    </div>
+    <div class="col-12 col-md-2">
+        <a class="button btn btn-md" href="/admin/products/add-product">THÊM SẢN PHẨM</a>
+    </div>
+</div>
+
+<table class="table table-striped alignmiddle">
+    <thead>
+        <tr class="home">
+            <th>Product</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Rating</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% products.forEach(function(product) {%>
+        <tr>
+            <td><%= product.name %></td>
+            <td>
+                <% if (product.image == "") { %>
+                    <img id="noimage" src="/images/noimage.png">
+                <% } else { %>
+                    <img id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
+                <% } %>
+            </td>
+            <td><%= product.price %></td>
+            <td><%= product.category %></td>
+            <td><%= product.ratingAverage %></td>
+            <td><%= product.totalQuantity %></td>
+            <td><a class="btn btn-md button" href="/admin/categories/edit-category/<%= cat._id %>">Edit</a></>
+            <td><a class="btn btn-md button confirmDeletion" href="/admin/categories/delete-category/<%= cat._id %>">Delete</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<% include ../partials/admin_footer %>

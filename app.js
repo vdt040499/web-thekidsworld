@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const validator = require('express-validator');
 const passport = require('passport');
+const fileUpload = require('express-fileupload');
 
 var app = express();
 
@@ -31,6 +32,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//Express file upload middleware
+app.use(fileUpload());
 
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -103,10 +107,12 @@ app.get('*', (req, res, next) => {
 
 //Set routes
 const adminCategoriesRoute = require('./routes/admin_categories.route');
+const adminProductsRoute = require('./routes/admin_products.route');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users.route');
 
 app.use('/admin/categories', adminCategoriesRoute);
+app.use('/admin/products', adminProductsRoute);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 
