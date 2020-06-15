@@ -55,5 +55,36 @@ module.exports.checkout = (req, res) => {
             cart: req.session.cart
         });
     }
+}
 
+//GET update product
+module.exports.updateProduct = (req, res) => {
+    var slug = req.params.product;
+    var cart = req.session.cart;
+    var action = req.query.action;
+
+    for (var i = 0; i < cart.length; i++) {
+        if ( cart[i].title == slug ) {
+            switch(action) {
+                case "add":
+                    cart[i].qty++;
+                    break;
+                case "remove":
+                    cart[i].qty--;
+                    if(cart[i].qty < 1) cart.splice(i, 1);
+                    break;
+                case "clear":
+                    cart.splice(i, 1);
+                    if (cart.length == 0) delete req.session.cart;
+                    break;
+                default:
+                    console.log('update problem');
+                    break;
+            }
+            break;
+        }
+    }
+
+    req.flash('success', 'Cart updated!');
+    res.redirect('/cart/checkout');
 }
