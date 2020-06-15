@@ -13,12 +13,23 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    address: {
+        type: String,
+        required: true
+    }, 
     phone: {
         type: String,
-        require: true
+        required: true
+    },
+    cart: {
+        type: Array
     },
     admin: {
         type: Number
+    },
+    date: {
+        type: Date,
+        required: true
     }
 });
 
