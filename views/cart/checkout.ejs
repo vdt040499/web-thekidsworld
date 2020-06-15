@@ -1,61 +1,96 @@
 <% include ../partials/header %>
 
-<% if (typeof cart !== "undefined") { %>
-    <h1 class="page-title title">GIỎ HÀNG</h1>
-    <div class="container">
-        <table class="table table-striped alignmiddle">
-            <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th></th>
-                <th>Subtotal</th>
-            </tr>
-            
-            <% var total = 0 %>
-            <% cart.forEach((product) => { %>
-            <% var sub = parseInt(product.price) * parseInt(product.qty) %>
-            <% var displaySub = parseInt(product.qty * product.price).toLocaleString("vi", { style: "currency", currency: "VND", })%>
-            <% total += +sub %>
-            <tr>
-                <td><img class="cpi" src="<%= product.image %>" alt=""></td>
-                <td><%= product.title %></td>
-                <td><%= parseInt(product.price).toLocaleString("vi", { style: "currency", currency: "VND", }) %></td>
-                <td><%= product.qty %></td>
-                <td>
-                    <a class="badge badge-pill badge-info" href="/cart/update/<%= product.title %>?action=add">+</a>
-                    <a class="badge badge-pill badge-info" href="/cart/update/<%= product.title %>?action=remove">-</a>
-                    <a class="badge badge-pill badge-info" href="/cart/update/<%= product.title %>?action=clear">x</a>
-                </td>
-                <td><%= sub.toLocaleString("vi", { style: "currency", currency: "VND", }) %></td>
-            </tr>
-            <% }); %>
-            <tr>
-               <td align="right" colspan="6" ><b>Total: </b>$<%= parseInt(total).toLocaleString("vi", { style: "currency", currency: "VND", })%></td> 
-            </tr>
-            <tr>
-                <td colspan="5" align="right">
-                    <a class="btn btn-md button clearcart" href="/cart/clear">Xóa giỏ hàng</a>
-                </td>
-                <td colspan="5" align="right">
-                    <a class="btn btn-md button buynow" href="#">Chốt đơn</a>
-                </td>
-            </tr>
-            </table>
-            <% } else { %>
-                <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
-                    <h3 class="text-center title">Hiện tại không có sản phẩm nào!</h3>
-                </div>
-            <% } %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="margin-top: 15px; margin-bottom: 30px;" >
+            <img src="/images/gif1.gif" class="img-fluid" alt="hinh">
+        </div>
+
+        <div class="col-md-6" style="margin-top: 15px; margin-bottom: 30px;">
+            <img src="/images/gif3.gif" class="img-fluid" alt="hinh">
+        </div>
     </div>
-    
-    <script>
-        $(function() {
-            $('a.clearcart').on('click', function() {
-            if(!confirm('Bạn thực sự muốn xóa gỏ hàng')) return false; 
-        });
-        });
-    </script>
+</div>
+
+<p style="text-align: center; font-size: xx-large; margin: 20px 0px;
+    color: #38CDD9; font-weight: bold;">GIỎ HÀNG CỦA BẠN</p>
+
+<div class="container">
+    <% if (typeof cart !== undefined) { %>
+    <div class="container">
+        <div class="table-responsive-md ">
+            <table class="table table-hover table-borderless">
+                <thead>
+                  <tr style="background-color: #d5f6f8; color: #52979c;">
+                    <th scope="col">STT</th>
+                    <th scope="col"></th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col"></th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% var total = 0 %>
+                    <% var index = 0 %>
+                    <% cart.forEach((product) => { %>
+                        <% index++ %>
+                        <% var sub = parseInt(product.price) * parseInt(product.qty) %>
+                        <% var displaySub = parseInt(product.qty * product.price).toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                        <% total += +sub %>
+                        <tr>
+                            <th scope="row"><%= index %></th>
+                            <td><img class="cpi" src="<%= product.image %>" 
+                                style="width: 100px; height: 100px; background-position: center; background-size:cover;" alt=""></td>
+                            <td><%= product.title %></td>
+                            <td><%= parseInt(product.price).toLocaleString("vi", { style: "currency", currency: "VND", })%></td>
+                            <td><%= product.qty %></td>
+                            <td>
+                                <div class="number1">
+                                    <a class="badge badge-pill badge-info" href="/cart/update/<%= product.title %>?action=add">+</a>
+                                    <a class="badge badge-pill badge-info" href="/cart/update/<%= product.title %>?action=remove">-</a>
+                                </div>
+                            </td>
+                            <td><%= sub.toLocaleString("vi", { style: "currency", currency: "VND", }) %></td>
+                            <td>
+                                <a class="btn btn-outline-danger" href="/cart/update/<%= product.title %>?action=clear">x</badge>
+                            </td>
+                          </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" style="margin-bottom: 30px;">
+        <hr style="border: 5px double rgb(219, 255, 255);">
+    </div>
+    <div class="container"style="margin-bottom: 30px;">
+        <div class="row">
+            <div class="col-md-8">
+                <a type="button" class="btn btn-success" style="margin-right: 5px;" href="#">Tiếp tục mua hàng</a>
+                <a type="button" class="btn btn-info" style="margin-right: 5px;" href="#">Thanh toán</a>
+                <a type="button" class="btn btn-outline-danger clearcart" href="/cart/clear">Xóa tất cả</a>
+            </div>
+            <div class="col-md-4" style="text-align: end; color: #ff8888; font-size: larger; font-weight: bold;">
+                <p>TỔNG TIỀN : <%= parseInt(total).toLocaleString("vi", { style: "currency", currency: "VND", })%></p>
+            </div>
+        </div>
+    </div>
+    <% } else { %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
+            <h3 class="text-center title">Hiện tại không có sản phẩm nào trong gỏ hàng!</h3>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    $(function() {
+        $('a.clearcart').on('click', function() {
+        if(!confirm('Bạn thực sự muốn xóa gỏ hàng')) return false; 
+    });
+    });
+</script>
 
 <% include ../partials/footer %>
