@@ -300,4 +300,25 @@ footer ul li{
   border-radius: 8px;
 }
 
+img.cpi {
+  width: 100px;
+}
+
+table.alignmiddle td {
+  vertical-align: middle !important;
+}
+
+table th {
+  color: #5A8B8F;
+}
+
+.button {
+  background-color: #51BCB1;
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 8px;
+  text-decoration: none; 
+}
+
 

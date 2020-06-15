@@ -1,5 +1,7 @@
 const Product = require('../models/product.model');
 
+
+//GET product to cart
 module.exports.addToCart = (req, res) => {
     var slug = req.params.product;
 
@@ -39,4 +41,19 @@ module.exports.addToCart = (req, res) => {
         req.flash('success', 'Product added!');
         res.redirect('back');
     });
+}
+
+//GET checkout
+module.exports.checkout = (req, res) => {
+
+    if(req.session.cart && req.session.cart.length == 0) {
+        delete req.session.cart;
+        res.redirect('/cart/checkout');
+    } else {
+        res.render('cart/checkout', {
+            headTitle: 'Checkout',
+            cart: req.session.cart
+        });
+    }
+
 }
