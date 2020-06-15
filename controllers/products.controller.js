@@ -17,6 +17,30 @@ module.exports.getProductsByCategory = (req, res) => {
   });
 };
 
+//GET all best seller products by category
+module.exports.getBSPByCategory = (req, res) => {
+    Category.findOne({slug: req.params.category}, (err, cate) => {
+        console.log(cate)
+        if(err) {
+            console.log(err);
+        } else {
+            Product.find({category: req.params.category}, (err, products) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    products.sort((a, b) => {
+                        return b.sold - a.sold;
+                    });
+                    res.render('product/bscat_products', {
+                        headTitle: cate.title,
+                        products: products
+                    });
+                }
+            });
+        }
+    });
+}
+
 //Get product details
 module.exports.getProductDetails = (req, res) => {
   var galleryImages = null;
