@@ -35,6 +35,18 @@ const productSchema = mongoose.Schema({
     totalQuantity: {
         type: Number,
         required: true
+    },
+    sale: {
+        type: Number,
+        default: 0
+    },
+    salePrice: {
+        type: Number,
+        default: 0
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 
