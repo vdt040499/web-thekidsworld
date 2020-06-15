@@ -60,7 +60,9 @@
                 <div class="col-md-3 mb-3">
                     <div class="card">
                         <div class="container" style="text-align: center; margin-top: 20px;">
-                            <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                            <a href="/products/<%= product.category %>/<%= product.slug %>">
+                                <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                            </a> 
                         </div>
                         <div style="text-align: center;" class="card-body">
                             <h5 class="card-title"><%= product.name %></h5>
