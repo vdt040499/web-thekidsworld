@@ -16,7 +16,7 @@
     color: #38CDD9; font-weight: bold;">GIỎ HÀNG CỦA BẠN</p>
 
 <div class="container">
-    <% if (typeof cart !== undefined) { %>
+    <% if (typeof cart !== "undefined") { %>
     <div class="container">
         <div class="table-responsive-md ">
             <table class="table table-hover table-borderless">
@@ -69,7 +69,7 @@
     <div class="container"style="margin-bottom: 30px;">
         <div class="row">
             <div class="col-md-8">
-                <a type="button" class="btn btn-success" style="margin-right: 5px;" href="#">Tiếp tục mua hàng</a>
+                <a type="button" class="btn btn-success" style="margin-right: 5px;" href="/">Tiếp tục mua hàng</a>
                 <a type="button" class="btn btn-info" style="margin-right: 5px;" href="#">Thanh toán</a>
                 <a type="button" class="btn btn-outline-danger clearcart" href="/cart/clear">Xóa tất cả</a>
             </div>

@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-4">
+        <% if (products) { %>
+            <% products.forEach((product) => { %>
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="container" style="text-align: center; margin-top: 20px;">
+                            <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                        </div>
+                        <div style="text-align: center;" class="card-body">
+                            <h5 class="card-title"><%= product.name %></h5>
+                            <div class="star-rate">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <% var editPrice = (product.price + 200000).toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                            <% var editPrice2 = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                            <p class="original-price"><strike><%= editPrice %></strike></p>
+                            <p class="product-price"><%= editPrice2 %></p>
+                            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white"
+                                href="/cart/add/<%= product.slug %>" role="button">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</div>
+<% include ../partials/footer %>
