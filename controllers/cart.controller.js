@@ -1,45 +1,92 @@
 const Product = require('../models/product.model');
-
+const User = require('../models/user.model');
 
 //GET product to cart
 module.exports.addToCart = (req, res) => {
     var slug = req.params.product;
 
     Product.findOne({slug: slug}, (err, p) => {
-        if(err)
+        if(err) {
             console.log(err);
-        if (typeof req.session.cart == "undefined") {
-            req.session.cart = [];
-            req.session.cart.push({
-                title: slug,
-                qty: 1,
-                price: parseInt(p.price),
-                image: '/product_images/' + p._id + '/' + p.image
-            });
         } else {
-            var cart = req.session.cart;
-            var newItem = true;
-
-            for (let i = 0; i < cart.length; i++) {
-                if(cart[i].title == slug) {
-                    cart[i].qty++;
-                    newItem = false;
-                    break;
-                }
-            }
-
-            if(newItem) {
-                cart.push({
+            if (typeof req.session.cart == "undefined") {
+                req.session.cart = [];
+                req.session.cart.push({
                     title: slug,
                     qty: 1,
                     price: parseInt(p.price),
                     image: '/product_images/' + p._id + '/' + p.image
+            });
+    
+            if(req.isAuthenticated()) {
+                console.log(req.user);
+                User.findOne({username: req.user.username}, (err, user) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        user.cart = req.session.cart.slice();
+    
+                        user.save((err) => {
+                            if(err) {
+                                console.log(err);
+                            } else {
+                                req.flash('success', 'Product added!');
+                                res.redirect('back');
+                            }
+                        });
+                    }
                 });
+                } else {
+                    console.log(req.session.cart);
+                    req.flash('success', 'Product added!');
+                    res.redirect('back');
+                }
+            } else {
+                var cart = req.session.cart;
+                var newItem = true;
+    
+                for (let i = 0; i < cart.length; i++) {
+                    if(cart[i].title == slug) {
+                        cart[i].qty++;
+                        newItem = false;
+                        break;
+                    }
+                }
+    
+                if(newItem) {
+                    cart.push({
+                        title: slug,
+                        qty: 1,
+                        price: parseInt(p.price),
+                        image: '/product_images/' + p._id + '/' + p.image
+                    });
+                }
+    
+                if(req.isAuthenticated()) {
+                    console.log(req.user);
+                    User.findOne({username: req.user.username}, (err, user) => {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            user.cart = req.session.cart.slice();
+        
+                            user.save((err) => {
+                                if(err) {
+                                    console.log(err);
+                                } else {
+                                    req.flash('success', 'Product added!');
+                                    res.redirect('back');
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    console.log(req.session.cart);
+                    req.flash('success', 'Product added!');
+                    res.redirect('back');
+                }
             }
         }
-        console.log(req.session.cart);
-        req.flash('success', 'Product added!');
-        res.redirect('back');
     });
 }
 

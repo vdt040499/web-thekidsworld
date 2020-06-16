@@ -8,12 +8,14 @@ module.exports.signup = (req, res) => {
     var username = "";
     var email = "";
     var phone = "";
+    var address = "";
 
     res.render('users/signup', {
         headTitle: "Sign Up",
         username: username,
         email: email,
-        phone: phone
+        phone: phone, 
+        address: address
     });
 }
 
@@ -22,12 +24,14 @@ module.exports.signupPost = (req, res) => {
     var username = req.body.username;
     var email = req.body.email;
     var phone = req.body.phone;
+    var address = req.body.address;
     var password = req.body.password;
     var repass = req.body.repass;
 
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('email', 'Email is required!').isEmail();
     req.checkBody('phone', 'Phone is required!').notEmpty();
+    req.checkBody('address', 'Address is required!').notEmpty();
     req.checkBody('password', 'Password is required!').notEmpty();
     req.checkBody('repass', 'Passwords do not match!').equals(password);
 
@@ -39,6 +43,7 @@ module.exports.signupPost = (req, res) => {
             username: username,
             email: email,
             phone: phone,
+            address: address,
             errors: errors,
             user: null
         })
@@ -54,6 +59,7 @@ module.exports.signupPost = (req, res) => {
                     username: username,
                     email: email,
                     phone: phone,
+                    address: address,
                     password: password,
                     admin: 0
                 });
@@ -105,6 +111,8 @@ module.exports.signinPost = (req, res, next) => {
 
 module.exports.logout = (req, res) => {
     req.logout();
+
+    delete req.session.cart;
 
     req.flash('success', 'You are logged out!');
     res.redirect('/users/signin');
