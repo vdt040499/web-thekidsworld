@@ -13,6 +13,7 @@ module.exports.addToCart = (req, res) => {
                 req.session.cart = [];
                 req.session.cart.push({
                     title: slug,
+                    category: p.category,
                     qty: 1,
                     price: parseInt(p.price),
                     image: '/product_images/' + p._id + '/' + p.image
@@ -56,6 +57,7 @@ module.exports.addToCart = (req, res) => {
                 if(newItem) {
                     cart.push({
                         title: slug,
+                        category: p.category,
                         qty: 1,
                         price: parseInt(p.price),
                         image: '/product_images/' + p._id + '/' + p.image
@@ -97,6 +99,7 @@ module.exports.checkout = (req, res) => {
         delete req.session.cart;
         res.redirect('/cart/checkout');
     } else {
+        req.session.cart 
         res.render('cart/checkout', {
             headTitle: 'Checkout',
             cart: req.session.cart
