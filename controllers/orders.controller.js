@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const Product = require('../models/product.model');
+const Order = require('../models/order.model');
 
 function makeid(length) {
     var result           = '';
@@ -46,18 +47,75 @@ module.exports.order = (req, res) => {
 
 //POST check out
 module.exports.orderPost = (req, res) => {
-    var username = req.body.username;
-    console.log(username);
-    var address = req.body.address;
-    console.log(address);
-    var phone = req.body.phone;
-    console.log(phone);
-    var email = req.body.email;
-    console.log(email);
-    var makeID = req.body.makeID;
-    console.log(makeID);
-    var id = req.body.id;
-    console.log(id);
 
-    res.send(username + address + phone + email + makeID + id);
+    req.checkBody('username', 'Username is required').notEmpty();
+    req.checkBody('email', 'Email is required!').isEmail();
+    req.checkBody('phone', 'Phone is required!').notEmpty();
+    req.checkBody('address', 'Address is required!').notEmpty();
+
+    var username = req.body.username;
+    var address = req.body.address;
+    var phone = req.body.phone;
+    var email = req.body.email;
+    var makeID = req.body.makeID;
+    var id = req.body.id;
+
+    if (req.isAuthenticated()) {
+        User.findById(id, (err, user) => {
+            if(err) {
+                console.log(err);
+            } else {
+                var order = new Order({
+                    ID: makeID,
+                    orderBy: user,
+                    cart: req.session.cart,
+                });
+
+                order.save((err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        delete req.session.cart;
+        
+                        user.cart = [];
+
+                        user.save((err) => {
+                            if(err) {
+                                console.log(err);
+                            } else {
+                                req.flash('success', 'Cảm ơn bạn đã mua hàng của chúng tôi');
+                                res.redirect('/');
+                            }
+                        });
+
+                    }
+                })
+            }
+        });
+    } else {
+        var noaccount = {
+            username: username,
+            address: address,
+            phone: phone,
+            email: email
+        }
+
+        var user = JSON.stringify(noaccount);
+
+        var order = new Order({
+            ID: makeID,
+            orderByNoAccount: user,
+            cart: req.session.cart,
+        });
+
+        order.save((err) => {
+            if(err) {
+                console.log(err);
+            } else {
+                delete req.session.cart;
+                req.flash('success', 'Cảm ơn bạn đã mua hàng của chúng tôi');
+                res.redirect('/');
+            }
+        })
+    }
 }
