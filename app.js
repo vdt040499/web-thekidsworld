@@ -112,12 +112,14 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.route');
 const cartRouter = require('./routes/cart.route');
 const productsRouter = require('./routes/products.route');
+const ordersRouter = require('./routes/orders.route');
 
 app.use('/admin/categories', adminCategoriesRoute);
 app.use('/admin/products', adminProductsRoute);
 app.use('/cart', cartRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/orders', ordersRouter);
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler

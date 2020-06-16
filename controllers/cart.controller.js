@@ -93,7 +93,7 @@ module.exports.addToCart = (req, res) => {
 }
 
 //GET checkout
-module.exports.checkout = (req, res) => {
+module.exports.cart = (req, res) => {
 
     if(req.session.cart && req.session.cart.length == 0) {
         delete req.session.cart;
