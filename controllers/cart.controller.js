@@ -132,6 +132,26 @@ module.exports.updateProduct = (req, res) => {
         }
     }
 
-    req.flash('success', 'Cart updated!');
-    res.redirect('/cart/checkout');
+    if (req.isAuthenticated()) {
+        User.findOne({username: req.user.username}, (err, user) => {
+            if (err) {
+                console.log(err);
+            } else {
+                user.cart = req.session.cart.slice();
+        
+                user.save((err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        req.flash('success', 'Cart updated!');
+                        res.redirect('back');
+                    }
+                });
+            }
+        });
+    } else {
+        req.flash('success', 'Cart updated!');
+        res.redirect('/cart/checkout');
+    }   
 }
+    
