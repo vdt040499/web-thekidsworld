@@ -8,5 +8,6 @@ const cartController = require('../controllers/cart.controller');
 router.get('/add/:product', cartController.addToCart);
 router.get('/checkout', cartController.checkout);
 router.get('/update/:product', cartController.updateProduct);
+router.get('/clear', cartController.deleteCart);
 
 module.exports = router;

@@ -157,4 +157,32 @@ module.exports.updateProduct = (req, res) => {
         res.redirect('/cart/checkout');
     }   
 }
+
+//GET delete cart
+module.exports.deleteCart = (req, res) => {
+    delete req.session.cart;
+
+    if(req.isAuthenticated()) {
+        User.findOne({username: req.user.username}, (err, user) => {
+            if(err) {
+                console.log(err);
+            } else {
+                user.cart = [];
+
+                user.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        req.flash('success', 'Cart cleared!');
+                        res.redirect('/cart/checkout');
+                    }
+                });
+            }
+        });
+
+    } else {    
+        req.flash('success', 'Cart cleared!');
+        res.redirect('/cart/checkout');
+    }
+}
     
