@@ -97,11 +97,11 @@ module.exports.checkout = (req, res) => {
 
     if(req.session.cart && req.session.cart.length == 0) {
         delete req.session.cart;
-        res.redirect('/cart/checkout');
+        res.redirect('/cart/cart');
     } else {
         req.session.cart 
-        res.render('cart/checkout', {
-            headTitle: 'Checkout',
+        res.render('cart/cart', {
+            headTitle: 'Cart',
             cart: req.session.cart
         });
     }
@@ -154,7 +154,7 @@ module.exports.updateProduct = (req, res) => {
         });
     } else {
         req.flash('success', 'Cart updated!');
-        res.redirect('/cart/checkout');
+        res.redirect('/cart/cart');
     }   
 }
 
@@ -174,7 +174,7 @@ module.exports.deleteCart = (req, res) => {
                         console.log(err);
                     } else {
                         req.flash('success', 'Cart cleared!');
-                        res.redirect('/cart/checkout');
+                        res.redirect('/cart/cart');
                     }
                 });
             }
@@ -182,7 +182,7 @@ module.exports.deleteCart = (req, res) => {
 
     } else {    
         req.flash('success', 'Cart cleared!');
-        res.redirect('/cart/checkout');
+        res.redirect('/cart/cart');
     }
 }
     
