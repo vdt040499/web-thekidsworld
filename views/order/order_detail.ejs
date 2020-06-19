@@ -1,0 +1,89 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="bill">
+        <p class="bill-title" style="font-size: x-large; text-align: center;">HÓA ĐƠN THANH TOÁN</p>
+        <p class="bill-title" style="font-size: large; text-align: center; ">MÃ SỐ ĐƠN HÀNG <%= orderID %></p>
+        <p class="bill-title">CHI TIẾT ĐƠN HÀNG </p>
+        <div class="table-responsive-md ">
+            <table class="table table-sm table-borderless">
+                <thead>
+                  <tr style="background-color: #d5f6f8; color: #52979c;">
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Tổng tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% var total = 0 %>
+                  <% orderCart.forEach((product, index) => { %>
+                    <% var sub = parseInt(product.price) * parseInt(product.qty) %>
+                    <% var displaySub = parseInt(product.qty * product.price).toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% total += +sub %>
+                    <tr>
+                      <th scope="row"><%= index + 1 %></th>
+                      <td><%= product.title %></td>
+                      <td><%= parseInt(product.price).toLocaleString("vi", { style: "currency", currency: "VND", }) %></td>
+                      <td><%= product.qty %></td>
+                      <td><%= displaySub %></td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <p class="bill-title">PHƯƠNG THỨC GIAO HÀNG</p>
+        <p class="bill-info-details">Thanh toán khi nhận hàng.</p>
+        <p class="bill-title">THÔNG TIN GIAO HÀNG</p>
+        <div class="table-responsive-md ">
+            <table class="table table-sm table-borderless">
+                <thead>
+                  <tr style="background-color: #d5f6f8; color: #52979c;">
+                    <th scope="col">Đề mục</th>
+                    <th scope="col">Thông tin người nhận</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tên người nhận</td>
+                    <td style="text-transform: uppercase;"> 
+                     <p><%= orderUser.username %></p> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Địa chỉ </td>
+                    <td>
+                      <p><%= orderUser.address %></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Số điện thoại </td>
+                    <td style="text-transform: uppercase;">
+                      <p><%= orderUser.phone %></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Email xác nhận </td>
+                    <td>
+                      <p><%= orderUser.email %></p>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            <hr style="border: 5px double rgb(219, 255, 255);">
+        </div>
+        <p class="bill-title">PHÍ GIAO HÀNG</p>
+        <p class="bill-info-details">Miễn phí nha!</p>
+        <p class="bill-title">TỔNG TIỀN THANH TOÁN</p>
+        <p class="bill-info-details"><%= parseInt(total).toLocaleString("vi", { style: "currency", currency: "VND", }) %></p>
+        <p class="bill-title">THỜI GIAN GIAO HÀNG DỰ KIẾN</p>
+        <% let date = new Date() %>
+        <% var orderDate = date.getDate() + "/" + (date.getMonth()+1)  + "/" + date.getFullYear(); %>
+        <% var deliveryDate = (date.getDate()+3) + "/" + (date.getMonth()+1)  + "/" + date.getFullYear(); %>
+        <p class="bill-info-details">Từ ngày <%= orderDate %> - <%= deliveryDate %></p>
+        <p class="bill-title">TÌNH TRẠNG ĐƠN HÀNG: </p>
+    </div>
+</div>
+
+<% include ../partials/footer %>

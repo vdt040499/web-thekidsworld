@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
+        <form action="/orders/checkorder" method="POST">
+            <div class="row mt-2 mx-2">
+                <label class="col-sm-3 col-form-label" for="ID"><strong>MÃ ĐƠN HÀNG</strong></label>
+                <div class="col-sm-9">
+                    <input type="text" style="border: none; outline: none;
+                        background: transparent; border-bottom: 1px solid black;" name="ID"
+                        class="form-control" id="ID" value="<%= orderId %>" required>
+                </div>
+                <div class="row mt-2 mx-2">
+                    <button style="margin-top: 20px; text-align: center; background-color:rgb(117, 228, 222);
+                    color: white; font-weight: bold; text-shadow: #D1FFFD;" class="btn btn-lg btn-block"
+                        type="submit">KIỂM TRA</button>
+                </div>
+            </div>
+        </form>       
+    </div>
+</div>
+
+<% include ../partials/footer %>

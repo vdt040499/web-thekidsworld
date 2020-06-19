@@ -107,6 +107,7 @@ module.exports.signinPost = (req, res, next) => {
         failureFlash: true
     })(req, res, next);
 
+
 }
 
 module.exports.logout = (req, res) => {

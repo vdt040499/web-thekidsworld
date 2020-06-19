@@ -5,6 +5,7 @@ const crypto =require('crypto');
 const User = require('../models/user.model');
 const Product = require('../models/product.model');
 const Order = require('../models/order.model');
+const router = require('../routes/cart.route');
 
 function makeid(length) {
     var result           = '';
@@ -126,7 +127,9 @@ module.exports.orderPost = (req, res) => {
                                             from: 'vdt040499@gmail.com',
                                             to: email,
                                             subject: 'Confirm your order',
-                                            text: '<h1> Your Invoice </h1>'
+                                            text: `Your invoice
+                                                    Order's ID: ${makeID}
+                                                    Please use it to check your invoice on my website`
                                           };
                                     
                                           transporter.sendMail(mailOptions, function(err, data){
@@ -192,7 +195,9 @@ module.exports.orderPost = (req, res) => {
                             from: 'vdt040499@gmail.com',
                             to: email,
                             subject: 'Confirm your order',
-                            text: '<h1> Your Invoice </h1>'
+                            text: `Your invoice
+                                    Order's ID: ${makeID}
+                                    Please use it to check your invoice on my website`
                           };
                     
                           transporter.sendMail(mailOptions, function(err, data){
@@ -213,3 +218,88 @@ module.exports.orderPost = (req, res) => {
         }
     }
 }
+
+//GET check order
+module.exports.checkOrder = (req, res) => {
+    var orderId = '';
+
+    res.render('order/check_order', {
+        headTitle: 'Check order',
+        orderId: orderId
+    });
+}
+
+//POST check order
+module.exports.checkOrderPost = (req, res) => {
+    var orderId = req.body.ID;
+
+    req.checkBody('ID', 'Bạn chưa nhập mã đơn hàng');
+
+    var errors = req.validationErrors();
+
+    if(errors) {
+        req.render('order/check_order', {
+            headTitle: 'Check order',
+            orderId: orderId
+        });
+    } else {
+        Order.findOne({ID: orderId}, (err, order) => {
+            if(err) {
+                console.log(err);
+            } else {
+                if(!order) {
+                    req.flash('danger', 'Mã đơn hàng không tồn tại');
+                    res.render('order/check_order', {
+                        headTitle: 'Check order',
+                        orderId: orderId
+                    });
+                } else {
+                    if(!order.orderBy) {
+                        var user = JSON.parse(order.orderByNoAccount);
+                        var cart = JSON.parse(JSON.stringify(order.cart.slice()));
+                        
+                        if (req.isAuthenticated()) {
+                            res.render('order/order_detail', {
+                                headTitle: 'Your order',
+                                orderID: order.ID,
+                                orderUser: user,
+                                user: req.user,
+                                orderCart: cart
+                            });
+                        } else {
+                            res.render('order/order_detail', {
+                                headTitle: 'Your order',
+                                orderID: order.ID,
+                                orderUser: user,
+                                user: null,
+                                orderCart: cart
+                            });
+                        }
+                    } else {
+                        var cart = JSON.parse(JSON.stringify(order.cart.slice()));
+
+                        User.findById(order.orderBy, (err, user) => {
+                            if (req.isAuthenticated()) {
+                                res.render('order/order_detail', {
+                                    headTitle: 'Your order',
+                                    orderID: order.ID,
+                                    orderUser: user,
+                                    user: req.user,
+                                    orderCart: cart
+                                });
+                            } else {
+                                res.render('order/order_detail', {
+                                    headTitle: 'Your order',
+                                    orderID: order.ID,
+                                    orderUser: user,
+                                    user: null,
+                                    orderCart: cart
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+} 
