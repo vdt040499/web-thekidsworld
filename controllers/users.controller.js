@@ -2,6 +2,7 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
 const User = require('../models/user.model');
+const Order = require('../models/order.model');
 
 //GET signup
 module.exports.signup = (req, res) => {
@@ -110,6 +111,7 @@ module.exports.signinPost = (req, res, next) => {
 
 }
 
+//GET logout
 module.exports.logout = (req, res) => {
     req.logout();
 
@@ -117,4 +119,38 @@ module.exports.logout = (req, res) => {
 
     req.flash('success', 'You are logged out!');
     res.redirect('/users/signin');
+}
+
+//GET profile
+module.exports.account = (req, res) => {
+    var user = req.user;
+    var receiver = '';
+    Order.find({ orderBy : user._id }, (err, orders) => {
+        var processingOrder = [];
+        var shippingOrder = [];
+        var completedOrder = [];
+        orders.forEach((order) => {
+            receiver = order.receiver;
+            if(order.status == "Processing") {
+                processingOrder.push(order);
+            } else if (order.status == "Shipping") {
+                shippingOrder.push(order);
+            } else {
+                completedOrder.push(order);
+            }
+        });
+
+        console.log(user);
+        console.log(JSON.parse(receiver));
+
+        res.render('users/account', {
+            headTitle: 'Account',
+            user: user,
+            receiver: JSON.parse(receiver),
+            processingOrder: processingOrder,
+            shippingOrder: shippingOrder,
+            completedOrder: completedOrder,
+        });
+    })
+   
 }

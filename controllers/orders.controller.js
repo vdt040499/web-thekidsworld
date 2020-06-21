@@ -86,9 +86,19 @@ module.exports.orderPost = (req, res) => {
                 if(err) {
                     console.log(err);
                 } else {
+                    var account = {
+                        username: username,
+                        address: address,
+                        phone: phone,
+                        email: email
+                    }
+            
+                    var receiver = JSON.stringify(account);
+
                     var order = new Order({
                         ID: makeID,
                         orderBy: user,
+                        receiver: receiver,
                         cart: req.session.cart,
                     });
     
@@ -160,12 +170,12 @@ module.exports.orderPost = (req, res) => {
                 email: email
             }
     
-            var user = JSON.stringify(noaccount);
+            var receiver = JSON.stringify(noaccount);
     
             var order = new Order({
                 ID: makeID,
-                orderByNoAccount: user,
-                cart: req.session.cart,
+                receiver: receiver,
+                cart: req.session.cart
             });
     
             order.save((err) => {
@@ -255,14 +265,15 @@ module.exports.checkOrderPost = (req, res) => {
                     });
                 } else {
                     if(!order.orderBy) {
-                        var user = JSON.parse(order.orderByNoAccount);
                         var cart = JSON.parse(JSON.stringify(order.cart.slice()));
-                        
+                        var receiver = JSON.parse(order.receiver);
+
                         if (req.isAuthenticated()) {
+                            
                             res.render('order/order_detail', {
                                 headTitle: 'Your order',
                                 orderID: order.ID,
-                                orderUser: user,
+                                receiver: receiver,
                                 user: req.user,
                                 orderCart: cart
                             });
@@ -270,33 +281,33 @@ module.exports.checkOrderPost = (req, res) => {
                             res.render('order/order_detail', {
                                 headTitle: 'Your order',
                                 orderID: order.ID,
-                                orderUser: user,
+                                receiver: receiver,
                                 user: null,
                                 orderCart: cart
                             });
                         }
                     } else {
                         var cart = JSON.parse(JSON.stringify(order.cart.slice()));
-
-                        User.findById(order.orderBy, (err, user) => {
-                            if (req.isAuthenticated()) {
-                                res.render('order/order_detail', {
-                                    headTitle: 'Your order',
-                                    orderID: order.ID,
-                                    orderUser: user,
-                                    user: req.user,
-                                    orderCart: cart
-                                });
-                            } else {
-                                res.render('order/order_detail', {
-                                    headTitle: 'Your order',
-                                    orderID: order.ID,
-                                    orderUser: user,
-                                    user: null,
-                                    orderCart: cart
-                                });
-                            }
-                        });
+                        var receiver = JSON.parse(order.receiver);
+                        
+                        if (req.isAuthenticated()) {
+                            
+                            res.render('order/order_detail', {
+                                headTitle: 'Your order',
+                                orderID: order.ID,
+                                receiver: receiver,
+                                user: req.user,
+                                orderCart: cart
+                            });
+                        } else {
+                            res.render('order/order_detail', {
+                                headTitle: 'Your order',
+                                orderID: order.ID,
+                                receiver: receiver,
+                                user: null,
+                                orderCart: cart
+                            });
+                        }
                     }
                 }
             }

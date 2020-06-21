@@ -11,11 +11,15 @@ const orderSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    orderByNoAccount: {
+    receiver: {
         type: String
     },
     cart: {
         type: Array
+    },
+    status: {
+        type: String,
+        default: "Processing"
     },
     date: {
         type: Date,
