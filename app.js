@@ -15,7 +15,7 @@ var app = express();
 const config = require('./config/database');
 
 //Connect to MongoDB
-mongoose.connect(config.database, {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, err => {
