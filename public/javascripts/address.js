@@ -9,7 +9,9 @@
           var allText = rawFile.responseText;
   
           var pros = JSON.parse(allText);
-  
+
+          console.log(pros);
+
           var provinces = pros.map((pro) => {
             return `<option value="${pro.id}">${pro.name}</option>`;
           });

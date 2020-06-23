@@ -1,5 +1,6 @@
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
 
 const User = require('../models/user.model');
 const Order = require('../models/order.model');
@@ -25,6 +26,9 @@ module.exports.signupPost = (req, res) => {
     var username = req.body.username;
     var email = req.body.email;
     var phone = req.body.phone;
+    var province = req.body.province;
+    var district = req.body.district;
+    var ward = req.body.ward;
     var address = req.body.address;
     var password = req.body.password;
     var repass = req.body.repass;
@@ -32,6 +36,9 @@ module.exports.signupPost = (req, res) => {
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('email', 'Email is required!').isEmail();
     req.checkBody('phone', 'Phone is required!').notEmpty();
+    req.checkBody('province', 'Province address is required!').notEmpty();
+    req.checkBody('district', 'District address required!').notEmpty();
+    req.checkBody('ward', 'Ward is required!').notEmpty();
     req.checkBody('address', 'Address is required!').notEmpty();
     req.checkBody('password', 'Password is required!').notEmpty();
     req.checkBody('repass', 'Passwords do not match!').equals(password);
@@ -53,14 +60,42 @@ module.exports.signupPost = (req, res) => {
             if(err) console.log(err);
 
             if(user) {
-                res.flash('danger', 'Username exists, choose another!');
+                req.flash('danger', 'Username exists, choose another!');
                 res.redirect('/users/signup');
             } else {
+
+                var prov, dist, ward2;
+
+                var provinces = JSON.parse(fs.readFileSync('./public/files/Province.txt'));
+
+                provinces.forEach((pro) => {
+                    if (pro.id === parseInt(province)) {
+                        prov = pro.name;
+                    }
+                });
+
+                var districts = JSON.parse(fs.readFileSync('./public/files/District.txt'));
+
+                districts.forEach((dis) => {
+                    if (dis.id === parseInt(district)) {
+                        dist = dis.name;
+                    }
+                });
+
+                var wards = JSON.parse(fs.readFileSync('./public/files/Ward.txt'));
+
+                wards.forEach((wa) => {
+                    if(wa.id === parseInt(ward)) {
+                        ward2 = wa.name;
+                    }
+                });
+
+                var add = `${address}, ${ward2}, ${dist}, ${prov}`;
                 var user = new User ({
                     username: username,
                     email: email,
                     phone: phone,
-                    address: address,
+                    address: add,
                     password: password,
                     admin: 0
                 });

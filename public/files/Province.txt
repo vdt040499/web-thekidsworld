@@ -1,4 +1,4 @@
-﻿[
+[
 	{"id": 1, "name": "An Giang"},
 	{"id": 2, "name": "Bà Rịa - Vũng Tàu"},
 	{"id": 3, "name": "Bắc Kạn"},
