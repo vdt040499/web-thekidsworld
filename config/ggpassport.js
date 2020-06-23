@@ -6,7 +6,8 @@ module.exports = (passport) => {
     passport.use(new GooglePlusStrategy({
         clientID: "974946233658-shibjmdfev2sgec6klqg9jss3mjm5jg0.apps.googleusercontent.com",
         clientSecret: "fBct9ppCQwURjyZ9G5-4wYez",
-        callbackURL: 'https://thekidsworld.herokuapp.com/auth/gg/cb'
+        callbackURL: 'http://localhost:3001/auth/gg/cb'
+        // callbackURL: 'https://thekidsworld.herokuapp.com/auth/gg/cb'
       },
       (token, refreshToken, profile, done) => {
 
