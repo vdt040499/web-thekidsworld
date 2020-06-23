@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const passport = require('passport');
 
 const Product = require('../models/product.model');
 const User = require('../models/user.model');
@@ -49,5 +50,11 @@ router.get('/', function(req, res, next) {
   });
   
 });
+
+//Login with google
+//Login with google
+router.get('/auth/gg', passport.authenticate('google',{scope: ['profile', 'email']}));
+
+router.get('/auth/gg/cb', passport.authenticate('google', { successRedirect : '/', failureRedirect: '/users/signin' }));
 
 module.exports = router;

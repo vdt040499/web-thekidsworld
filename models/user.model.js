@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
+    ggid: {
+        type: String
+    },
     email: {
         type: String,
         required: true
@@ -10,16 +13,13 @@ const userSchema = mongoose.Schema({
         required: true
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     address: {
-        type: String,
-        required: true
+        type: String
     }, 
     phone: {
-        type: String,
-        required: true
+        type: String
     },
     cart: {
         type: Array

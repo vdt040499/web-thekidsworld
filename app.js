@@ -92,6 +92,9 @@ app.use(function (req, res, next) {
 //Passport config
 require('./config/passport')(passport);
 
+//Google passport config
+require('./config/ggpassport')(passport);
+
 //Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
