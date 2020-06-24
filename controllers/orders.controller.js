@@ -6,6 +6,7 @@ const User = require('../models/user.model');
 const Product = require('../models/product.model');
 const Order = require('../models/order.model');
 const router = require('../routes/cart.route');
+const select = require('../config/select_address');
 
 function makeid(length) {
     var result           = '';
@@ -39,11 +40,11 @@ module.exports.order = async (req, res) => {
     } else {
         res.render('order/checkout', {
             headTitle: 'Check out',
+            user: null,
             makeID: makeid(10),
             cart: req.session.cart,
             id: '',
             username: '',
-            address: '',
             phone: '',
             email: ''
         });
@@ -64,6 +65,12 @@ module.exports.orderPost = (req, res) => {
     var email = req.body.email;
     var makeID = req.body.makeID;
     var id = req.body.id;
+
+    if (!req.isAuthenticated()) {
+        var province = req.body.province;
+        var district = req.body.district;
+        var ward = req.body.ward;
+    }
 
     var errors = req.validationErrors();
 
@@ -86,6 +93,7 @@ module.exports.orderPost = (req, res) => {
                 if(err) {
                     console.log(err);
                 } else {
+
                     var account = {
                         username: username,
                         address: address,
@@ -163,9 +171,11 @@ module.exports.orderPost = (req, res) => {
                 }
             });
         } else {
+            var address2 = select.address(address, province, district, ward);
+
             var noaccount = {
                 username: username,
-                address: address,
+                address: address2,
                 phone: phone,
                 email: email
             }

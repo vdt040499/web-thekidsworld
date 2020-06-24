@@ -175,13 +175,23 @@ module.exports.account = (req, res) => {
             }
         });
 
-        console.log(user);
-        console.log(JSON.parse(receiver));
+        var noreceiver = {
+            username: '',
+            address: '',
+            phone: '',
+            email: ''
+        }
+
+        if (receiver == '') {
+            receiver = noreceiver;
+        } else {
+            receiver = JSON.parse(receiver);
+        }
 
         res.render('users/account', {
             headTitle: 'Account',
             user: user,
-            receiver: JSON.parse(receiver),
+            receiver: receiver,
             processingOrder: processingOrder,
             shippingOrder: shippingOrder,
             completedOrder: completedOrder,
