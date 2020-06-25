@@ -15,6 +15,7 @@
             <th>Category</th>
             <th>Level</th>
             <th>PreLevel</th>
+            <th>Slug</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -25,6 +26,7 @@
             <td><%= cat.title %></td>
             <td><%= cat.level %></td>
             <td><%= cat.prelevel %></td>
+            <td><%= cat.slug %></td>
             <td><a class="btn btn-md button" href="/admin/categories/edit-category/<%= cat._id %>">Edit</a></>
             <td><a class="btn btn-md button confirmDeletion" href="/admin/categories/delete-category/<%= cat._id %>">Delete</a></td>
         </tr>

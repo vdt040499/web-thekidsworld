@@ -33,6 +33,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+//Get category model
+const Category = require('./models/category.model');
+
+//Get all categories for header.ejs
+Category.find((err, cates) => {
+  if (err) {
+    console.log(err);
+  } else {
+    app.locals.cates = cates;
+  }
+});
+
 //Express file upload middleware
 app.use(fileUpload());
 

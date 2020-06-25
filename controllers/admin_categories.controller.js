@@ -19,12 +19,14 @@ module.exports.addCate = (req, res) => {
     var title = "";
     var level = 0;
     var prelevel = "";
+    var slug = "";
 
     res.render('admin/add_category', {
         headTitle: 'Add category',
         title: title,
         level: level,
-        prelevel: prelevel
+        prelevel: prelevel,
+        slug: slug
     });
 }
 
@@ -32,11 +34,12 @@ module.exports.addCate = (req, res) => {
 module.exports.addCatePost = (req, res) => {
     
     var title = req.body.title;
-    var slug = title.replace(/\s+/g, '-').toLowerCase();
+    var slug = req.body.slug;
     var level = parseInt(req.body.level);
     var prelevel = req.body.prelevel;
 
     req.checkBody('title', 'Title is required!').notEmpty();
+    req.checkBody('slug', 'Slug is required!').notEmpty();
     req.checkBody('prelevel', 'Prelevel is required!').notEmpty();
 
     var errors = req.validationErrors();
@@ -47,7 +50,8 @@ module.exports.addCatePost = (req, res) => {
             errors: errors,
             title: title,
             level: level,
-            prelevel: prelevel
+            prelevel: prelevel,
+            slug: slug
         });
     } else {
         Category.findOne({slug: slug}, (err, existCate) => {
@@ -60,6 +64,7 @@ module.exports.addCatePost = (req, res) => {
                         headtitle: 'Add category',
                         title: title,
                         level: level,
+                        slug: slug,
                         prelevel: prelevel
                     });
                 } else {
@@ -74,6 +79,7 @@ module.exports.addCatePost = (req, res) => {
                         if(err) {
                             console.log(err);
                         } else {
+                            
                             Category.find((err, cates) => {
                                 if(err) {
                                     console.log(err);
@@ -103,6 +109,7 @@ module.exports.editCate = (req, res) => {
                 title: cate.title,
                 level: cate.level,
                 prelevel: cate.prelevel,
+                slug: cate.slug,
                 id: cate._id
             });
         }
@@ -113,12 +120,13 @@ module.exports.editCate = (req, res) => {
 module.exports.editCatePost = (req, res) => {
 
     var title = req.body.title;
-    var slug = title.replace(/\s+/g, '-').toLowerCase();
+    var slug = req.body.slug;
     var level = req.body.level;
     var prelevel = req.body.prelevel;
     var id = req.params.id;
 
     req.checkBody('title', 'Title is required!').notEmpty();
+    req.checkBody('slug', 'Slug is required!').notEmpty();
     req.checkBody('prelevel', 'Prelevel is required!').notEmpty();
 
     var errors = req.validationErrors();
@@ -130,7 +138,8 @@ module.exports.editCatePost = (req, res) => {
             id: id,
             title: title,
             level: level,
-            prelevel: prelevel
+            prelevel: prelevel,
+            slug: slug
         });
     } else {
         Category.findOne({slug: slug, _id: {'$ne': id}}, (err, existCate) =>  {
@@ -143,7 +152,8 @@ module.exports.editCatePost = (req, res) => {
                         headTitle: 'Edit category',
                         title: title,
                         level: level,
-                        prelevel: prelevel
+                        prelevel: prelevel,
+                        slug: slug
                     });
                 } else {
                     Category.findById(id, (err, cate) => {
