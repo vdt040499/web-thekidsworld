@@ -1,0 +1,62 @@
+<% include ../partials/admin_header %>
+
+<div class="row">
+    <div class="col-12 col-md-10">
+        <h1 class="title">ĐƠN HÀNG KHÁCH HÀNG</h1>
+    </div>
+</div>
+
+<table class="table table-striped alignmiddle">
+    <thead>
+        <tr class="home">
+            <th>ID</th>
+            <th>Created date</th>
+            <th>Delivery date</th>
+            <th>Status</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% orders.forEach(function(order) {%>
+        <% var orderDate = order.date.getDate() + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
+        <% var deliveryDate = (order.date.getDate()+3) + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
+        <tr>
+            <td><%= order.ID %></td>
+            <td><%= orderDate %></td>
+            <td><%= deliveryDate %></td>
+            <td>
+                <% if (order.status == "Processing") { %>
+                    <div class="action d-flex justify-content-center align-items-center">
+                        <a href="#" class="btn btn-warning mr-1 disabled">Handling</a>
+                        <a href="#" class="btn btn-outline-success mr-1">Shipping</a>
+                        <a href="#" class="btn btn-outline-danger">Completed</a>
+                    </div> 
+                <% } %>
+
+                <% if (order.status == "Shipping") { %>
+                    <div class="action d-flex justify-content-center align-items-center">
+                        <a href="#" class="btn btn-outline-warning mr-1">Handling</a>
+                        <a href="#" class="btn btn-success mr-1 disabled">Shipping</a>
+                        <a href="#" class="btn btn-outline-danger">Completed</a>
+                    </div> 
+                <% } %>
+
+                <% if (order.status == "Completed") { %>
+                    <div class="action d-flex justify-content-center align-items-center">
+                        <a href="#" class="btn btn-outline-warning mr-1">Handling</a>
+                        <a href="#" class="btn btn-outline-success mr-1">Shipping</a>
+                        <a href="#" class="btn btn-danger disabled">Completed</a>
+                    </div> 
+                <% } %>               
+            </td>
+            <td>
+                <div class="action d-flex justify-content-center align-items-center">
+                    <a href="#" class="btn btn-danger">Delete</a>
+                </div>  
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<% include ../partials/admin_footer %>

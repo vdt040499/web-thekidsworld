@@ -307,7 +307,10 @@
 
   table.alignmiddle th, table.alignmiddle td {
     vertical-align: middle !important;
+    text-align: center;
   }
+
+  
 
   #noimage {
     width: 60px;
@@ -327,6 +330,10 @@ ul.gallery li {
   margin: 20px;
   display: inline-block;
   list-style: none;
+}
+
+.action{
+  height: 50px;
 }
   
 
