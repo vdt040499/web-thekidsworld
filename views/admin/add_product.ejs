@@ -24,7 +24,7 @@
         <label for="category">Categories</label>
         <select name="category" class="form-control">
             <% cates.forEach((cat) => { %>
-                <option value="<%= cat.slug %>"><%= cat.title %></option>
+                <option value="<%= cat.slug %>"><%= cat.title %> - <%= cat.slug %></option>
             <% }); %>
         </select>
     </div>
