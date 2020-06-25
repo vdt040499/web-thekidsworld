@@ -182,9 +182,12 @@ module.exports.editProduct = (req, res) => {
                             name: p.name,
                             desc: p.desc,
                             price: parseInt(p.price),
+                            sale: parseInt(p.sale),
+                            ratingAverage: parseFloat(p.ratingAverage),
                             image: p.image,
                             totalQuantity: p.totalQuantity,
-                            category: p.category.replace(/\s+/g, '-').toLowerCase(),
+                            sold: parseInt(p.sold),
+                            category: p.category,
                             cates: cates,
                             galleryImages: galleryImages
                         });
@@ -206,15 +209,22 @@ module.exports.editProductPost = (req, res) => {
     req.checkBody('name', 'Name must have a value!').notEmpty();
     req.checkBody('desc', 'Description must have a value!').notEmpty();
     req.checkBody('price', 'Price must have a value!').isDecimal();
+    req.checkBody('sale', 'Sale percentage must have a value!').isDecimal();
+    req.checkBody('ratingAverage', 'Rating must have a value!').isFloat();
     req.checkBody('image', 'You must upload an image!').isImage(imageFile);
+    req.checkBody('totalQuantity', 'Quantity must have a value!').isDecimal();
+    req.checkBody('sold', 'Quantity sold must have value!').isDecimal();
 
     var name = req.body.name;
     var slug = name.replace(/\s+/g, '-').toLowerCase();
     var desc = req.body.desc;
     var price = req.body.price;
+    var sale = req.body.sale;
     var category = req.body.category;
     var pimage = req.body.pimage;
+    var ratingAverage = req.body.ratingAverage;
     var totalQuantity = req.body.totalQuantity;
+    var sold = req.body.sold;
     var id = req.params.id;
 
     var errors = req.validationErrors();
@@ -229,7 +239,7 @@ module.exports.editProductPost = (req, res) => {
             }
 
             if(p) {
-                res.flas('danger', 'Product exists, choose another.');
+                res.flash('danger', 'Product exists, choose another.');
                 res.redirect('/admin/products/edit-product/' + id);
             } else {
                 Product.findById(id, (err, p) => {
@@ -240,8 +250,12 @@ module.exports.editProductPost = (req, res) => {
                         p.slug = slug;
                         p.desc = desc;
                         p.price = parseInt(price);
+                        p.sale = parseInt(sale);
+                        p.salePrice = parseInt(p.price - ( sale * p.price / 100));
                         p.category = category;
+                        p.ratingAverage = parseFloat(ratingAverage);
                         p.totalQuantity = totalQuantity;
+                        p.sold = parseInt(sold);
                         if (imageFile != "") {
                             p.image = imageFile;
                         }

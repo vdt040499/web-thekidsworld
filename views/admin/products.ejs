@@ -16,10 +16,13 @@
         <tr class="home">
             <th>Product</th>
             <th>Image</th>
-            <th>Price</th>
+            <th>Original price</th>
+            <th>Sale percentage</th>
+            <th>Sale percentage price</th>
             <th>Category</th>
             <th>Rating</th>
             <th>Quantity</th>
+            <th>Quantity sold</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -36,9 +39,12 @@
                 <% } %>
             </td>
             <td><%= product.price %></td>
+            <td><%= product.sale %>
+            <td><%= product.salePrice %></td>
             <td><%= product.category %></td>
             <td><%= product.ratingAverage %></td>
             <td><%= product.totalQuantity %></td>
+            <td><%= product.sold %></td>
             <td><a class="btn btn-md button" href="/admin/products/edit-product/<%= product._id %>">Edit</a></>
             <td><a class="btn btn-md button confirmDeletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
         </tr>

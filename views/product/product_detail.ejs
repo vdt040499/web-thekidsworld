@@ -115,30 +115,58 @@
     <p style="margin: 0px; font-size: x-large; color:#51BCB1; padding-bottom: 10px; text-transform: uppercase;">Những sản phẩm cùng danh mục :</p>
     <div class="row">
         <% cateProducts.forEach((product) => { %>
-            <div class="col-md-3 mb-3">
-                <div class="card h-100">
-                  <div class="container" style="text-align: center; margin-top: 20px;">
-                    <a href="/products/<%= product.category %>/<%= product.slug %>">
-                        <img src="/product_images/<%= product._id%>/<%= product.image %>" class="card-img" alt="...">
-                    </a>
-                  </div>
-                  <div style="text-align: center;" class="card-body">
-                    <h5 class="card-title"><%= product.name %></h5>
-                      <div class="star-rate">
-                          <span class="fa fa-star checked"></span>
-                          <span class="fa fa-star checked"></span>
-                          <span class="fa fa-star checked"></span>
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star"></span>
-                      </div>
-                      <% var editPrice = (product.price + 10000).toLocaleString("vi", { style: "currency", currency: "VND", })%>
-                      <% var editPrice2 = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
-                      <p class="original-price"><strike><%= editPrice %></strike></p>
-                      <p class="product-price"><%= editPrice2 %></p>
-                      <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white" href="#" role="button">Thêm vào giỏ</a>
-                  </div>
+            <% if (product.sale != 0) { %>
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="container" style="text-align: center; margin-top: 20px;">
+                            <a href="/products/<%= product.category %>/<%= product.slug %>">
+                                <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                            </a>
+                        </div>
+                        <div style="text-align: center;" class="card-body">
+                            <h5 class="card-title"><%= product.name %></h5>
+                            <div class="star-rate">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                            <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                            <p class="original-price"><strike><%= price %></strike></p>
+                            <p class="product-price"><%= salePrice %></p>
+                            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white"
+                                href="/cart/add/<%= product.slug %>" role="button">Thêm vào giỏ</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <% } else { %>
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="container" style="text-align: center; margin-top: 20px;">
+                            <a href="/products/<%= product.category %>/<%= product.slug %>">
+                                <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                            </a>
+                        </div>
+                        <div style="text-align: center;" class="card-body">
+                            <h5 class="card-title"><%= product.name %></h5>
+                            <div class="star-rate">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                            <br>
+                            <p class="product-price"><%= price %></p>
+                            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white"
+                                href="/cart/add/<%= product.slug %>" role="button">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
         <% }); %>
     </div>
     <div class="container" style="margin: 0px;text-align: right;">

@@ -305,7 +305,7 @@
     text-decoration: none; 
   }
 
-  table.alignmiddle td {
+  table.alignmiddle th, table.alignmiddle td {
     vertical-align: middle !important;
   }
 
