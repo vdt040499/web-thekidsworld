@@ -25,33 +25,37 @@
             <td><%= orderDate %></td>
             <td><%= deliveryDate %></td>
             <td>
+                <% var proccess = "Processing"; %>
+                <% var ship = "Shipping"; %>
+                <% var completed = "Completed"; %>
+
                 <% if (order.status == "Processing") { %>
                     <div class="action d-flex justify-content-center align-items-center">
-                        <a href="#" class="btn btn-warning mr-1 disabled">Handling</a>
-                        <a href="#" class="btn btn-outline-success mr-1">Shipping</a>
-                        <a href="#" class="btn btn-outline-danger">Completed</a>
+                        <a class="btn btn-warning mr-1 disabled">Handling</a>
+                        <a href="/admin/orders/change-status/<%= ship %>/<%= order.ID %>" class="btn btn-outline-success mr-1">Shipping</a>
+                        <a href="/admin/orders/change-status/<%= completed %>/<%= order.ID %>" class="btn btn-outline-danger">Completed</a>
                     </div> 
                 <% } %>
 
                 <% if (order.status == "Shipping") { %>
                     <div class="action d-flex justify-content-center align-items-center">
-                        <a href="#" class="btn btn-outline-warning mr-1">Handling</a>
-                        <a href="#" class="btn btn-success mr-1 disabled">Shipping</a>
-                        <a href="#" class="btn btn-outline-danger">Completed</a>
+                        <a href="/admin/orders/change-status/<%= proccess %>/<%= order.ID %>" class="btn btn-outline-warning mr-1">Handling</a>
+                        <a class="btn btn-success mr-1 disabled">Shipping</a>
+                        <a href="/admin/orders/change-status/<%= completed %>/<%= order.ID %>" class="btn btn-outline-danger">Completed</a>
                     </div> 
                 <% } %>
 
                 <% if (order.status == "Completed") { %>
                     <div class="action d-flex justify-content-center align-items-center">
-                        <a href="#" class="btn btn-outline-warning mr-1">Handling</a>
-                        <a href="#" class="btn btn-outline-success mr-1">Shipping</a>
-                        <a href="#" class="btn btn-danger disabled">Completed</a>
+                        <a href="/admin/orders/change-status/<%= proccess %>/<%= order.ID %>" class="btn btn-outline-warning mr-1">Handling</a>
+                        <a href="/admin/orders/change-status/<%= ship %>/<%= order.ID %>" class="btn btn-outline-success mr-1">Shipping</a>
+                        <a class="btn btn-danger disabled">Completed</a>
                     </div> 
                 <% } %>               
             </td>
             <td>
                 <div class="action d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="/admin/orders/delete-order/<%= order._id %>" class="btn btn-danger confirmDeletion">Delete</a>
                 </div>  
             </td>
         </tr>

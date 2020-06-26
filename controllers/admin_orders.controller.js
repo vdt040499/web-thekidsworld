@@ -47,7 +47,38 @@ module.exports.getOrder = (req, res) => {
                 status: order.status,
                 date: order.date
             });
+        }
+    });
+}
 
+//GET change order's status
+module.exports.changeStatus = (req, res) => {
+    var changeStatus = req.params.changeStatus;
+    var orderId = req.params.orderId;
+
+    Order.findOne({ID: orderId}, (err, order) => {
+        order.status = changeStatus;
+
+        order.save((err) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.redirect('/admin/orders/');
+            }
+        });
+    });   
+}
+
+//GET delete order
+module.exports.deleteOrder = (req, res) => {
+    var orderId = req.params.orderId;
+
+    Order.findByIdAndRemove(orderId, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            req.flash('success', 'Order deleted!');
+            res.redirect('/admin/orders');
         }
     });
 }

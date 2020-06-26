@@ -24,6 +24,9 @@ const orderSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    deliveryDate: {
+        type: Date
     }
 });
 
