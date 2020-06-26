@@ -108,6 +108,7 @@ module.exports.orderPost = (req, res) => {
                         orderBy: user,
                         receiver: receiver,
                         cart: req.session.cart,
+                        delivery
                     });
     
                     order.save((err) => {
@@ -332,3 +333,23 @@ module.exports.checkOrderPost = (req, res) => {
         });
     }
 } 
+
+//GET get order for user 
+module.exports.getDetailOrder = (req, res) => {
+    var orderId = req.params.orderId;
+
+    Order.findById(orderId, (err, order) => {
+        var cart = JSON.parse(JSON.stringify(order.cart.slice()));
+        var receiver = JSON.parse(order.receiver);
+            
+        res.render('order/order_detail', {
+            headTitle: 'Your order',
+            orderID: order.ID,
+            receiver: receiver,
+            user: req.user,
+            orderCart: cart,
+            status: order.status,
+            date: order.date
+        });
+    });
+}
