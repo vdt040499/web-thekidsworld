@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<table class="table table-striped alignmiddle">
+<table class="table table-striped alignmiddle order">
     <thead>
         <tr class="home">
             <th>ID</th>
@@ -20,8 +20,8 @@
         <% orders.forEach(function(order) {%>
         <% var orderDate = order.date.getDate() + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
         <% var deliveryDate = (order.date.getDate()+3) + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
-        <tr>
-            <td><%= order.ID %></td>
+        <tr class="clickable-row" data-href="/admin/orders/get-order/<%= order.ID %>">
+            <td><a href="/admin/orders/get-order/<%= order.ID %>"><%= order.ID %></a></td>
             <td><%= orderDate %></td>
             <td><%= deliveryDate %></td>
             <td>
@@ -58,5 +58,13 @@
         <% }); %>
     </tbody>
 </table>
+
+<script>
+   $(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
 
 <% include ../partials/admin_footer %>

@@ -285,7 +285,9 @@ module.exports.checkOrderPost = (req, res) => {
                                 orderID: order.ID,
                                 receiver: receiver,
                                 user: req.user,
-                                orderCart: cart
+                                orderCart: cart,
+                                status: order.status,
+                                date: order.date
                             });
                         } else {
                             res.render('order/order_detail', {
@@ -293,7 +295,9 @@ module.exports.checkOrderPost = (req, res) => {
                                 orderID: order.ID,
                                 receiver: receiver,
                                 user: null,
-                                orderCart: cart
+                                orderCart: cart,
+                                status: order.status,
+                                date: order.date
                             });
                         }
                     } else {
@@ -307,7 +311,9 @@ module.exports.checkOrderPost = (req, res) => {
                                 orderID: order.ID,
                                 receiver: receiver,
                                 user: req.user,
-                                orderCart: cart
+                                orderCart: cart,
+                                status: order.status,
+                                date: order.date
                             });
                         } else {
                             res.render('order/order_detail', {
@@ -315,7 +321,9 @@ module.exports.checkOrderPost = (req, res) => {
                                 orderID: order.ID,
                                 receiver: receiver,
                                 user: null,
-                                orderCart: cart
+                                orderCart: cart,
+                                status: order.status,
+                                date: order.date
                             });
                         }
                     }

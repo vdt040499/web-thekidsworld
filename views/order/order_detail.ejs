@@ -78,11 +78,10 @@
         <p class="bill-title">TỔNG TIỀN THANH TOÁN</p>
         <p class="bill-info-details"><%= parseInt(total).toLocaleString("vi", { style: "currency", currency: "VND", }) %></p>
         <p class="bill-title">THỜI GIAN GIAO HÀNG DỰ KIẾN</p>
-        <% let date = new Date() %>
         <% var orderDate = date.getDate() + "/" + (date.getMonth()+1)  + "/" + date.getFullYear(); %>
         <% var deliveryDate = (date.getDate()+3) + "/" + (date.getMonth()+1)  + "/" + date.getFullYear(); %>
         <p class="bill-info-details">Từ ngày <%= orderDate %> - <%= deliveryDate %></p>
-        <p class="bill-title">TÌNH TRẠNG ĐƠN HÀNG: </p>
+        <p class="bill-title">TÌNH TRẠNG ĐƠN HÀNG: <h5 class="text-uppercase"><%= status %></h5></p>
     </div>
 </div>
 
