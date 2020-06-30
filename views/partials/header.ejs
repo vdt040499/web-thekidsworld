@@ -32,11 +32,11 @@
                                 </div>
 
                                 <% cates.forEach((cate) => { %>
-                                <% if ((cate.slug == 1 || cate.slug == 2) && cate.level == 1) { %>
+                                <% if ((cate.slug === "be-trai" || cate.slug == "be-gai") && cate.level == 1) { %>
                                 <div class="col-sm-6 col-lg-3">
                                     <h5><%= cate.title %></h5>
                                     <% cates.forEach((cate2) => { %>
-                                    <% if (cate2.level == 2 && cate2.prelevel == cate.slug) { %>
+                                    <% if (cate2.level == 2 && cate2.prelevel === cate.slug) { %>
                                     <a class="dropdown-item" href="/products/<%= cate2.slug %>"><%= cate2.title %></a>
                                     <% } %>
                                     <% }); %>
@@ -46,7 +46,7 @@
 
                                 <div class="col-sm-6 col-lg-3">
                                 <% cates.forEach((cate) => { %>
-                                <% if ((cate.level == 1 && cate.slug != 1) && (cate.level == 1 && cate.slug != 2)) { %>
+                                <% if ((cate.level == 1 && cate.slug != "be-trai") && (cate.level == 1 && cate.slug != "be-gai")) { %>
                                 <a href="/products/<%= cate.slug %>"><h5><%= cate.title %></h5></a>
                                 <% } %>
                                 <% }); %>

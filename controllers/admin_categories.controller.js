@@ -7,7 +7,7 @@ module.exports.getCates = (req, res) => {
             console.log(err);
         } else {
             res.render('admin/categories', {
-                headTitle: "Admin categories",
+                headTitle: "Danh mục",
                 cates: cates
             });
         }
@@ -19,14 +19,28 @@ module.exports.addCate = (req, res) => {
     var title = "";
     var level = 0;
     var prelevel = "";
-    var slug = "";
 
-    res.render('admin/add_category', {
-        headTitle: 'Add category',
-        title: title,
-        level: level,
-        prelevel: prelevel,
-        slug: slug
+    Category.find((err, cates) => {
+        if(err) {
+            console.log(err);
+        } else {
+            const root = {
+                title: "",
+                level: 0,
+                prelevel: "",
+                slug: ""
+            }
+
+            cates.push(root);
+
+            res.render('admin/add_category', {
+                headTitle: 'Thêm danh mục',
+                title: title,
+                level: level,
+                prelevel: prelevel,
+                cates: cates
+            });
+        }
     });
 }
 
@@ -34,38 +48,50 @@ module.exports.addCate = (req, res) => {
 module.exports.addCatePost = (req, res) => {
     
     var title = req.body.title;
-    var slug = req.body.slug;
+    var slug = title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').toLowerCase();
     var level = parseInt(req.body.level);
     var prelevel = req.body.prelevel;
 
-    req.checkBody('title', 'Title is required!').notEmpty();
-    req.checkBody('slug', 'Slug is required!').notEmpty();
-    req.checkBody('prelevel', 'Prelevel is required!').notEmpty();
+    req.checkBody('title', 'Vui lòng nhập tiêu đề danh mục').notEmpty();
+    req.checkBody('level', 'Vui lòng nhập level').isDecimal();
 
     var errors = req.validationErrors();
 
     if(errors) {
-        res.render('admin/add_category', {
-            headTitle: 'Add category',
-            errors: errors,
-            title: title,
-            level: level,
-            prelevel: prelevel,
-            slug: slug
+        Category.find((err, cates) => {
+            if(err) {
+                console.log(err);
+            } else {
+                const root = {
+                    title: "",
+                    level: 0,
+                    prelevel: "",
+                    slug: ""
+                }
+    
+                cates.push(root);
+    
+                res.render('admin/add_category', {
+                    headTitle: 'Thêm danh mục',
+                    errors: errors,
+                    title: title,
+                    level: level,
+                    cates: cates
+                });
+            }
         });
+        
     } else {
         Category.findOne({slug: slug}, (err, existCate) => {
             if(err) {
                 console.log(err);
             } else {
                 if(existCate) {
-                    req.flash('danger', 'Category slug exists, choose another!');
+                    req.flash('danger', 'Tiêu đề danh mục đã tồn tại! Chọn một tiêu để khác!');
                     res.render('admin/add_category', {
-                        headtitle: 'Add category',
+                        headtitle: 'Thêm danh mục',
                         title: title,
-                        level: level,
-                        slug: slug,
-                        prelevel: prelevel
+                        level: level
                     });
                 } else {
                     const category = new Category({
@@ -88,7 +114,7 @@ module.exports.addCatePost = (req, res) => {
                                 }
                             });
 
-                            req.flash('success', 'Category added!');
+                            req.flash('success', 'Danh mục đã được thêm!');
                             res.redirect('/admin/categories');
                         }
                     })
@@ -104,13 +130,28 @@ module.exports.editCate = (req, res) => {
         if(err) {
             console.log(err);
         } else {
-            res.render('admin/edit_category', {
-                headTitle: "Edit category",
-                title: cate.title,
-                level: cate.level,
-                prelevel: cate.prelevel,
-                slug: cate.slug,
-                id: cate._id
+            Category.find((err, cates) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    const root = {
+                        title: "",
+                        level: 0,
+                        prelevel: "",
+                        slug: ""
+                    }
+        
+                    cates.push(root);
+        
+                    res.render('admin/edit_category', {
+                        headTitle: "Chỉnh sửa danh mục",
+                        title: cate.title,
+                        level: cate.level,
+                        prelevel: cate.prelevel,
+                        id: cate._id,
+                        cates: cates
+                    });
+                }
             });
         }
     });
@@ -120,26 +161,39 @@ module.exports.editCate = (req, res) => {
 module.exports.editCatePost = (req, res) => {
 
     var title = req.body.title;
-    var slug = req.body.slug;
+    var slug = title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').toLowerCase();
     var level = req.body.level;
     var prelevel = req.body.prelevel;
     var id = req.params.id;
 
-    req.checkBody('title', 'Title is required!').notEmpty();
-    req.checkBody('slug', 'Slug is required!').notEmpty();
-    req.checkBody('prelevel', 'Prelevel is required!').notEmpty();
+    req.checkBody('title', 'Vui lòng nhập tiêu đề danh mục').notEmpty();
 
     var errors = req.validationErrors();
 
     if(errors) {
-        res.render('admin/edit_category', {
-            headTitle: 'Edit category',
-            errors: errors,
-            id: id,
-            title: title,
-            level: level,
-            prelevel: prelevel,
-            slug: slug
+        Category.find((err, cates) => {
+            if(err) {
+                console.log(err);
+            } else {
+                const root = {
+                    title: "",
+                    level: 0,
+                    prelevel: "",
+                    slug: ""
+                }
+    
+                cates.push(root);
+
+                res.render('admin/edit_category', {
+                    headTitle: 'Chỉnh sửa danh mục',
+                    errors: errors,
+                    id: id,
+                    title: title,
+                    level: level,
+                    prelevel: prelevel,
+                    cates: cates
+                });
+            }
         });
     } else {
         Category.findOne({slug: slug, _id: {'$ne': id}}, (err, existCate) =>  {
@@ -147,13 +201,12 @@ module.exports.editCatePost = (req, res) => {
                 console.log(err);
             } else {
                 if(existCate) {
-                    req.flash('danger', 'Category slug exists, choose another!');
+                    req.flash('danger', 'Danh mục đã tồn tại! Hãy chọn một tên khác');
                     res.render('admin/edit-category', {
-                        headTitle: 'Edit category',
+                        headTitle: 'Chỉnh sửa danh mục',
                         title: title,
                         level: level,
-                        prelevel: prelevel,
-                        slug: slug
+                        prelevel: prelevel
                     });
                 } else {
                     Category.findById(id, (err, cate) => {
@@ -177,7 +230,7 @@ module.exports.editCatePost = (req, res) => {
                                         }
                                     });
     
-                                    req.flash('success', 'Category edited!');
+                                    req.flash('success', 'Chỉnh sửa danh mục thành công');
                                     res.redirect('/admin/categories');
                                 }
                             });
@@ -203,7 +256,7 @@ module.exports.deleteCate = (req, res) => {
                 }
             });
 
-            req.flash('success', 'Category deleted!');
+            req.flash('success', 'Xóa danh mục thành công');
             res.redirect('/admin/categories');
         }
     });

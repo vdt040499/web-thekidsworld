@@ -19,14 +19,35 @@
         <input class="form-control" type="number" id="level" name="level" max=100 value="<%= level %>">
     </div>
     <div class="form-group">
-        <label for="title">Prelevel</label>
-        <input class="form-control" type="text" id="prelevel" name="prelevel" value="<%= prelevel %>" placeholder="Prelevel">
-    </div>
-    <div class="form-group">
-        <label for="title">Slug</label>
-        <input class="form-control" type="text" id="slug" name="slug" value="<%= slug %>" placeholder="Slug">
+        <label for="prelevel">Prelevel</label>
+        <select name="prelevel" id="prelevel" class="form-control">
+            <% cates.forEach((cat) => { %>
+                <option value="<%= cat.slug %>"><%= cat.slug %></option>
+            <% }); %>
+        </select>
     </div>
     <button type="submit" class="btn btn-md button">Thêm</button>
 </form>
+
+<!-- <script>
+    (function() {
+        console.log(cates);
+        const level = document.getElementById('level');
+
+        level.addEventListener('change', () => {
+            var levelInput = parseInt(level.value);
+
+            cates.filter(cat => cat.level === cat.level + 1);
+
+            var categories = cates.map((cat) => {
+                return `<option value="${cat.slug}">${cat.title}</option>`;
+            });
+
+            document.getElementById(
+                    "prelevel"
+            ).innerHTML = categories.join("");
+        });
+    })();
+</script> -->
 
 <% include ../partials/admin_footer %>
