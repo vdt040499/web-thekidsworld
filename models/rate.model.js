@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const rateSchema = mongoose.Schema({
     rateBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        type: String
     },
     rateIn: {
         type: mongoose.Schema.Types.ObjectId,

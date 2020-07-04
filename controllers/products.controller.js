@@ -4,6 +4,7 @@ const Category = require("../models/category.model");
 const Product = require("../models/product.model");
 const Rate = require("../models/rate.model");
 const User = require("../models/user.model");
+const { findById } = require("../models/rate.model");
 
 //GET all products by category
 module.exports.getProductsByCategory = (req, res) => {
@@ -64,23 +65,31 @@ module.exports.getProductDetails = (req, res) => {
             (err, categoryProducts) => {
               if (err) {
               } else {
-                var galleryDir =
-                  "public/product_images/" + product._id + "/gallery";
 
-                fs.readdir(galleryDir, (err, files) => {
-                  if (err) {
+                Rate.find({rateIn: product._id}, (err, ratings) => {
+                  if(err) {
                     console.log(err);
                   } else {
-                    galleryImages = files;
-                    res.render("product/product_detail", {
-                      headTitle: product.name,
-                      p: product,
-                      galleryImages: galleryImages,
-                      cateProducts: categoryProducts.slice(0, 4),
-                      bestSellerCateProducts: bestSellerCateProducts.slice(
-                        0,
-                        4
-                      ),
+                    var galleryDir =
+                  "public/product_images/" + product._id + "/gallery";
+
+                    fs.readdir(galleryDir, (err, files) => {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        galleryImages = files;
+                        res.render("product/product_detail", {
+                          headTitle: product.name,
+                          p: product,
+                          galleryImages: galleryImages,
+                          cateProducts: categoryProducts.slice(0, 4),
+                          bestSellerCateProducts: bestSellerCateProducts.slice(
+                            0,
+                            4
+                          ),
+                          ratings: ratings
+                        });
+                      }
                     });
                   }
                 });
@@ -100,6 +109,21 @@ module.exports.rating = (req, res) => {
   let ratingValue = parseInt(req.body.ratingValue);
   let comment = req.body.comment;
 
+  req.checkBody('ratingValue', 'Bạn chưa chọn sao để đánh giá!').notEmpty();
+  req.checkBody('comment', 'Bạn chưa điền vào khung bình luận!').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    Product.findById(productId, (err, product) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect(`/products/${product.category}/${product.slug}`);
+      }
+    });
+  } else {
+
   Product.findById(productId, (err, product) => {
     var oldAver = parseFloat(product.ratingAverage);
     var oldQty = parseInt(product.ratingQty);
@@ -110,10 +134,10 @@ module.exports.rating = (req, res) => {
     product.save();
       User.findById(userId, (err, user) => {
         const rate = new Rate({
-          rateBy: user,
+          rateBy: JSON.stringify(user),
           rateIn: product,
           rate: parseInt(ratingValue),
-          comment: req.body.comment
+          comment: comment
         });
   
         rate.save((err) => {
@@ -124,6 +148,7 @@ module.exports.rating = (req, res) => {
           }
         });
       });
-  });
-  console.log(ratingValue, comment);
+    });
+  }
 }
+
