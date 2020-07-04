@@ -374,11 +374,22 @@ input[type=number] {
   color: #5A8B8F;
 }
 /*------------RATING-----------*/
-.rating {
-  float: left;
-  border:none;
+.rating-box {
+  display: flex;
+  justify-content: center;
 }
-.rating:not(:checked) > input {
+.rating {
+  display: flex;
+  border:none;
+  /* justify-content: center; */
+}
+
+.rating-box .rating .fa {
+  font-size: 30px;
+  color: #ff9800;
+  cursor: pointer;
+}
+/* .rating:not(:checked) > input {
   position:absolute;
   top:-9999px;
   clip:rect(0, 0, 0, 0);
@@ -408,7 +419,7 @@ input[type=number] {
 }
 .rating > label:active {
   position:relative;
-}
+} */
 
 .avatar{
   border: 2px double rgb(216, 216, 216);

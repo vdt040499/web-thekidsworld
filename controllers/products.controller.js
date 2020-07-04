@@ -2,6 +2,8 @@ const fs = require("fs-extra");
 
 const Category = require("../models/category.model");
 const Product = require("../models/product.model");
+const Rate = require("../models/rate.model");
+const User = require("../models/user.model");
 
 //GET all products by category
 module.exports.getProductsByCategory = (req, res) => {
@@ -90,3 +92,38 @@ module.exports.getProductDetails = (req, res) => {
     }
   });
 };
+
+//POST rating
+module.exports.rating = (req, res) => {
+  let productId = req.params.productId;
+  let userId = req.params.userId;
+  let ratingValue = parseInt(req.body.ratingValue);
+  let comment = req.body.comment;
+
+  Product.findById(productId, (err, product) => {
+    var oldAver = parseFloat(product.ratingAverage);
+    var oldQty = parseInt(product.ratingQty);
+    var tempRateQty = oldQty + 1;
+    var tempRateAver = (oldAver * oldQty + ratingValue)/(tempRateQty);
+    product.ratingAverage = parseFloat(tempRateAver);
+    product.ratingQty = parseInt(tempRateQty);
+    product.save();
+      User.findById(userId, (err, user) => {
+        const rate = new Rate({
+          rateBy: user,
+          rateIn: product,
+          rate: parseInt(ratingValue),
+          comment: req.body.comment
+        });
+  
+        rate.save((err) => {
+          if(err) {
+            console.log(err);
+          } else {
+            res.redirect(`/products/${product.category}/${product.slug}`);
+          }
+        });
+      });
+  });
+  console.log(ratingValue, comment);
+}
