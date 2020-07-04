@@ -86,8 +86,10 @@
               style="color: rgb(219, 172, 18);"
           <% } else if (status == "Shipping") { %>
               style="color: rgb(19, 116, 19);"
-          <% } else { %>
+          <% } else if (status == "Completed") { %>
               style="color: rgb(160, 26, 26);"
+          <% } else { %>
+              style="color: rgb(160, 160, 160);"
           <% } %>><strong><%= status %></strong></h5></p>
 </div>
     </div>

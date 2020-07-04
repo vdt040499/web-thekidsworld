@@ -7,7 +7,7 @@ module.exports.getOrders = async (req, res) => {
     const orders = await Order.find();
    
     res.render('admin/orders', {
-        headTitle: 'Orders',
+        headTitle: 'Đơn hàng',
         orders: orders
     });
 
@@ -23,7 +23,7 @@ module.exports.getOrder = (req, res) => {
             var receiver = JSON.parse(order.receiver);
 
             res.render('admin/order_detail', {
-                headTitle: 'Your order',
+                headTitle: 'Chi tiết đơn hàng',
                 orderID: order.ID,
                 receiver: receiver,
                 orderOwner: null,
@@ -39,7 +39,7 @@ module.exports.getOrder = (req, res) => {
             var orderOwner = await User.findById(order.orderBy);
 
             res.render('admin/order_detail', {
-                headTitle: 'Your order',
+                headTitle: 'Chi tiết đơn hàng',
                 orderID: order.ID,
                 receiver: receiver,
                 orderOwner: orderOwner,
@@ -77,7 +77,7 @@ module.exports.deleteOrder = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            req.flash('success', 'Order deleted!');
+            req.flash('success', 'Xóa đơn hàng thành công');
             res.redirect('/admin/orders');
         }
     });
