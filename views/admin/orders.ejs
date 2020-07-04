@@ -10,6 +10,9 @@
     <thead>
         <tr class="home">
             <th>ID</th>
+            <th>Receiver's Name</th>
+            <th>Receiver's Phone</th>
+            <th>Receiver's Email</th>
             <th>Created date</th>
             <th>Delivery date</th>
             <th>Status</th>
@@ -18,10 +21,14 @@
     </thead>
     <tbody>
         <% orders.forEach(function(order) {%>
+        <% var orderUser = JSON.parse(order.receiver); %>
         <% var orderDate = order.date.getDate() + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
         <% var deliveryDate = (order.date.getDate()+3) + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
         <tr class="clickable-row" data-href="/admin/orders/get-order/<%= order.ID %>">
             <td><a href="/admin/orders/get-order/<%= order.ID %>"><%= order.ID %></a></td>
+            <td><%= orderUser.username %></td>
+            <td><%= orderUser.phone %></td>
+            <td><%= orderUser.email %></td>
             <td><%= orderDate %></td>
             <td><%= deliveryDate %></td>
             <td>
