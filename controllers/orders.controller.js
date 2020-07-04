@@ -243,16 +243,19 @@ module.exports.orderPost = (req, res) => {
 //GET check order
 module.exports.checkOrder = (req, res) => {
     var orderId = '';
+    var email = '';
 
     res.render('order/check_order', {
-        headTitle: 'Check order',
-        orderId: orderId
+        headTitle: 'Kiểm tra đơn hàng',
+        orderId: orderId,
+        email: email
     });
 }
 
 //POST check order
 module.exports.checkOrderPost = (req, res) => {
     var orderId = req.body.ID;
+    var email = req.body.email;
 
     req.checkBody('ID', 'Bạn chưa nhập mã đơn hàng');
 
@@ -260,79 +263,133 @@ module.exports.checkOrderPost = (req, res) => {
 
     if(errors) {
         req.render('order/check_order', {
-            headTitle: 'Check order',
-            orderId: orderId
+            headTitle: 'Kiểm tra đơn hàng',
+            orderId: orderId,
+            email: email
         });
     } else {
         Order.findOne({ID: orderId}, (err, order) => {
             if(err) {
                 console.log(err);
             } else {
-                if(!order) {
-                    req.flash('danger', 'Mã đơn hàng không tồn tại');
-                    res.render('order/check_order', {
-                        headTitle: 'Check order',
-                        orderId: orderId
-                    });
-                } else {
-                    if(!order.orderBy) {
-                        var cart = JSON.parse(JSON.stringify(order.cart.slice()));
-                        var receiver = JSON.parse(order.receiver);
-
-                        if (req.isAuthenticated()) {
-                            
-                            res.render('order/order_detail', {
-                                headTitle: 'Your order',
-                                orderID: order.ID,
-                                receiver: receiver,
-                                user: req.user,
-                                orderCart: cart,
-                                status: order.status,
-                                date: order.date
-                            });
-                        } else {
-                            res.render('order/order_detail', {
-                                headTitle: 'Your order',
-                                orderID: order.ID,
-                                receiver: receiver,
-                                user: null,
-                                orderCart: cart,
-                                status: order.status,
-                                date: order.date
-                            });
-                        }
+                if (req.isAuthenticated()) {
+                    if(!order) {
+                        req.flash('danger', 'Mã đơn hàng không tồn tại');
+                        res.render('order/check_order', {
+                            headTitle: 'Kiểm tra đơn hàng',
+                            orderId: orderId,
+                            email: email
+                        });
                     } else {
-                        var cart = JSON.parse(JSON.stringify(order.cart.slice()));
-                        var receiver = JSON.parse(order.receiver);
-                        
-                        if (req.isAuthenticated()) {
+                        if(!order.orderBy) { //Order noaccount
+                            var cart = JSON.parse(JSON.stringify(order.cart.slice()));
+                            var receiver = JSON.parse(order.receiver);
                             
-                            res.render('order/order_detail', {
-                                headTitle: 'Your order',
-                                orderID: order.ID,
-                                receiver: receiver,
-                                user: req.user,
-                                orderCart: cart,
-                                status: order.status,
-                                date: order.date
-                            });
+                            if(receiver.email !== email) {
+                                req.flash('danger', 'Email không khớp');
+                                res.render('order/check_order', {
+                                    headTitle: 'Kiểm tra đơn hàng',
+                                    orderId: orderId,
+                                    email: email
+                                }); 
+                            } else {
+                                res.render('order/order_detail', {
+                                    headTitle: 'Đơn hàng của bạn',
+                                    orderID: order.ID,
+                                    receiver: receiver,
+                                    user: req.user,
+                                    orderCart: cart,
+                                    status: order.status,
+                                    date: order.date
+                                });
+                            }
                         } else {
-                            res.render('order/order_detail', {
-                                headTitle: 'Your order',
-                                orderID: order.ID,
-                                receiver: receiver,
-                                user: null,
-                                orderCart: cart,
-                                status: order.status,
-                                date: order.date
-                            });
+                            var cart = JSON.parse(JSON.stringify(order.cart.slice()));
+                            var receiver = JSON.parse(order.receiver);
+                            
+                            if(receiver.email !== email) {
+                                req.flash('danger', 'Email không khớp');
+                                res.render('order/check_order', {
+                                    headTitle: 'Kiểm tra đơn hàng',
+                                    orderId: orderId,
+                                    email: email
+                                }); 
+                            } else {
+                                res.render('order/order_detail', {
+                                    headTitle: 'Đơn hàng của bạn',
+                                    orderID: order.ID,
+                                    receiver: receiver,
+                                    user: req.user,
+                                    orderCart: cart,
+                                    status: order.status,
+                                    date: order.date
+                                });
+                            }
+                        }
+                    }   
+                } else {
+                    if(!order) {
+                        req.flash('danger', 'Mã đơn hàng không tồn tại');
+                        res.render('order/check_order', {
+                            headTitle: 'Kiểm tra đơn hàng',
+                            orderId: orderId,
+                            email: email,
+                            user: null
+                        });
+                    } else {
+                        if(!order.orderBy) { //Order noaccount
+                            var cart = JSON.parse(JSON.stringify(order.cart.slice()));
+                            var receiver = JSON.parse(order.receiver);
+                            
+                            if(receiver.email !== email) {
+                                req.flash('danger', 'Email không khớp');
+                                res.render('order/check_order', {
+                                    headTitle: 'Kiểm tra đơn hàng',
+                                    orderId: orderId,
+                                    email: email,
+                                    user: null
+                                }); 
+                            } else {
+                                res.render('order/order_detail', {
+                                    headTitle: 'Đơn hàng của bạn',
+                                    orderID: order.ID,
+                                    receiver: receiver,
+                                    user: null,
+                                    orderCart: cart,
+                                    status: order.status,
+                                    date: order.date
+                                });
+                            }
+                        } else {
+                            var cart = JSON.parse(JSON.stringify(order.cart.slice()));
+                            var receiver = JSON.parse(order.receiver);
+                            
+                            if(receiver.email !== email) {
+                                req.flash('danger', 'Email không khớp');
+                                res.render('order/check_order', {
+                                    headTitle: 'Kiểm tra đơn hàng',
+                                    orderId: orderId,
+                                    email: email,
+                                    user: null
+                                }); 
+                            } else {
+                                res.render('order/order_detail', {
+                                    headTitle: 'Đơn hàng của bạn',
+                                    orderID: order.ID,
+                                    receiver: receiver,
+                                    user: null,
+                                    orderCart: cart,
+                                    status: order.status,
+                                    date: order.date
+                                });
+                            }
                         }
                     }
                 }
             }
-        });
+        }); 
     }
-} 
+}
 
 //GET get order for user 
 module.exports.getDetailOrder = (req, res) => {
