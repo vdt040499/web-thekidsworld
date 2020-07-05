@@ -6,6 +6,22 @@ const Rate = require("../models/rate.model");
 const User = require("../models/user.model");
 const { findById } = require("../models/rate.model");
 
+function stringToSlug(str) {
+  // remove accents
+  var from = "àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ",
+      to   = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+  for (var i=0, l=from.length ; i < l ; i++) {
+    str = str.replace(RegExp(from[i], "gi"), to[i]);
+  }
+
+  str = str.toLowerCase()
+        .trim()
+        // .replace(/[^a-z0-9\-]/g, '-')
+        // .replace(/-+/g, '-');
+
+  return str;
+}
+
 //GET all products by category
 module.exports.getProductsByCategory = (req, res) => {
   var categorySlug = req.params.category;
@@ -155,16 +171,14 @@ module.exports.rating = (req, res) => {
 //GET search
 module.exports.searchProduct = async(req, res) => {
   var query = req.query.searchProduct.toLowerCase();
+  var rmQuery = stringToSlug(query);
 
   const products = await Product.find();
 
-  console.log(products);
-
   let matchedProducts = products.filter((product) => {
-    return product.name.toLowerCase().indexOf(query) !== -1;
+    let rmName = stringToSlug(product.name.toLowerCase());
+    return rmName.indexOf(query) !== -1;
   });
-
-  console.log(matchedProducts);
 
   res.render('product/cat_products', {
     headTitle: "Sản phẩm",
