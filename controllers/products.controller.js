@@ -36,6 +36,24 @@ module.exports.getProductsByCategory = (req, res) => {
   });
 };
 
+//GET all best seller
+module.exports.getBestSellers = (req, res) => {
+  
+    Product.find((err, products) => {
+        if(err) {
+            console.log(err);
+        } else {
+            products.sort((a, b) => {
+                return b.sold - a.sold;
+            });
+            res.render('product/bestsellers', {
+                headTitle: "Sản phẩm bán chạy",
+                products: products.slice(0, 20)
+            });
+        }
+    });
+}
+
 //GET all best seller products by category
 module.exports.getBSPByCategory = (req, res) => {
     Category.findOne({slug: req.params.category}, (err, cate) => {
