@@ -34,7 +34,7 @@
                                 <% cates.forEach((cate) => { %>
                                 <% if ((cate.slug === "be-trai" || cate.slug == "be-gai") && cate.level == 1) { %>
                                 <div class="col-sm-6 col-lg-3">
-                                    <h5><%= cate.title %></h5>
+                                    <a href="/products/<%= cate.slug %>"><h5><%= cate.title %></h5></a>
                                     <% cates.forEach((cate2) => { %>
                                     <% if (cate2.level == 2 && cate2.prelevel === cate.slug) { %>
                                     <a class="dropdown-item" href="/products/<%= cate2.slug %>"><%= cate2.title %></a>
@@ -55,7 +55,7 @@
             </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Giảm giá</a>
+                <a class="nav-link" href="/sales">Giảm giá</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/aboutus">Về chúng tôi</a>

@@ -1,0 +1,250 @@
+<% include ../partials/header %>
+
+<% if (headTitle === "Cho bé trai") { %>
+    <div class="container">
+        <div class="row" style="padding: 0px; margin: 0px; background-color: #d3fff0;">
+            <img src="/images/boy (1).png" width="60px" alt="" style="padding: 5px; margin-left: 5px;">
+            <p style="margin-top: 10px; margin-left: 10px; font-size: x-large; color: #2ccbe0;
+        font-weight: bold;">CHO BÉ TRAI</p>
+        </div>
+    </div>
+<% } else { %>
+    <div class="container">
+        <div class="row" style="padding: 0px; margin: 0px; background-color: #d3fff0;">
+            <img src="/images/girl.png" width="60px" alt="" style="padding: 5px; margin-left: 5px;">
+            <p style="margin-top: 10px; margin-left: 10px; font-size: x-large; color: #2ccbe0;
+          font-weight: bold;">CHO BÉ GÁI</p>
+        </div>
+    </div>
+<% } %>
+
+<div class="container" style="margin-bottom: 30px; margin-top: 10px;">
+    <p style="text-transform: uppercase; color: #3eacac; font-weight: bold;
+    font-size: larger; margin: 0px; padding: 0px;">Áo quần</p>
+    <hr style="border: 5px double #dbffff; margin: 0px;">
+</div>
+
+<div class="container" style="margin-top: 30px;" data-aos="zoom-in">
+    <div class="row row-cols-1 row-cols-md-4">
+        <% clothes.forEach((product) => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+                <div class="container" style="text-align: center; margin-top: 20px;">
+                    <a href="/products/<%= product.category %>/<%= product.slug %>">
+                        <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                    </a>
+                </div>
+                <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title"><%= product.name %></h5>
+                    <div class="star-rate">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% if (product.sale != 0) { %>
+                    <p class="original-price"><strike><%= price %></strike></p>
+                    <p class="product-price"><%= salePrice %></p>
+                    <% } else { %>
+                    <br>
+                    <p class="product-price"><%= price %></p>
+                    <% } %>
+                    <a style="background-color: #51BCB1; padding: 10px 30px;"
+                        class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                        role="button">Thêm vào giỏ</a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <% if (headTitle === "Cho bé trai") { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/quan-ao-be-trai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } else { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/quan-ao-be-gai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<div class="container" style="margin-bottom: 30px; margin-top: 10px;">
+    <p style="text-transform: uppercase; color: #3eacac; font-weight: bold;
+  font-size: larger; margin: 0px; padding: 0px;">Đồ chơi</p>
+    <hr style="border: 5px double #dbffff; margin: 0px;">
+</div>
+
+<div class="container" style="margin-top: 30px;" data-aos="fade-down">
+    <div class="row row-cols-1 row-cols-md-4">
+        <% toys.forEach((product) => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+                <div class="container" style="text-align: center; margin-top: 20px;">
+                    <a href="/products/<%= product.category %>/<%= product.slug %>">
+                        <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                    </a>
+                </div>
+                <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title"><%= product.name %></h5>
+                    <div class="star-rate">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% if (product.sale != 0) { %>
+                    <p class="original-price"><strike><%= price %></strike></p>
+                    <p class="product-price"><%= salePrice %></p>
+                    <% } else { %>
+                    <br>
+                    <p class="product-price"><%= price %></p>
+                    <% } %>
+                    <a style="background-color: #51BCB1; padding: 10px 30px;"
+                        class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                        role="button">Thêm vào giỏ</a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <% if (headTitle === "Cho bé trai") { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/do-choi-be-trai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } else { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/do-choi-be-gai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } %>
+</div>
+<div class="container" style="margin-bottom: 30px; margin-top: 10px;">
+    <p style="text-transform: uppercase; color: #3eacac; font-weight: bold;
+  font-size: larger; margin: 0px; padding: 0px;">Giày dép</p>
+    <hr style="border: 5px double #dbffff; margin: 0px;">
+</div>
+
+<div class="container" style="margin-top: 30px;" data-aos="fade-down">
+    <div class="row row-cols-1 row-cols-md-4">
+        <% shoes.forEach((product) => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+                <div class="container" style="text-align: center; margin-top: 20px;">
+                    <a href="/products/<%= product.category %>/<%= product.slug %>">
+                        <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                    </a>
+                </div>
+                <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title"><%= product.name %></h5>
+                    <div class="star-rate">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% if (product.sale != 0) { %>
+                    <p class="original-price"><strike><%= price %></strike></p>
+                    <p class="product-price"><%= salePrice %></p>
+                    <% } else { %>
+                    <br>
+                    <p class="product-price"><%= price %></p>
+                    <% } %>
+                    <a style="background-color: #51BCB1; padding: 10px 30px;"
+                        class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                        role="button">Thêm vào giỏ</a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <% if (headTitle === "Cho bé trai") { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/giay-dep-be-trai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } else { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/giay-dep-be-gai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<div class="container" style="margin-bottom: 30px; margin-top: 10px;">
+    <p style="text-transform: uppercase; color: #3eacac; font-weight: bold;
+  font-size: larger; margin: 0px; padding: 0px;">Phụ kiện</p>
+    <hr style="border: 5px double #dbffff; margin: 0px;">
+</div>
+
+<div class="container" style="margin-top: 30px;" data-aos="fade-down">
+    <div class="row row-cols-1 row-cols-md-4">
+        <% accessories.forEach((product) => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+                <div class="container" style="text-align: center; margin-top: 20px;">
+                    <a href="/products/<%= product.category %>/<%= product.slug %>">
+                        <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                    </a>
+                </div>
+                <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title"><%= product.name %></h5>
+                    <div class="star-rate">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% if (product.sale != 0) { %>
+                    <p class="original-price"><strike><%= price %></strike></p>
+                    <p class="product-price"><%= salePrice %></p>
+                    <% } else { %>
+                    <br>
+                    <p class="product-price"><%= price %></p>
+                    <% } %>
+                    <a style="background-color: #51BCB1; padding: 10px 30px;"
+                        class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                        role="button">Thêm vào giỏ</a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <% if (headTitle === "Cho bé trai") { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/phu-kien-be-trai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } else { %>
+        <div class="container" style="text-align: end; margin: 0px; padding: 0px;">
+            <a data-hover="Tiếp tục" id="seemore11" class="btn btn-default" href="/products/phu-kien-be-gai" role="button">
+                <div>Xem thêm</div>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+
+
+<% include ../partials/footer %>

@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-<div class="container">
+<div class="container" data-aos="fade-down">
     <div class="row row-cols-1 row-cols-md-4">
         <% if (products) { %>
             <% products.forEach((product) => { %>
@@ -24,7 +24,7 @@
                                 <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
                                 <p class="original-price"><strike><%= price %></strike></p>
                                 <p class="product-price"><%= salePrice %></p>
-                                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white"
+                                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1"
                                     href="/cart/add/<%= product.slug %>" role="button">Thêm vào giỏ</a>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                 <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
                                 <br>
                                 <p class="product-price"><%= price %></p>
-                                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default text-white"
+                                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1"
                                     href="/cart/add/<%= product.slug %>" role="button">Thêm vào giỏ</a>
                             </div>
                         </div>

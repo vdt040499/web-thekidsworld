@@ -1,5 +1,21 @@
 var Category = require('../models/category.model');
 
+function stringToSlug(str) {
+    // remove accents
+    var from = "àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ",
+        to   = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+    for (var i=0, l=from.length ; i < l ; i++) {
+      str = str.replace(RegExp(from[i], "gi"), to[i]);
+    }
+  
+    str = str.toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9\-]/g, '-')
+          .replace(/-+/g, '-');
+  
+    return str;
+  }
+
 //GET categories index
 module.exports.getCates = (req, res) => {
     Category.find((err, cates) => {
@@ -48,7 +64,7 @@ module.exports.addCate = (req, res) => {
 module.exports.addCatePost = (req, res) => {
     
     var title = req.body.title;
-    var slug = title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').toLowerCase();
+    var slug = stringToSlug(title);
     var level = parseInt(req.body.level);
     var prelevel = req.body.prelevel;
 
@@ -161,7 +177,7 @@ module.exports.editCate = (req, res) => {
 module.exports.editCatePost = (req, res) => {
 
     var title = req.body.title;
-    var slug = title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').toLowerCase();
+    var slug = stringToSlug(title);
     var level = req.body.level;
     var prelevel = req.body.prelevel;
     var id = req.params.id;

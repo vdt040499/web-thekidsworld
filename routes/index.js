@@ -57,6 +57,12 @@ router.get('/aboutus', (req, res) => {
   });
 });
 
+router.get('/sales', (req, res) => {
+  res.render('pages/sales', {
+    headTitle: "Sale khủng"
+  });
+});
+
 //Login with google
 //Login with google
 router.get('/auth/gg', passport.authenticate('google',{scope: ['profile', 'email']}));

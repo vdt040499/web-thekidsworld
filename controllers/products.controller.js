@@ -187,3 +187,57 @@ module.exports.searchProduct = async(req, res) => {
   });
 }
 
+//GET for boy
+module.exports.getForBoy = async(req, res) => {
+
+  let clothesSlug = "quan-ao-be-trai";
+  let toysSlug = "do-choi-be-trai";
+  let shoesSlug = "giay-dep-be-trai";
+  let accessoriesSlug = "phu-kien-be-trai";
+
+  let clothes = await Product.find({category: clothesSlug});
+  console.log(clothes);
+  let toys = await Product.find({category: toysSlug});
+  let shoes = await Product.find({category: shoesSlug});
+  let accessories = await Product.find({category: accessoriesSlug});
+
+  clothes = clothes.slice(0, 8);
+  toys = toys.slice(0, 8);
+  shoes = shoes.slice(0, 8);
+  accessories = accessories.slice(0, 8);
+
+  res.render('product/main_cat', {
+    headTitle: "Cho bé trai",
+    clothes: clothes,
+    toys: toys,
+    shoes: shoes,
+    accessories: accessories
+  });
+}
+
+//GET for girl
+module.exports.getForGirl = async(req, res) => {
+
+  let clothesSlug = "quan-ao-be-gai";
+  let toysSlug = "do-choi-be-gai";
+  let shoesSlug = "giay-dep-be-gai";
+  let accessoriesSlug = "phu-kien-be-gai";
+
+  let clothes = await Product.find({category: clothesSlug});
+  let toys = await Product.find({category: toysSlug});
+  let shoes = await Product.find({category: shoesSlug});
+  let accessories = await Product.find({category: accessoriesSlug});
+
+  clothes = clothes.slice(0, 8);
+  toys = toys.slice(0, 8);
+  shoes = shoes.slice(0, 8);
+  accessories = accessories.slice(0, 8);
+
+  res.render('product/main_cat', {
+    headTitle: "Cho bé gái",
+    clothes: clothes,
+    toys: toys,
+    shoes: shoes,
+    accessories: accessories
+  });
+}
