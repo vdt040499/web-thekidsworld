@@ -51,6 +51,12 @@ router.get('/', function(req, res, next) {
   
 });
 
+router.get('/aboutus', (req, res) => {
+  res.render('pages/aboutus', {
+    headTitle: "Về The Kid's World"
+  });
+});
+
 //Login with google
 //Login with google
 router.get('/auth/gg', passport.authenticate('google',{scope: ['profile', 'email']}));
