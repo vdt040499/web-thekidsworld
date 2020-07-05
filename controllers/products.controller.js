@@ -86,6 +86,9 @@ module.exports.getProductDetails = (req, res) => {
                   if(err) {
                     console.log(err);
                   } else {
+                    ratings.sort((a,b) => {
+                      return new Date(b.date) - new Date(a.date)
+                    });
                     var galleryDir =
                   "public/product_images/" + product._id + "/gallery";
 
