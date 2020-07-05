@@ -13,7 +13,7 @@ module.exports.signup = (req, res) => {
     var address = "";
 
     res.render('users/signup', {
-        headTitle: "Sign Up",
+        headTitle: "Đăng kí",
         username: username,
         email: email,
         phone: phone, 
@@ -33,21 +33,21 @@ module.exports.signupPost = (req, res) => {
     var password = req.body.password;
     var repass = req.body.repass;
 
-    req.checkBody('username', 'Username is required').notEmpty();
-    req.checkBody('email', 'Email is required!').isEmail();
-    req.checkBody('phone', 'Phone is required!').notEmpty();
-    req.checkBody('province', 'Province address is required!').notEmpty();
-    req.checkBody('district', 'District address required!').notEmpty();
-    req.checkBody('ward', 'Ward is required!').notEmpty();
-    req.checkBody('address', 'Address is required!').notEmpty();
-    req.checkBody('password', 'Password is required!').notEmpty();
-    req.checkBody('repass', 'Passwords do not match!').equals(password);
+    req.checkBody('username', 'Vui lòng nhập tên đăng nhập').notEmpty();
+    req.checkBody('email', 'Vui lòng nhập email').isEmail();
+    req.checkBody('phone', 'Vui lòng nhập số điện thoại').notEmpty();
+    req.checkBody('province', 'Vui lòng chọn tỉnh/thành phố').notEmpty();
+    req.checkBody('district', 'Vui lòng chn quận/huyện').notEmpty();
+    req.checkBody('ward', 'Vui lòng nhập phường/xã').notEmpty();
+    req.checkBody('address', 'Vui lòng nhập địa chỉ cụ thể').notEmpty();
+    req.checkBody('password', 'Vui lòng nhập mật khẩu').notEmpty();
+    req.checkBody('repass', 'Vui lòng nhập lại mật khẩu xác nhận').equals(password);
 
     var errors = req.validationErrors();
 
     if(errors) {
         res.render('users/signup', {
-            headTitle: 'Sign Up',
+            headTitle: 'Đăng kí',
             username: username,
             email: email,
             phone: phone,
@@ -60,7 +60,7 @@ module.exports.signupPost = (req, res) => {
             if(err) console.log(err);
 
             if(user) {
-                req.flash('danger', 'Username exists, choose another!');
+                req.flash('danger', 'Tên đăng nhập đã tồn tại! Vui chọn tên khác');
                 res.redirect('/users/signup');
             } else {
 
@@ -110,7 +110,7 @@ module.exports.signupPost = (req, res) => {
                             if(err) {
                                 console.log(err);
                             } else {
-                                req.flash('success', 'You are now registerd!');
+                                req.flash('success', 'Đăng kí tài khoản thành công');
                                 res.redirect('/users/signin');
                             }
                         })
@@ -129,7 +129,7 @@ module.exports.signin = (req, res) => {
     var username = "";
 
     res.render('users/signin', {
-        headTitle: 'Sign In',
+        headTitle: 'Đăng nhập',
         username: username
     });
 }
@@ -152,7 +152,7 @@ module.exports.logout = (req, res) => {
 
     delete req.session.cart;
 
-    req.flash('success', 'You are logged out!');
+    req.flash('success', 'Bạn đã đăng xuất');
     res.redirect('/users/signin');
 }
 
@@ -189,7 +189,7 @@ module.exports.account = (req, res) => {
         }
 
         res.render('users/account', {
-            headTitle: 'Account',
+            headTitle: 'Tài khoản',
             user: user,
             receiver: receiver,
             processingOrder: processingOrder,

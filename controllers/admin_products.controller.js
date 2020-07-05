@@ -18,7 +18,7 @@ module.exports.getProducts = (req, res) => {
             console.log(err);
         } else {
             res.render('admin/products', {
-                headTitle: 'Admin products',
+                headTitle: 'Sản phẩm',
                 products: products,
                 count: count
             });
@@ -39,7 +39,7 @@ module.exports.addProduct = (req, res) => {
             console.log(err);
         } else {
             res.render('admin/add_product', {
-                headTitle: 'Add product',
+                headTitle: 'Thêm sản phẩm',
                 name: name,
                 desc: desc,
                 price: price,
@@ -62,10 +62,10 @@ module.exports.addProductPost = (req, res) => {
         var imageFile = typeof(req.files.image) !== "undefined" ? req.files.image.name : "";
     }
     
-    req.checkBody('name', 'Name is required!').notEmpty();
-    req.checkBody('desc', 'Description is required!').notEmpty();
-    req.checkBody('price', 'Price is required!').isDecimal();
-    req.checkBody('image', 'You must upload an image').isImage(imageFile);
+    req.checkBody('name', 'Vui lòng nhập tên sản phẩm').notEmpty();
+    req.checkBody('desc', 'Vui lòng nhập mô tả sản phẩm').notEmpty();
+    req.checkBody('price', 'Vui lòng nhập giá sản phẩm').isDecimal();
+    req.checkBody('image', 'Vui lòng chọn hình sản phẩm').isImage(imageFile);
 
     var name = req.body.name;
     var slug = name.replace(/\s+/g, '-').toLowerCase();
@@ -79,7 +79,7 @@ module.exports.addProductPost = (req, res) => {
     if(errors) {
         Category.find((err, cates) => {
             res.render('admin/add_product', {
-                headTitle: 'Add product',
+                headTitle: 'Thêm sản phẩm',
                 errors: errors,
                 name: name,
                 desc: desc,
@@ -95,9 +95,9 @@ module.exports.addProductPost = (req, res) => {
             } else {
                 if(existProduct) {
                     Category.find((err, cates) => {
-                        req.flash('danger', 'Product title exists, choose another!');
+                        req.flash('danger', 'Tên sản phẩm đã tồn tại');
                         res.render('admin/add_product', {
-                            headTitle: 'Add product',
+                            headTitle: 'Thêm sản phẩm',
                             name: name,
                             desc: desc,
                             price: price,
@@ -141,7 +141,7 @@ module.exports.addProductPost = (req, res) => {
                                 });
                             }
 
-                            req.flash('success', 'Product added!');
+                            req.flash('success', 'Thêm sản phẩm thành công');
                             res.redirect('/admin/products');
                         }
                     });
@@ -176,7 +176,7 @@ module.exports.editProduct = (req, res) => {
                         galleryImages = files;
 
                         res.render('admin/edit_product', {
-                            headTitle: 'Edit product',
+                            headTitle: 'Chỉnh sửa sản phẩm',
                             errors: errors,
                             id: p._id,
                             name: p.name,
@@ -206,14 +206,14 @@ module.exports.editProductPost = (req, res) => {
         var imageFile = typeof(req.files.image) !== "undefined" ? req.files.image.name : "";
     }
 
-    req.checkBody('name', 'Name must have a value!').notEmpty();
-    req.checkBody('desc', 'Description must have a value!').notEmpty();
-    req.checkBody('price', 'Price must have a value!').isDecimal();
-    req.checkBody('sale', 'Sale percentage must have a value!').isDecimal();
-    req.checkBody('ratingAverage', 'Rating must have a value!').isFloat();
-    req.checkBody('image', 'You must upload an image!').isImage(imageFile);
-    req.checkBody('totalQuantity', 'Quantity must have a value!').isDecimal();
-    req.checkBody('sold', 'Quantity sold must have value!').isDecimal();
+    req.checkBody('name', 'Vui lòng nhập tên sản phẩm').notEmpty();
+    req.checkBody('desc', 'Vui lòng nhập mô tả sản phẩm').notEmpty();
+    req.checkBody('price', 'Vui lòng nhập giá sản phẩm').isDecimal();
+    req.checkBody('sale', 'Vui lòng nhập phẩn trăm giảm giá').isDecimal();
+    req.checkBody('ratingAverage', 'Vui lòng nhập phần trăm giảm giá trung bình').isFloat();
+    req.checkBody('image', 'Vui lòng chọn hình ảnh').isImage(imageFile);
+    req.checkBody('totalQuantity', 'Vui lòng nhập tổng lượng ').isDecimal();
+    req.checkBody('sold', 'Vui lòng nhập số lượng sản phẩm đã bán').isDecimal();
 
     var name = req.body.name;
     var slug = name.replace(/\s+/g, '-').toLowerCase();
@@ -239,7 +239,7 @@ module.exports.editProductPost = (req, res) => {
             }
 
             if(p) {
-                res.flash('danger', 'Product exists, choose another.');
+                res.flash('danger', 'Tên sản phẩm đã tồn tại! Vui lòng nhập tên khác');
                 res.redirect('/admin/products/edit-product/' + id);
             } else {
                 Product.findById(id, (err, p) => {
@@ -280,7 +280,7 @@ module.exports.editProductPost = (req, res) => {
                                 });
                             } 
 
-                            req.flash('success', 'Product edited!');
+                            req.flash('success', 'Chỉnh sửa sản phẩm thành công');
                             res.redirect('/admin/products/edit-product/' + id);
                         });
                     }
@@ -323,7 +323,7 @@ module.exports.deleteImage = (req, res) => {
                 if(err) {
                     console.log(err);
                 } else {
-                    req.flash('success', 'Image deleted!');
+                    req.flash('success', 'Xóa ảnh thành công');
                     res.redirect('/admin/products/edit-product/' + req.query.id);
                 }
             });
@@ -344,7 +344,7 @@ module.exports.deleteProduct = (req, res) => {
                 console.log(err);
             });
 
-            req.flash('success', 'Product deleted!');
+            req.flash('success', 'Xóa sản phẩm thành công');
             res.redirect('/admin/products');
         }
     });

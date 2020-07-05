@@ -26,7 +26,7 @@ module.exports.order = async (req, res) => {
                 console.log(err);
             } else {
                 res.render('order/checkout', {
-                    headTitle: 'Checkout',
+                    headTitle: 'Thanh toán',
                     makeID: makeid(10),
                     cart: req.session.cart,
                     id: user._id,
@@ -39,7 +39,7 @@ module.exports.order = async (req, res) => {
         });
     } else {
         res.render('order/checkout', {
-            headTitle: 'Check out',
+            headTitle: 'Thanh toán',
             user: null,
             makeID: makeid(10),
             cart: req.session.cart,
@@ -54,10 +54,10 @@ module.exports.order = async (req, res) => {
 //POST check out
 module.exports.orderPost = (req, res) => {
 
-    req.checkBody('username', 'Username is required').notEmpty();
-    req.checkBody('email', 'Email is required!').isEmail();
-    req.checkBody('phone', 'Phone is required!').notEmpty();
-    req.checkBody('address', 'Address is required!').notEmpty();
+    req.checkBody('username', 'Vui lòng nhập tên khách hàng').notEmpty();
+    req.checkBody('email', 'Vui lòng nhập email').isEmail();
+    req.checkBody('phone', 'Vui lòng nhập số điện thoại').notEmpty();
+    req.checkBody('address', 'Vui lòng nhập địa chỉ').notEmpty();
 
     var username = req.body.username;
     var address = req.body.address;
@@ -76,7 +76,7 @@ module.exports.orderPost = (req, res) => {
 
     if(errors) {
         res.render('order/checkout', {
-            headTitle: 'Check out',
+            headTitle: 'Thanh toán',
             errors: errors,
             username: username,
             address: address,
@@ -145,10 +145,10 @@ module.exports.orderPost = (req, res) => {
                                           const mailOptions = {
                                             from: 'vdt040499@gmail.com',
                                             to: email,
-                                            subject: 'Confirm your order',
-                                            text: `Your invoice
-                                                    Order's ID: ${makeID}
-                                                    Please use it to check your invoice on my website`
+                                            subject: 'Xác nhận đơn hàng',
+                                            text: `Đơn hàng của bạn
+                                                    Mã đơn hàng của bạn: ${makeID}
+                                                    Vui lòng dùng mã đơn hàng dùng mã này để kiểm tra trên website chúng tôi`
                                           };
                                     
                                           transporter.sendMail(mailOptions, function(err, data){
@@ -215,10 +215,10 @@ module.exports.orderPost = (req, res) => {
                           const mailOptions = {
                             from: 'vdt040499@gmail.com',
                             to: email,
-                            subject: 'Confirm your order',
-                            text: `Your invoice
-                                    Order's ID: ${makeID}
-                                    Please use it to check your invoice on my website`
+                            subject: 'Xác nhận đơn hàng',
+                            text: `Đơn hàng của bạn
+                                    Mã đơn hàng của bạn: ${makeID}
+                                    Vui lòng dùng mã đơn hàng dùng mã này để kiểm tra trên website chúng tôi`
                           };
                     
                           transporter.sendMail(mailOptions, function(err, data){
@@ -400,7 +400,7 @@ module.exports.getDetailOrder = (req, res) => {
         var receiver = JSON.parse(order.receiver);
             
         res.render('order/order_detail', {
-            headTitle: 'Your order',
+            headTitle: 'Đơn hàng của bạn',
             orderID: order.ID,
             receiver: receiver,
             user: req.user,

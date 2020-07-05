@@ -31,7 +31,7 @@ module.exports.addToCart = (req, res) => {
                             if(err) {
                                 console.log(err);
                             } else {
-                                req.flash('success', 'Product added!');
+                                req.flash('success', 'Thêm sản phẩm vào giỏ thành công');
                                 res.redirect('back');
                             }
                         });
@@ -39,7 +39,7 @@ module.exports.addToCart = (req, res) => {
                 });
                 } else {
                     console.log(req.session.cart);
-                    req.flash('success', 'Product added!');
+                    req.flash('success', 'Thêm sản phẩm vào giỏ thành công');
                     res.redirect('back');
                 }
             } else {
@@ -76,7 +76,7 @@ module.exports.addToCart = (req, res) => {
                                 if(err) {
                                     console.log(err);
                                 } else {
-                                    req.flash('success', 'Product added!');
+                                    req.flash('success', 'Thêm sản phẩm vào giỏ thành công');
                                     res.redirect('back');
                                 }
                             });
@@ -84,7 +84,7 @@ module.exports.addToCart = (req, res) => {
                     });
                 } else {
                     console.log(req.session.cart);
-                    req.flash('success', 'Product added!');
+                    req.flash('success', 'Thêm sản phẩm vào giỏ thành công');
                     res.redirect('back');
                 }
             }
@@ -101,7 +101,7 @@ module.exports.cart = (req, res) => {
     } else {
         req.session.cart 
         res.render('cart/cart', {
-            headTitle: 'Cart',
+            headTitle: 'Giỏ hàng',
             cart: req.session.cart
         });
     }
@@ -146,14 +146,14 @@ module.exports.updateProduct = (req, res) => {
                     if(err) {
                         console.log(err);
                     } else {
-                        req.flash('success', 'Cart updated!');
+                        req.flash('success', 'Cập nhật giỏ hàng thành công');
                         res.redirect('back');
                     }
                 });
             }
         });
     } else {
-        req.flash('success', 'Cart updated!');
+        req.flash('success', 'Cập nhật giỏ hàng thành công');
         res.redirect('/cart/cart');
     }   
 }
@@ -173,7 +173,7 @@ module.exports.deleteCart = (req, res) => {
                     if (err) {
                         console.log(err);
                     } else {
-                        req.flash('success', 'Cart cleared!');
+                        req.flash('success', 'Xóa giỏ hàng thành công');
                         res.redirect('/cart/cart');
                     }
                 });
@@ -181,7 +181,7 @@ module.exports.deleteCart = (req, res) => {
         });
 
     } else {    
-        req.flash('success', 'Cart cleared!');
+        req.flash('success', 'Xóa giỏ hàng thành công');
         res.redirect('/cart/cart');
     }
 }

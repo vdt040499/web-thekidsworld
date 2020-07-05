@@ -114,7 +114,7 @@ module.exports.addCatePost = (req, res) => {
                                 }
                             });
 
-                            req.flash('success', 'Danh mục đã được thêm!');
+                            req.flash('success', 'Danh mục đã được thêm');
                             res.redirect('/admin/categories');
                         }
                     })
