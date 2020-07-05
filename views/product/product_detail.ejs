@@ -58,11 +58,17 @@
                 <div class="row">
                     <p>Đánh giá</p>
                     <div class="star-rate" style="padding-left: 10px;">
+                        <!-- <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span> -->
+
+                        <div class="stars-outer">
+                            <div class="stars-inner"></div>
+                        </div>
+                        &nbsp;
+                        <span id="number-rating"><%= p.ratingAverage %></span>
                     </div>
                     <p style="padding-left: 20px;"><%= p.ratingQty %> nhận xét</p>
                 </div>
@@ -311,7 +317,26 @@
             </div>
         <% }); %>      
 </div>
+<script>
+    const starsTotal = 5;
 
+    document.addEventListener('DOMContentLoaded', getRatings);
+
+    function getRatings() {
+
+        let rating = parseFloat(document.getElementById("number-rating").textContent);
+        
+        const starPercentage = (rating/starsTotal) * 100;
+
+        console.log(starPercentage);
+
+        const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+    
+        console.log(starPercentageRounded);
+
+        document.querySelector(".stars-inner").style.width = starPercentageRounded;
+    }
+</script>
 <script src="/javascripts/rating.js"></script>
 
 <% include ../partials/footer %>
