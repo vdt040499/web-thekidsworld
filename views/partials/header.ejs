@@ -62,12 +62,21 @@
             </li>
             </ul>
             <div class="navbar-nav ml-auto">
-                <form class="form-inline my-2 my-lg-0">
-                    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Bạn tìm gì?"
-                        aria-label="Search">
-                    <button class="btn my-2 my-sm-0" type="submit"><img src="/images/magnifying-glass.png" width="25px"
-                            alt="search button"></button>
-                </form>
+                <% if(typeof searchProduct !== "undefined") { %>
+                    <form action="/products/search" method="GET" class="form-inline my-2 my-lg-0">
+                        <input id="search" class="form-control mr-sm-2" type="text" placeholder="Bạn tìm gì?"
+                            aria-label="Search" name="searchProduct" value="<%= searchProduct %>">
+                        <button class="btn my-2 my-sm-0" type="submit"><img src="/images/magnifying-glass.png" width="25px"
+                                alt="search button"></button>
+                    </form>
+                <% } else { %>
+                    <form action="/products/search" method="GET" class="form-inline my-2 my-lg-0">
+                        <input id="search" class="form-control mr-sm-2" type="text" placeholder="Bạn tìm gì?"
+                            aria-label="Search" name="searchProduct" value="">
+                        <button class="btn my-2 my-sm-0" type="submit"><img src="/images/magnifying-glass.png" width="25px"
+                                alt="search button"></button>
+                    </form>
+                <% } %>
 
                 <% if (typeof cart !== "undefined" && cart.length !== 0) { %>
                 <a class="btn my-2 my-sm-0" type="button" href="/cart/cart"><img src="/images/the-cart.png" width="25px"

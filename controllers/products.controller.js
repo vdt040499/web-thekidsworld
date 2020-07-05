@@ -152,3 +152,24 @@ module.exports.rating = (req, res) => {
   }
 }
 
+//GET search
+module.exports.searchProduct = async(req, res) => {
+  var query = req.query.searchProduct.toLowerCase();
+
+  const products = await Product.find();
+
+  console.log(products);
+
+  let matchedProducts = products.filter((product) => {
+    return product.name.toLowerCase().indexOf(query) !== -1;
+  });
+
+  console.log(matchedProducts);
+
+  res.render('product/cat_products', {
+    headTitle: "Sản phẩm",
+    searchProduct: query,
+    products : matchedProducts
+  });
+}
+
