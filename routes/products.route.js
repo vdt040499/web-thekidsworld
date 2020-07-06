@@ -12,6 +12,7 @@ router.get('/be-gai', productsController.getForGirl);
 router.get('/best-sellers', productsController.getBestSellers);
 router.get('/:category', productsController.getProductsByCategory);
 router.get('/bestseller-cat/:category', productsController.getBSPByCategory);
+router.get('/buynow/:product', productsController.buyNow);
 router.get('/:category/:product', productsController.getProductDetails);
 router.post('/rating/:productId/:userId', productsController.rating);
 
