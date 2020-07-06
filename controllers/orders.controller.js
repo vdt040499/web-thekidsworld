@@ -430,6 +430,21 @@ module.exports.getDetailOrder = (req, res) => {
     });
 }
 
+//GET cancel order
+module.exports.cancelOrder = async(req, res) => {
+    orderId = req.params.orderId;
+
+    let order = await Order.findOne({ID: orderId});
+
+    console.log(order);
+
+    order.status = "Cancel";
+
+    await order.save();
+
+    res.redirect(`/orders/get-detail/${order._id}`);
+}
+
 //GET thankyou
 module.exports.thankYou = (req, res) => {
     res.render('thankyou', {

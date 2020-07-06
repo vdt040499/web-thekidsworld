@@ -167,14 +167,17 @@ module.exports.account = (req, res) => {
         var processingOrder = [];
         var shippingOrder = [];
         var completedOrder = [];
+        var cancelOrder = [];
         orders.forEach((order) => {
             receiver = order.receiver;
             if(order.status == "Processing") {
                 processingOrder.push(order);
             } else if (order.status == "Shipping") {
                 shippingOrder.push(order);
-            } else {
+            } else if (order.status == "Completed") {
                 completedOrder.push(order);
+            } else {
+                cancelOrder.push(order);
             }
         });
 
@@ -198,6 +201,7 @@ module.exports.account = (req, res) => {
             processingOrder: processingOrder,
             shippingOrder: shippingOrder,
             completedOrder: completedOrder,
+            cancelOrder: cancelOrder
         });
     })
    

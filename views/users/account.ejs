@@ -87,6 +87,17 @@
             </a>
         <% }); %>
     </div>
+    <p style="padding-top: 10px; color:#5CA2A8; font-weight: bold; margin-bottom: 5px;">ĐƠN HÀNG HỦY</p>
+    <div class="container">
+        <% cancelOrder.forEach((order) => { %>
+            <% var orderDate = order.date.getDate() + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
+            <a href="/orders/get-detail/<%= order._id %>">
+                <div class="billcheck">
+                    <p style="padding: 10px; margin-bottom: 0px;">ĐƠN HÀNG MÃ <%= order.ID %> - NGÀY LẬP <%= orderDate %></p>
+                </div>
+            </a>
+        <% }); %>
+    </div>
 </div>
 
 <% include ../partials/footer %>

@@ -91,6 +91,14 @@
           <% } else { %>
               style="color: rgb(160, 160, 160);"
           <% } %>><strong><%= status %></strong></h5></p>
+
+        <% if (status === "Processing") { %>
+          <div class="d-flex justify-content-end">
+            <div>
+              <a type="button" class="btn btn-outline-danger clearcart" href="/orders/cancel/<%= orderID %>">HỦY ĐƠN</a>
+            </div>
+          </div>
+        <% } %>
 </div>
     </div>
 </div>
