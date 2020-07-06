@@ -1,3 +1,263 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Errors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta property="og:url" content="https://thekidsworlds.000webhostapp.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="The Kid's World" />
+    <meta property="og:description"
+        content="Chuyên về các mặt hàng dành cho trẻ em như quần áo trẻ em, sữa, tả, giày dép trẻ em,.." />
+    <meta property="og:image"
+        content="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.15752-9/104474065_263899954863829_6199984973096625261_n.png?_nc_cat=110&_nc_sid=b96e70&_nc_ohc=tgeUP51_kbEAX9pdnel&_nc_ht=scontent.fsgn5-3.fna&oh=e4925e698bbf2c5b346d3d5582de1a59&oe=5F1279F4" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- <h1><%= message %></h1>
+    <h2><%= error.status %></h2>
+    <pre><%= error.stack %></pre> -->
+
+    <nav class="navbar navbar-expand-lg " style="background-color: #D1FFFD;">
+        <a class="navbar-brand ml-2" href="index.html">
+            <img src="/images/logo.png" width="60px" alt="The Kid's World logo" loading="lazy">
+        </a>
+        <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbar"
+            aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Trang chủ</a>
+                </li>
+                <li class="nav-item dropdown megamenu-li">
+                    <a class="nav-link dropdown-toggle" href="/products.html" id="dropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
+                    <div class="dropdown-menu megamenu" aria-labelledby="dropdown" style="margin-top: -5px;">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-3">
+                                <h5>Chúng tôi là</h5>
+                                <img src="/images/logo.png" alt="logo" style="width: 100%;">
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <h5>Cho bé trai</h5>
+                                <a class="dropdown-item" href="products.html">Quần áo</a>
+                                <a class="dropdown-item" href="products.html">Đồ chơi</a>
+                                <a class="dropdown-item" href="products.html">Giày dép</a>
+                                <a class="dropdown-item" href="products.html">Phụ kiện</a>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <h5>Cho bé gái</h5>
+                                <a class="dropdown-item" href="products.html">Quần áo</a>
+                                <a class="dropdown-item" href="products.html">Đồ chơi</a>
+                                <a class="dropdown-item" href="products.html">Giày dép</a>
+                                <a class="dropdown-item" href="products.html">Phụ kiện</a>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <a href="products.html">
+                                    <h5>Sữa</h5>
+                                </a>
+                                <a href="/products.html">
+                                    <h5>Tã</h5>
+                                </a>
+                                <a href="/products.html">
+                                    <h5>Đồ trang trí</h5>
+                                </a>
+                                <a href="/products.html">
+                                    <h5>Thực phẩm</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sales.html">Giảm giá</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about-us.html">Về chúng tôi</a>
+                </li>
+            </ul>
+            <div class="navbar-nav ml-auto">
+                <form class="form-inline my-2 my-lg-0">
+                    <input id="search" class="form-control mr-sm-2" type="text" placeholder="Bạn tìm gì?"
+                        aria-label="Search">
+                    <button class="btn my-2 my-sm-0" type="submit"><img src="/images/magnifying-glass.png" width="25px"
+                            alt="search button"></button>
+                </form>
+                <button class="btn my-2 my-sm-0" type="button" onclick="window.location.href='cart.html'"><img
+                        src="/images/the-cart.png" width="25px" alt="search button"></button>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        onclick="window.location.href='account.html'" aria-haspopup="true" aria-expanded="false">
+                        <img src="/images/useravatar.png" alt="account" width="25px" alt="user">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: rgb(133, 210, 255); 
+                    outline: none; border: none; padding: 7px; border-radius: 10px;">
+                        <a class="dropdown-item" id="btn-in" href="signin.html">ĐĂNG NHẬP</a>
+                        <a class="dropdown-item" id="btn-up" href="signup.html">ĐĂNG KÝ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/mainbanner.png" class="d-block w-100" alt="mainbanner">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/gif1.gif" class="d-block w-100" alt="Sale cuối mùa">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/gif2.gif" class="d-block w-100" alt="Sản phẩm mới">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="container" style="text-align: center; margin-top: 20px; margin-bottom: 20px;" data-aos="fade-down"
+        data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="true"
+        data-aos-anchor-placement="top-center">
+        <div class="row justify-content-center">
+            <div class="error-mess">
+                <img src="/images/404.png" height="200px" alt="">
+                <p style="font-size: x-large; margin-top: 5px; margin-bottom: 5px; text-transform: uppercase; font-weight: bold;
+            color: rgb(24, 158, 182);">Gặp lỗi rồi :< </p>
+                        <p style="font-size: medium; color: rgb(23, 49, 97);">Chúng tôi không tìm thấy điều bạn đang
+                            tìm. <br>
+                            Nhưng chúng tôi có rất nhiều sản phẩm chất lượng và nhiều hơn nữa các ưu đãi hấp dẫn khác,
+                            quay về trang chủ và tiếp tục mua sắm nhé!</p>
+                        <a style="background-color: #51b1dd; padding: 10px 30px;"
+                            class="btn btn-default button-back color-9" href="home.html" role="button">Đưa tôi về trang
+                            chủ.</a>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color: #D1FFFD; padding-top: 60px;" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p id="nameweb">The Kid's World</p>
+                    <ul class="contactinfo">
+                        <li>Điện thoại : 17520811</li>
+                        <li>Email : 17520811@gm.uit.edu.vn</li>
+                        <li>Địa chỉ : 12345, Somewhere Street, Vietnam</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Hệ thống</p>
+                    <ul>
+                        <li>Trang chủ</li>
+                        <li>Sản phẩm</li>
+                        <li>Giảm giá</li>
+                        <li>Về chúng tôi</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Hỗ trợ</p>
+                    <ul>
+                        <li>FAQ</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Chúng tôi ở</p>
+                    <ul>
+                        <li>Twitter</li>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="footerinfo">Kết nối</p>
+                    <ul>
+                        <li>Đăng ký</li>
+                        <li>Đăng nhập</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/19.1.1/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="/javascripts/bootstrap-dialog.js"></script>
+    <script src="/javascripts/bootstrap-dialog.min.js"></script>
+    <script src="/javascripts/address.js"></script>
+    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/hover.js"></script>
+
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v7.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="102523418183774" theme_color="#44bec7"
+        logged_in_greeting="Xin chào! Chúng mình có thể giúp gì cho bạn?"
+        logged_out_greeting="Xin chào! Chúng mình có thể giúp gì cho bạn?">
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>
