@@ -7,6 +7,7 @@ const Product = require('../models/product.model');
 const Order = require('../models/order.model');
 const router = require('../routes/cart.route');
 const select = require('../config/select_address');
+const { cart } = require('./cart.controller');
 
 function makeid(length) {
     var result           = '';
@@ -52,7 +53,7 @@ module.exports.order = async (req, res) => {
 }
 
 //POST check out
-module.exports.orderPost = (req, res) => {
+module.exports.orderPost = async (req, res) => {
 
     req.checkBody('username', 'Vui lòng nhập tên khách hàng').notEmpty();
     req.checkBody('email', 'Vui lòng nhập email').isEmail();
@@ -102,6 +103,16 @@ module.exports.orderPost = (req, res) => {
                     }
             
                     var receiver = JSON.stringify(account);
+
+                    var handleCart = req.session.cart;
+
+                    for(let i=0; i < handleCart.length; i++) {
+                        Product.findOne({slug: handleCart[i].title}, (err, product) => {
+                            product.sold += handleCart[i].qty;
+                            product.totalQuantity -= handleCart[i].qty;
+                            product.save();
+                        });
+                    }
 
                     var order = new Order({
                         ID: makeID,
@@ -181,6 +192,16 @@ module.exports.orderPost = (req, res) => {
             }
     
             var receiver = JSON.stringify(noaccount);
+
+            var handleCart = req.session.cart;
+
+            for(let i=0; i < handleCart.length; i++) {
+                Product.findOne({slug: handleCart[i].title}, (err, product) => {
+                    product.sold += handleCart[i].qty;
+                    product.totalQuantity -= handleCart[i].qty;
+                    product.save();
+                });
+            }
     
             var order = new Order({
                 ID: makeID,
