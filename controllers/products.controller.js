@@ -338,3 +338,31 @@ module.exports.buyNow = async (req, res) => {
     }
   }
 };
+
+//GET sales
+module.exports.getSales = async(req, res) => {
+  let greaterThan50 = [];
+  let greaterThan30 = [];
+  let rest = [];
+
+  const products = await Product.find();
+
+  console.log(products);
+
+  products.forEach((product) => {
+    if(parseInt(product.sale) >= 50) {
+      greaterThan50.push(product);
+    } else if (parseInt(product.sale) >= 30) {
+      greaterThan30.push(product);
+    } else if (parseInt(product.sale !== 0)){
+      rest.push(product);
+    }
+  });
+
+  res.render('pages/sales', {
+    headTitle: "Khuyến mãi cực sốc",
+    greaterThan50: greaterThan50,
+    greaterThan30: greaterThan30,
+    rest: rest
+  });
+}

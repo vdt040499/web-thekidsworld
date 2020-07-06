@@ -6,331 +6,79 @@
 
 <div class="container" style="margin-top: 30px;">
     <div class="row row-cols-1 row-cols-md-4" data-aos="zoom-in">
+      <% greaterThan50.forEach((product) => { %>
         <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
             <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
+                <div class="container" style="text-align: center; margin-top: 20px;">
+                    <a href="/products/<%= product.category %>/<%= product.slug %>">
+                        <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                    </a>
+                </div>
+                <div style="text-align: center;" class="card-body">
+                    <h5 class="card-title"><%= product.name %></h5>
+                    <div class="star-rate">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                    <% if (product.sale != 0) { %>
+                    <p class="original-price"><strike><%= price %></strike> <strong><i>-<%= product.sale %>%</i></strong></p>
+                    <p class="product-price"><%= salePrice %></p>
+                    <% } else { %>
+                    <br>
+                    <p class="product-price"><%= price %></p>
+                    <% } %>
+                    <a style="background-color: #51BCB1; padding: 10px 30px;"
+                        class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                        role="button">Thêm vào giỏ</a>
+                </div>
             </div>
         </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card">
-              <div class="container" style="text-align: center; margin-top: 20px;">
-                <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-              </div>
-              <div style="text-align: center;" class="card-body">
-                <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                  <div class="star-rate">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                  </div>
-                  <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                  <p class="product-price">200.000 VNĐ</p>
-                  <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-md button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-              </div>
-            </div>
-        </div>
+        <% }); %>
     </div>
 </div>
 
-<div class="container" id="hidden-content" style="margin-top: 30px;">
+<!-- <div class="container" id="hidden-content" style="margin-top: 30px;">
   <div class="row row-cols-1 row-cols-md-4">
+    <% greaterThan30.forEach((product) => { %>
       <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
           <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
+              <div class="container" style="text-align: center; margin-top: 20px;">
+                  <a href="/products/<%= product.category %>/<%= product.slug %>">
+                      <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                  </a>
+              </div>
+              <div style="text-align: center;" class="card-body">
+                  <h5 class="card-title"><%= product.name %></h5>
+                  <div class="star-rate">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star"></span>
+                      <span class="fa fa-star"></span>
+                  </div>
+                  <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                  <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                  <% if (product.sale != 0) { %>
+                  <p class="original-price"><strike><%= price %></strike> -<%= product.sale %></p>
+                  <p class="product-price"><%= salePrice %></p>
+                  <% } else { %>
+                  <br>
+                  <p class="product-price"><%= price %></p>
+                  <% } %>
+                  <a style="background-color: #51BCB1; padding: 10px 30px;"
+                      class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                      role="button">Thêm vào giỏ</a>
+              </div>
           </div>
       </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
+      <% }); %>
   </div>
-</div>
-
-<div class="container" style="text-align: center;">
-  <button id="morebutton-1" style="background-color: #FFEB9B; color: #FF8484;
-  font-weight: bold; font-size: 20px;" class="btn btn-lg">XEM THÊM</button>
-</div>
+</div> -->
 
 <div class="container">
   <img src="/images/gif2.gif" style="margin-top: 30px;" class="img-fluid" alt="">
@@ -338,177 +86,43 @@
 
 <div class="container" style="margin-top: 30px;">
   <div class="row row-cols-1 row-cols-md-4" data-aos="zoom-in">
+    <% greaterThan30.forEach((product) => { %>
       <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
           <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
+              <div class="container" style="text-align: center; margin-top: 20px;">
+                  <a href="/products/<%= product.category %>/<%= product.slug %>">
+                      <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                  </a>
+              </div>
+              <div style="text-align: center;" class="card-body">
+                  <h5 class="card-title"><%= product.name %></h5>
+                  <div class="star-rate">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star"></span>
+                      <span class="fa fa-star"></span>
+                  </div>
+                  <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                  <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                  <% if (product.sale != 0) { %>
+                  <p class="original-price"><strike><%= price %></strike> <strong><i>-<%= product.sale %>%</i></strong></p>
+                  <p class="product-price"><%= salePrice %></p>
+                  <% } else { %>
+                  <br>
+                  <p class="product-price"><%= price %></p>
+                  <% } %>
+                  <a style="background-color: #51BCB1; padding: 10px 30px;"
+                      class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                      role="button">Thêm vào giỏ</a>
+              </div>
           </div>
       </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div class="card">
-            <div class="container" style="text-align: center; margin-top: 20px;">
-              <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-            </div>
-            <div style="text-align: center;" class="card-body">
-              <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-                <div class="star-rate">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-                <p class="product-price">200.000 VNĐ</p>
-                <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-md button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-            </div>
-          </div>
-      </div>
+      <% }); %>
   </div>
 </div>
 
-<div class="container" id="hidden-content2" style="margin-top: 30px;">
+<!-- <div class="container" id="hidden-content2" style="margin-top: 30px;">
 <div class="row row-cols-1 row-cols-md-4">
     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
         <div class="card">
@@ -657,343 +271,53 @@
       </div>
   </div>
 </div>
-</div>
-
+</div> -->
+<!-- 
 <div class="container" style="text-align: center;">
 <button id="morebutton-2" style="background-color: #FFEB9B; color: #FF8484;
 font-weight: bold; font-size: 20px;" class="btn btn-lg">XEM THÊM</button>
-</div>
+</div> -->
 
 <div class="container">
 <img src="/images/gif3.gif" style="margin-top: 30px;" class="img-fluid" alt="">
 </div>
 
 <div class="container" style="margin-top: 30px;">
-<div class="row row-cols-1 row-cols-md-4" data-aos="zoom-in">
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
+  <div class="row row-cols-1 row-cols-md-4" data-aos="zoom-in">
+    <% rest.forEach((product) => { %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+          <div class="card">
+              <div class="container" style="text-align: center; margin-top: 20px;">
+                  <a href="/products/<%= product.category %>/<%= product.slug %>">
+                      <img src="/product_images/<%= product._id %>/<%= product.image %>" class="card-img" alt="...">
+                  </a>
               </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
+              <div style="text-align: center;" class="card-body">
+                  <h5 class="card-title"><%= product.name %></h5>
+                  <div class="star-rate">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star"></span>
+                      <span class="fa fa-star"></span>
+                  </div>
+                  <% var salePrice = product.salePrice.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                  <% var price = product.price.toLocaleString("vi", { style: "currency", currency: "VND", })%>
+                  <% if (product.sale != 0) { %>
+                  <p class="original-price"><strike><%= price %></strike> <strong><i>-<%= product.sale %>%</i></strong></p>
+                  <p class="product-price"><%= salePrice %></p>
+                  <% } else { %>
+                  <br>
+                  <p class="product-price"><%= price %></p>
+                  <% } %>
+                  <a style="background-color: #51BCB1; padding: 10px 30px;"
+                      class="btn btn-default button-back color-1" href="/cart/add/<%= product.slug %>"
+                      role="button">Thêm vào giỏ</a>
               </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
           </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-              </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-              </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-              </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-              </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-              </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card">
-          <div class="container" style="text-align: center; margin-top: 20px;">
-            <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-          </div>
-          <div style="text-align: center;" class="card-body">
-            <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-              <div class="star-rate">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-              </div>
-              <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-              <p class="product-price">200.000 VNĐ</p>
-              <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-md button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-          </div>
-        </div>
-    </div>
-</div>
-</div>
-
-<div class="container" id="hidden-content3" style="margin-top: 30px;">
-<div class="row row-cols-1 row-cols-md-4">
-  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card">
-        <div class="container" style="text-align: center; margin-top: 20px;">
-          <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-        </div>
-        <div style="text-align: center;" class="card-body">
-          <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-            <div class="star-rate">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-            <p class="product-price">200.000 VNĐ</p>
-            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-        </div>
       </div>
+      <% }); %>
   </div>
-
-  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card">
-        <div class="container" style="text-align: center; margin-top: 20px;">
-          <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-        </div>
-        <div style="text-align: center;" class="card-body">
-          <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-            <div class="star-rate">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-            <p class="product-price">200.000 VNĐ</p>
-            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-        </div>
-      </div>
-  </div>
-
-  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card">
-        <div class="container" style="text-align: center; margin-top: 20px;">
-          <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-        </div>
-        <div style="text-align: center;" class="card-body">
-          <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-            <div class="star-rate">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-            <p class="product-price">200.000 VNĐ</p>
-            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-        </div>
-      </div>
-  </div>
-
-  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card">
-        <div class="container" style="text-align: center; margin-top: 20px;">
-          <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-        </div>
-        <div style="text-align: center;" class="card-body">
-          <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-            <div class="star-rate">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-            <p class="product-price">200.000 VNĐ</p>
-            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-        </div>
-      </div>
-  </div>
-
-  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card">
-        <div class="container" style="text-align: center; margin-top: 20px;">
-          <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-        </div>
-        <div style="text-align: center;" class="card-body">
-          <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-            <div class="star-rate">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-            <p class="product-price">200.000 VNĐ</p>
-            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-        </div>
-      </div>
-  </div>
-
-  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card">
-        <div class="container" style="text-align: center; margin-top: 20px;">
-          <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-        </div>
-        <div style="text-align: center;" class="card-body">
-          <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-            <div class="star-rate">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-            <p class="product-price">200.000 VNĐ</p>
-            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-        </div>
-      </div>
-  </div>
-
-  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card">
-        <div class="container" style="text-align: center; margin-top: 20px;">
-          <img src="/images/productimages/5cce4eb5d04ae0d9731a9c25b7e83699.jpg" class="card-img" alt="...">
-        </div>
-        <div style="text-align: center;" class="card-body">
-          <h5 class="card-title">SET VÁY BODY CHO BÉ GÁI - MS 201</h5>
-            <div class="star-rate">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <p class="original-price"><strike>1.000.000 VNĐ</strike></p>
-            <p class="product-price">200.000 VNĐ</p>
-            <a style="background-color: #51BCB1; padding: 10px 30px;" class="btn btn-default button-back color-1" href="productdetails.html" role="button">Thêm vào giỏ</a>
-      </div>
-    </div>
-</div>
-</div>
-</div>
-
-<div class="container" style="text-align: center; margin-bottom: 30px;">
-<button id="morebutton-3" style="background-color: #FFEB9B; color: #FF8484;
-font-weight: bold; font-size: 20px;" class="btn btn-lg">XEM THÊM</button>
 </div>
 
 <% include ../partials/footer %>
