@@ -1,6 +1,9 @@
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
+const async = require('async');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 const User = require('../models/user.model');
 const Order = require('../models/order.model');
@@ -199,3 +202,165 @@ module.exports.account = (req, res) => {
     })
    
 }
+
+//GET forgotPass
+module.exports.forgotPass = (req, res) => {
+    var email = "";
+
+    res.render('users/forgot_pass', {
+        headTitle: "Quên mật khẩu",
+        email: email
+    })
+}
+
+//POST forgotPass
+module.exports.forgotPassPost = async (req, res) => {
+    var email = req.body.email;
+
+    req.checkBody('email', 'Vui lòng nhập email').isEmail();
+
+    let errors = req.validationErrors();
+
+    if(errors) {
+        res.render('users/forgot_pass', {
+            headTitle: "Quên mật khẩu",
+            email: email
+        });
+    } else {
+        async.waterfall([
+            function(done){
+              crypto.randomBytes(3, (err, buf) => {
+                  if (err) throw err;
+                  const token = buf.toString('hex');
+                  done(err, token)
+              });
+            },
+        
+            function(token, done){
+              User.findOne({email: email}, function(err, user){
+                  console.log(user);
+                  if(!user){
+                   req.flash('danger', 'Tài khoản không tồn tại');
+                   res.render('users/forgot_pass', {
+                        headTitle: "Quên mật khẩu",
+                        email: email,
+                        user: null
+                   });
+                  } else {
+                    user.resetToken = token;
+                    user.resetTokenExpires = Date.now() + 360000 //1 hour
+          
+                    user.save(function (err){
+                      done(err, token, user)
+                    });
+                  }         
+              });
+            },
+        
+            function(token, user, done){
+              const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                  user: process.env.GMAIL_USER,
+                  pass: process.env.GMAIL_PASSWORD,
+                }
+              });
+        
+              const mailOptions = {
+                from: 'vdt040499@gmail.com',
+                to: user.email,
+                subject: 'Xác nhận quên mật khẩu',
+                text: 'Dùng mã này để đổi mật khẩu: ' + token
+              };
+        
+              transporter.sendMail(mailOptions, function(err, data){
+                  if(err){
+                    console.log('Error occurs: %s', err);
+                  }else{
+                    req.flash('success', 'Đã gửi mã xác nhận đến email ' + user.email + '. Vui lòng kiểm tra email của bạn');
+                    return res.render('users/reset_pass',{
+                        headTitle: "Đặt lại mật khẩu",
+                        verify: "",
+                        username: user.username,
+                        user: null
+                    });
+                  }
+              });
+            }
+        ]);
+    }
+}
+
+//POST resetpass
+module.exports.resetPassPost = (req, res) => {
+    let newPass = req.body.newPass;
+    let reenterNewPass = req.body.reenterNewPass;
+    let verify = req.body.verify;
+    let username = req.body.username;
+
+    console.log(username);
+
+    req.checkBody('newPass', 'Vui lòng nhập mật khẩu').notEmpty();
+    req.checkBody('reenterNewPass', 'Vui lòng nhập lại mật khẩu xác nhận').equals(newPass);
+
+    var errors = req.validationErrors();
+
+    if(errors) {
+        res.render('users/reset_pass', {
+            headTitle: "Đặt lại mật khẩu",
+            verify: verify,
+            username: username, 
+            errors: errors,
+            user: null
+        })
+    } else {
+
+        User.findOne({ username: username }).then((user) => {
+            if (user.resetToken === undefined || user.resetTokenExpires === undefined) {
+                req.flash('danger', 'Bạn chưa gửi yêu cầu xác nhận đặt lại mật khẩu')
+                res.render('users/reset_pass', {
+                    headTitle: "Đặt lại mật khẩu",
+                    verify: verify,
+                    username: username,
+                    user: null
+            });
+            } else {
+            if (Date.now > user.resetTokenExpires) {
+                user.resetToken = undefined;
+                user.resetTokenExpires = undefined;
+                user.save();
+                req.flash('danger', 'Xin lỗi! Mã xác nhận của bạn không còn hiệu lực')
+                res.redirect('/users/forgot-pass');
+            } else {
+                if (newPass === reenterNewPass) {
+                if (req.body.verify === user.resetToken) {
+                    user.password = bcrypt.hashSync(newPass, 10);
+                    user.resetToken = undefined;
+                    user.resetTokenExpires = undefined;
+                    user.save();
+                    req.flash('success', 'Đổi mật khẩu thành công');
+                    res.redirect('/users/signin');
+                } else {
+                    req.flash('danger', 'Mã xác nhận không đúng');
+                    res.render('users/reset_pass', {
+                        headTitle: "Đặt lại mật khẩu",
+                        verify: verify,
+                        username: username,
+                        user: null
+                    });
+                }
+                } else {
+                    req.flash('danger', 'Mật khẩu không khớp');
+                    res.render('users/reset_pass', {
+                        headTitle: "Đặt lại mật khẩu",
+                        verify: verify,
+                        username: username,
+                        user: null
+                    });
+                }
+            }
+            }
+        });
+    }
+}
+

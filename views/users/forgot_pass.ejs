@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div class="container" style="margin-bottom: 40px; margin-top: 40px;">
+    <div class="col-md">
+        <div class="row justify-content-center">
+            <div class="signinform">
+                <p style="text-align: center; color: rgb(117, 228, 222); font-size: 30px; font-weight: bold;">QUÊN MẬT KHẨU</p>
+                <form action="/users/forgot-pass" method="POST">
+                    <div class="row mt-2 mx-2">
+                        <label class="col-md-2 col-form-label" for="reg-email">Email</label>
+                        <div class="col-md-10">
+                            <input style="border: none; outline: none;
+                            background: transparent; border-bottom: 1px solid black;" type="email" name="email" class="form-control" id="reg-email" value="<%= email %>" required>
+                        </div>
+                    </div>
+                    <div class="container" style="text-align: center; margin-top: 20px;">
+                        <button type="submit" class="btn btn-md button-back color-9" style="color: white; font-weight: bold; padding: 5px 30px;">XÁC NHẬN</button>
+                    </div>
+                </form>
+                <div class="container" style="text-align: center; margin-top: 10px;">
+                    <p style="margin-bottom: 0px; font-size: 14px;">Bạn chưa có tài khoản?</p>
+                    <a href="/users/signup" style="color: #EC636D;">Bấm vào đây để đăng ký ngay!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
