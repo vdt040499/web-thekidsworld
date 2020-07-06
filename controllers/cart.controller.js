@@ -12,6 +12,7 @@ module.exports.addToCart = (req, res) => {
             if (typeof req.session.cart == "undefined") {
                 req.session.cart = [];
                 req.session.cart.push({
+                    _id: p._id,
                     title: slug,
                     category: p.category,
                     qty: 1,

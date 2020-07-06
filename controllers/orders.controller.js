@@ -158,8 +158,7 @@ module.exports.orderPost = (req, res) => {
                                                     error: err
                                                 });
                                               }else{
-                                                req.flash('success', 'Cảm ơn bạn đã mua hàng của chúng tôi');
-                                                res.redirect('/');
+                                                res.redirect('/orders/thankyou');
                                               }
                                           });
                                         }
@@ -228,8 +227,7 @@ module.exports.orderPost = (req, res) => {
                                     error: err
                                 });
                               }else{
-                                req.flash('success', 'Cảm ơn bạn đã mua hàng của chúng tôi');
-                                res.redirect('/');
+                                res.redirect('/orders/thankyou');
                               }
                           });
                         }
@@ -410,3 +408,10 @@ module.exports.getDetailOrder = (req, res) => {
         });
     });
 }
+
+//GET thankyou
+module.exports.thankYou = (req, res) => {
+    res.render('thankyou', {
+      headTitle: "Cảm ơn"
+    });
+};

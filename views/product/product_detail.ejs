@@ -299,8 +299,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <input type="hidden" id="rating-value" name="ratingValue">
+        </div>        
     </form>
 </div>
 
@@ -314,6 +313,10 @@
     <p
         style="margin: 0px 0px 10px 0px; font-size: x-large; color:#51BCB1; padding-bottom: 10px; text-transform: uppercase;">
         NHẬN XÉT CỦA KHÁCH HÀNG </p>
+
+        <div id="ratinglist">
+
+        </div>
    
         <% ratings.forEach((rate) => { %>
             <% var user = JSON.parse(rate.rateBy); %>
@@ -341,12 +344,49 @@
             </div>
         <% }); %>      
 </div>
+<input type="hidden" id="ratings" value="<%= ratings %>">
 <script>
     const starsTotal = 5;
 
     document.addEventListener('DOMContentLoaded', getRatings);
 
     function getRatings() {
+
+        // let ratings = document.getElementById("ratings").value;
+
+        // ratings.inner
+
+        // ratings.map((rate) => {
+        //     return `<% ratings.forEach((rate) => { %>
+        //     <% var user = JSON.parse(rate.rateBy); %>
+        //     <% var rateDate = rate.date.getDate() + "/" + (rate.date.getMonth()+1)  + "/" + rate.date.getFullYear() + " " + rate.date.getHours() + ":" + rate.date.getMinutes(); %>
+        //     <div class="row">
+        //         <div class="col-md-1 col-md-1 col-sm-1" style="text-align: center; align-self: center; padding: 0px;">
+        //             <div class="avatar">
+        //                 <img src="/images/heart.png" alt="" class="img-fluid" width="70px">
+        //             </div>
+        //         </div>
+        //         <div class="col-md-11 col-lg-11 col-sm-11">
+        //             <div class="star-rate">
+        //                 <span class="fa fa-star checked"></span>
+        //                 <span class="fa fa-star checked"></span>
+        //                 <span class="fa fa-star checked"></span>
+        //                 <span class="fa fa-star"></span>
+        //                 <span class="fa fa-star"></span>
+        //             </div>
+        //             <blockquote class="blockquote">
+        //                 <p class="mb-0"><%= rate.comment %>
+        //                 </p>
+        //                 <footer class="blockquote-footer"><strong><%= user.username %></strong><cite title="Source Title">  <%= rateDate %></cite></footer>
+        //             </blockquote>
+        //         </div>
+        //     </div>
+        // <% }); %>`
+        // });
+
+        // ratings.join("");
+
+        // document.getElementById("ratinglist").innerHTML = ratings;
 
         let rating = parseFloat(document.getElementById("number-rating").textContent);
         

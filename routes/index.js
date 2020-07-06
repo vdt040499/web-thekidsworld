@@ -63,6 +63,13 @@ router.get('/sales', (req, res) => {
   });
 });
 
+//GET thankyou
+router.get('/thankyou', (req, res) => {
+  res.render('thankyou', {
+    headTitle: "Cảm ơn"
+  });
+})
+
 //Login with google
 //Login with google
 router.get('/auth/gg', passport.authenticate('google',{scope: ['profile', 'email']}));
