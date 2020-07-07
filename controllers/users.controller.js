@@ -318,24 +318,48 @@ module.exports.editUser = async(req, res) => {
     });
 }
 
-//POST edit user infor
+//POST edit address
+module.exports.editAddressPost = async(req, res) => {
+    let tempUser = req.user;
+    let province = req.body.province;
+    let district = req.body.district;
+    let ward = req.body.ward;
+    let address = req.body.address;
+
+    req.checkBody('province', 'Vui lòng chọn tỉnh/thành phố').notEmpty();
+    req.checkBody('district', 'Vui lòng chn quận/huyện').notEmpty();
+    req.checkBody('ward', 'Vui lòng nhập phường/xã').notEmpty();
+    req.checkBody('address', 'Vui lòng nhập địa chỉ cụ thể').notEmpty();
+
+    let errors = req.validationErrors();
+
+    if(errors) {
+        req.flash('danger', 'Có lỗi xảy ra vui lòng nhập lại');
+        res.redirect('/users/account');
+    } else {
+        let user = await User.findOne({username: tempUser.username});
+
+        var address2 = select.address(address, province, district, ward);
+
+        user.address = address2;
+
+        await user.save();
+
+        req.flash('success', 'Cập nhật thành công');
+        res.redirect('/users/account');
+    }
+}
+
+//POST edit user info
 module.exports.editUserPost = async(req, res) => {
     let oldusername = req.params.oldusername;
     let username = req.body.username;
     let email = req.body.email;
     let phone = req.body.phone;
-    let province = req.body.province;
-    let district = req.body.district;
-    let ward = req.body.ward;
-    let address = req.body.address;
    
     req.checkBody('username', 'Vui lòng nhập tên đăng nhập').notEmpty();
     req.checkBody('email', 'Vui lòng nhập email').isEmail();
     req.checkBody('phone', 'Vui lòng nhập số điện thoại').notEmpty();
-    req.checkBody('province', 'Vui lòng chọn tỉnh/thành phố').notEmpty();
-    req.checkBody('district', 'Vui lòng chn quận/huyện').notEmpty();
-    req.checkBody('ward', 'Vui lòng nhập phường/xã').notEmpty();
-    req.checkBody('address', 'Vui lòng nhập địa chỉ cụ thể').notEmpty();
 
     let errors = req.validationErrors();
 
@@ -365,6 +389,14 @@ module.exports.editUserPost = async(req, res) => {
             user.email = email;
             user.phone = phone;
             
+            var address2 = select.address(address, province, district, ward);
+
+            user.address = address2;
+
+            await user.save();
+
+            req.flash('success', 'Cập nhật thành công');
+            res.redirect('/account');
         }
     }
 }

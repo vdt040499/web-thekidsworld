@@ -5,6 +5,7 @@ const isUser = auth.isUser;
 
 const usersController = require('../controllers/users.controller');
 
+router.post('/editaddress', usersController.editAddressPost);
 router.get('/signup', usersController.signup);
 router.post('/signup', usersController.signupPost);
 router.get('/signin', usersController.signin);

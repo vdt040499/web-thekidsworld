@@ -11,27 +11,78 @@
 <div class="container d-flex justify-content-center" style="margin-top: 20px; margin-bottom: 20px;">
     <div class="row h-100" style="width: 1000px">
         <div class="col-md-12 h-100">
+            <form action="/users/editaddress" method="POST">
             <div class="infocard">
                 <p style="text-align: center;color:#5CA2A8; font-weight: bold;">THÔNG TIN NGƯỜI DÙNG</p>
                 <div class="d-flex">
-                    <div class="col-md-2" style="color: #5CA2A8; margin: 0px 20px;">
+                    <div class="col-md-1" style="color: #5CA2A8; margin: 0px 20px;">
                         <p style="margin-bottom: 0;">Username:</p>
                         <p style="font-weight: bold;"><%= user.username %></p>
                         <p style="margin-bottom: 0;">Password: </p>
                         <p style="font-weight: bold;">********</p>
                     </div>
-                    <div class="col-md-10" style="color: #5CA2A8; margin: 0px 20px;">
+                    <div class="col-md-5" style="color: #5CA2A8; margin: 0px 0px;">
                         <p style="margin-bottom: 0;">Số điện thoại :</p>
                         <p style="font-weight: bold;"><%= user.phone %></p>
                         <p style="margin-bottom: 0;">Địa chỉ: </p>
                         <p style="font-weight: bold;"><%= user.address %></p>
                     </div>
+                    <div class="col-md-6" style="color: #5CA2A8; margin: 0px 0px; padding: 0 20px 0 0;">
+                        <div class="ml-5">
+                            <div class="row mt-2 mx-2">
+                                <label class="col-sm-3 col-form-label mr-3" for="address">Tỉnh/TP:</label>
+                                <div class="col-sm-5">
+                                    <select name="province" id="province_select" class="form-control" style="border: none; outline: none;
+                                    background: transparent; border-bottom: 1px solid black;">
+      
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-2 mx-2">
+                                <label class="col-sm-3 col-form-label mr-3" for="address">Quận/Huyện:</label>
+                                <div class="col-sm-5">
+                                    <select name="district" id="district_select"  class="form-control" style="border: none; outline: none;
+                                    background: transparent; border-bottom: 1px solid black;">
+      
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-2 mx-2">
+                                <label class="col-sm-3 col-form-label mr-3" for="address">Phường/Xã:</label>
+                                <div class="col-sm-5">
+                                    <select name="ward" id="ward_select"  class="form-control" style="border: none; outline: none;
+                                    background: transparent; border-bottom: 1px solid black;">
+      
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-2 mx-2">
+                                <label class="col-sm-3 col-form-label mr-3" for="phone">Số nhà, đường</label>
+                                <div class="col-sm-7">
+                                    <input style="border: none; outline: none;
+                                        background: transparent; border-bottom: 1px solid black;" type="text"
+                                        class="form-control" name="address" id="address" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="container" style="text-align: center; padding-bottom: 10px; width: 350px;">
-                    <a href="/users/edituser/<%= user.username %>" type="button" class="btn btn-md btn-block" style="background-color: #51BCB1; color: white; font-weight: bold;">
-                        Chỉnh sửa thông tin</a>
-                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="container" style="text-align: center; padding-bottom: 10px; width: 350px;">
+                            <a href="/users/edituser/<%= user.username %>" type="button" class="btn btn-md btn-block" style="background-color: #51BCB1; color: white; font-weight: bold;">
+                                Chỉnh sửa thông tin</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container" style="text-align: center; padding-bottom: 10px; width: 200px;">
+                            <button type="submit" class="btn btn-md btn-block" style="background-color: #51BCB1; color: white; font-weight: bold;">
+                                Chỉnh sửa địa chỉ</button>
+                        </div>
+                    </div>
+                </div>         
             </div>
+            </form>
         </div>
     </div>
 </div>
