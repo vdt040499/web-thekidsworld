@@ -359,6 +359,11 @@ module.exports.editUserPost = async(req, res) => {
                 phone: phone
             })
         } else {
+            let user = await User.findOne({username: oldusername});
+
+            user.username = username;
+            user.email = email;
+            user.phone = phone;
             
         }
     }
