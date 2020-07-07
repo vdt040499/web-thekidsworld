@@ -42,7 +42,7 @@
             <td><%= product.sale %>
             <td><%= product.salePrice %></td>
             <td><%= product.category %></td>
-            <td><%= product.ratingAverage %></td>
+            <td><%= product.ratingAverage.toFixed(2) %></td>
             <td><%= product.totalQuantity %></td>
             <td><%= product.sold %></td>
             <td><a class="btn btn-md button" href="/admin/products/edit-product/<%= product._id %>">Edit</a></>
