@@ -8,43 +8,27 @@
     <img src="/images/useravatar.png" alt="">
 </div>
 
-<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
-    <div class="row h-100">
-        <div class="col-md-6 h-100">
+<div class="container d-flex justify-content-center" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class="row h-100" style="width: 1000px">
+        <div class="col-md-12 h-100">
             <div class="infocard">
                 <p style="text-align: center;color:#5CA2A8; font-weight: bold;">THÔNG TIN NGƯỜI DÙNG</p>
-                <div class="col-md" style="color: #5CA2A8; margin: 0px 20px;">
-                    <p style="margin-bottom: 0;">Username:</p>
-                    <p style="font-weight: bold;"><%= user.username %></p>
-                    <p style="margin-bottom: 0;">Password: </p>
-                    <p style="font-weight: bold;">********</p>
-                    <p style="margin-bottom: 0;">Email :</p>
-                    <p style="font-weight: bold;"><%= user.email %></p>
-                    <p style="margin-bottom: 0;">Số điện thoại :</p>
-                    <p style="font-weight: bold;"><%= user.phone %></p>    
+                <div class="d-flex">
+                    <div class="col-md-2" style="color: #5CA2A8; margin: 0px 20px;">
+                        <p style="margin-bottom: 0;">Username:</p>
+                        <p style="font-weight: bold;"><%= user.username %></p>
+                        <p style="margin-bottom: 0;">Password: </p>
+                        <p style="font-weight: bold;">********</p>
+                    </div>
+                    <div class="col-md-10" style="color: #5CA2A8; margin: 0px 20px;">
+                        <p style="margin-bottom: 0;">Số điện thoại :</p>
+                        <p style="font-weight: bold;"><%= user.phone %></p>
+                        <p style="margin-bottom: 0;">Địa chỉ: </p>
+                        <p style="font-weight: bold;"><%= user.address %></p>
+                    </div>
                 </div>
-                <div class="container" style="text-align: center; padding-bottom: 10px;">
-                    <a href="#" type="button" class="btn btn-md btn-block" style="background-color: #51BCB1; color: white; font-weight: bold;">
-                        Chỉnh sửa thông tin</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 h-100">
-            <div class="infocard">
-                <p style="text-align: center; color:#5CA2A8; font-weight: bold;">THÔNG TIN GIAO HÀNG</p>
-                <div class="col-md" style="color: #5CA2A8; margin: 0px 20px;">
-                    <p style="margin-bottom: 0;">Tên người nhận:</p>
-                    <p style="font-weight: bold;"><%= receiver.username %></p>
-                    <p style="margin-bottom: 0;">Địa chỉ: </p>
-                    <p style="font-weight: bold;"><%= receiver.address %></p>
-                    <p style="margin-bottom: 0;">Email xác nhận:</p>
-                    <p style="font-weight: bold;"><%= receiver.email %></p>
-                    <p style="margin-bottom: 0;">Số điện thoại :</p>
-                    <p style="font-weight: bold;"><%= receiver.phone %></p>
-                </div>
-                <div class="container" style="text-align: center; padding-bottom: 10px;">
-                    <a href="#" type="button" class="btn btn-md btn-block" style="background-color: #51BCB1; color: white; font-weight: bold;">
+                <div class="container" style="text-align: center; padding-bottom: 10px; width: 350px;">
+                    <a href="/users/edituser/<%= user.username %>" type="button" class="btn btn-md btn-block" style="background-color: #51BCB1; color: white; font-weight: bold;">
                         Chỉnh sửa thông tin</a>
                 </div>
             </div>

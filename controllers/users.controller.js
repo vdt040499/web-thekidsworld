@@ -5,6 +5,8 @@ const async = require('async');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
+const select = require('../config/select_address');
+
 const User = require('../models/user.model');
 const Order = require('../models/order.model');
 
@@ -293,6 +295,43 @@ module.exports.forgotPassPost = async (req, res) => {
             }
         ]);
     }
+}
+
+//GET edit user info
+module.exports.editUser = async(req, res) => {
+
+    let slug  = req.params.user;
+
+    let user = await User.findOne({username: slug});
+
+    let username = user.username;
+    let email = user.email;
+    let phone = user.phone;
+    let address = user.address;
+
+    let values = select.revert(address);
+
+    console.log(values[0]);
+    console.log(values[1]);
+    console.log(values[2]);
+    console.log(values[3]);
+
+    let province = values[0];
+    let district = values[1];
+    let ward = values[2];
+    address = values[3];
+
+
+    res.render('users/edit_user', {
+        headTitle: "Thay đổi thông tin người dùng",
+        username: username,
+        email: email,
+        phone: phone,
+        province: parseInt(province),
+        district: parseInt(district),
+        ward: parseInt(ward),
+        address: address
+    });
 }
 
 //POST resetpass

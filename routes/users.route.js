@@ -13,6 +13,7 @@ router.get('/logout', usersController.logout);
 router.get('/forgot-pass', usersController.forgotPass);
 router.post('/forgot-pass', usersController.forgotPassPost);
 router.post('/reset-pass', usersController.resetPassPost);
+router.get('/edituser/:user', usersController.editUser);
 router.get('/account', isUser, usersController.account);
 
 module.exports = router;
