@@ -4,7 +4,7 @@
     <div class="row justify-content-center mb-3">
         <div class="editinfo" style="width: 700px;">
             <p style="text-align: center;color:#5CA2A8; font-weight: bold;">THÔNG TIN NGƯỜI DÙNG</p>
-            <form>
+            <form action="/users/edituser" method="POST">
               <div style="color: #5CA2A8; margin: 0px 20px;">
                   <p style="margin-bottom: 0;">Username:</p>
                   <input style="margin-bottom: 10px;" type="text" name="username" class="form-control" id="username" value="<%= username %>" required>
@@ -15,165 +15,14 @@
                   <input style="margin-bottom: 10px;" type="email" name="email" class="form-control" id="email" value="<%= email %>" required>
                   <p style="margin-bottom: 0;">Số điện thoại :</p>
                   <input style="margin-bottom: 10px;" type="tel" name="phone" class="form-control" id="phone" value="<%= phone %>" required>
-                  <label class="col-sm-3 col-form-label" for="address">Địa chỉ:</label>
-                  <input style="margin-bottom: 10px;" type="tel" name="oldaddress" class="form-control" id="oldaddress" value="<%= oldaddress %>" disabled>
-                
-                  <div class="ml-5">
-                      <div class="row mt-2 mx-2">
-                          <label class="col-sm-3 col-form-label" for="address">Tỉnh/TP:</label>
-                          <div class="col-sm-5">
-                              <select name="province" id="province_select" class="form-control" style="border: none; outline: none;
-                              background: transparent; border-bottom: 1px solid black;">
-
-                              </select>
-                          </div>
-                      </div>
-                      <div class="row mt-2 mx-2">
-                          <label class="col-sm-3 col-form-label" for="address">Quận/Huyện:</label>
-                          <div class="col-sm-5">
-                              <select name="district" id="district_select"  class="form-control" style="border: none; outline: none;
-                              background: transparent; border-bottom: 1px solid black;">
-
-                              </select>
-                          </div>
-                      </div>
-                      <div class="row mt-2 mx-2">
-                          <label class="col-sm-3 col-form-label" for="address">Phường/Xã:</label>
-                          <div class="col-sm-5">
-                              <select name="ward" id="ward_select"  class="form-control" style="border: none; outline: none;
-                              background: transparent; border-bottom: 1px solid black;">
-
-                              </select>
-                          </div>
-                      </div>
-                      <div class="row mt-2 mx-2">
-                          <label class="col-sm-3 col-form-label" for="phone">Số nhà, đường</label>
-                          <div class="col-sm-9">
-                              <input style="border: none; outline: none;
-                                  background: transparent; border-bottom: 1px solid black;" type="text"
-                                  class="form-control" name="address" id="address" value="">
-                          </div>
-                      </div>
-                  </div>
                   <div class="container mt-2" style="text-align: center;">
-                      <a href="#" type="submit" class="btn btn-md button-back color-1" style=" color: white; font-weight: bold; padding: 5px 20px;">
-                          XÁC NHẬN</a>
+                      <button type="submit" class="btn btn-md button-back color-1" style=" color: white; font-weight: bold; padding: 5px 20px;">
+                          XÁC NHẬN</button>
                   </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script>
-    (function () {
-    var file = "/files/Province.txt";
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-      if (rawFile.readyState === 4) {
-        if (rawFile.status === 200 || rawFile.status == 0) {
-          var allText = rawFile.responseText;
-  
-          var pros = JSON.parse(allText);
-
-          console.log(pros);
-
-          var provinces = pros.map((pro) => {
-            console.log(pro.id);
-                return `<option value="${pro.id}">${pro.name}</option>`;
-          });
-  
-          console.log(provinces);
-  
-          document.getElementById("province_select").innerHTML = provinces.join(
-            ""
-          );
-  
-          var proSelect = document.getElementById("province_select");
-  
-          proSelect.addEventListener("change", () => {
-            var selectedProvince = parseInt(proSelect.value);
-  
-            var file = "/files/District.txt";
-            var rawFile = new XMLHttpRequest();
-            rawFile.open("GET", file, false);
-            rawFile.onreadystatechange = function () {
-              if (rawFile.readyState === 4) {
-                if (rawFile.status === 200 || rawFile.status == 0) {
-                  var allText = rawFile.responseText;
-  
-                  var dicts = JSON.parse(allText);
-  
-                  console.log(dicts);
-                  console.log(selectedProvince);
-  
-                  var filteredDistricts = dicts.filter(
-                    (dict) => dict.subid === selectedProvince
-                  );
-  
-                  console.log(filteredDistricts);
-  
-                  var districts = filteredDistricts.map((dict) => {
-                      console.log(dict.id);
-                      return `<option value="${dict.id}">${dict.name}</option>`;
-                  });
-  
-                  console.log(districts);
-  
-                  document.getElementById(
-                    "district_select"
-                  ).innerHTML = districts.join("");
-  
-                  var dictSelect = document.getElementById("district_select");
-  
-                  dictSelect.addEventListener("change", () => {
-                    var selectedDistrict = parseInt(dictSelect.value);
-  
-                    var file = "/files/Ward.txt";
-                    var rawFile = new XMLHttpRequest();
-                    rawFile.open("GET", file, false);
-                    rawFile.onreadystatechange = function () {
-                      if (rawFile.readyState === 4) {
-                        if (rawFile.status === 200 || rawFile.status == 0) {
-                          var allText = rawFile.responseText;
-  
-                          var wards = JSON.parse(allText);
-  
-                          var filteredWards = wards.filter(
-                            (ward) => ward.subid === selectedDistrict
-                          );
-  
-                          var wards2 = filteredWards.map((ward) => {
-                              return `<option value="${ward.id}">${ward.name}</option>`;
-                          });
-  
-                          console.log(wards2);
-  
-                          document.getElementById(
-                            "ward_select"
-                          ).innerHTML = wards2.join("");
-                        }
-                      }
-                    };
-                    rawFile.send(null);
-                  });
-                }
-              }
-            };
-            rawFile.send(null);
-          });
-        }
-      }
-    };
-    rawFile.send(null);
-    // var data = JSON.stringreadTextFile('/javascripts/Province.txt');
-  
-    //     var blogs = blogPosts.map(blog => {
-    //   return `<article><h2>${blog.title}</h2><p>${blog.body}</p></article>`
-    // });
-  
-    //   document.getElementById('output').innerHTML = blogs.join('');
-  })();
-</script>
 
 <% include ../partials/footer %>

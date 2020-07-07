@@ -352,10 +352,11 @@ module.exports.editAddressPost = async(req, res) => {
 
 //POST edit user info
 module.exports.editUserPost = async(req, res) => {
-    let oldusername = req.params.oldusername;
     let username = req.body.username;
     let email = req.body.email;
     let phone = req.body.phone;
+    let user = req.user;
+    console.log(user);
    
     req.checkBody('username', 'Vui lòng nhập tên đăng nhập').notEmpty();
     req.checkBody('email', 'Vui lòng nhập email').isEmail();
@@ -372,7 +373,7 @@ module.exports.editUserPost = async(req, res) => {
             errors: errors
         })
     } else {
-        const existUser = await User.findOne({username: username});
+        const existUser = await User.findOne({username: username, _id: {'$ne': user._id}});
 
         if (existUser) {
             req.flash('danger', 'Tên đăng nhập đã tồn tại');
@@ -380,23 +381,20 @@ module.exports.editUserPost = async(req, res) => {
                 headTitle: "Thay đổi thông tin",
                 username: username,
                 email: email,
-                phone: phone
+                phone: phone,
+                user: req.user
             })
         } else {
-            let user = await User.findOne({username: oldusername});
+            let user2 = await User.findById(user._id);
 
-            user.username = username;
-            user.email = email;
-            user.phone = phone;
-            
-            var address2 = select.address(address, province, district, ward);
+            user2.username = username;
+            user2.email = email;
+            user2.phone = phone;
 
-            user.address = address2;
-
-            await user.save();
+            await user2.save();
 
             req.flash('success', 'Cập nhật thành công');
-            res.redirect('/account');
+            res.redirect('/users/account');
         }
     }
 }
