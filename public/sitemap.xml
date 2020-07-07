@@ -1,123 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+-<urlset xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
-<url>
-  <loc>https://thekidsworld.herokuapp.com/</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/be-gai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/quan-ao-be-gai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/giay-dep-be-gai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/phu-kien-be-gai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/do-choi-be-gai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/be-trai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/quan-ao-be-trai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/giay-dep-be-trai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/phu-kien-be-trai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/do-choi-be-trai</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/sua</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/ta</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/thuc-pham</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/do-trang-tri</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/sales</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/aboutus</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/cart/cart</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/users/signup</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/users/signin</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/orders/checkorder</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/best-sellers</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://thekidsworld.herokuapp.com/products/quan-ao-be-trai/%C3%A1o-thun-banglades-1090</loc>
-  <lastmod>2020-07-07T06:35:29+00:00</lastmod>
-  <priority>0.80</priority>
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>1.00</priority>
+
 </url>
 
+
++<url>
+
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com/products/be-gai</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>0.80</priority>
+
+</url>
+
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com/products/quan-ao-be-gai</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>0.80</priority>
+
+</url>
+
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com/products/be-trai</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>0.80</priority>
+
+</url>
+
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com/products/quan-ao-be-trai</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>0.80</priority>
+
+</url>
+
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com/sales</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>0.80</priority>
+
+</url>
+
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com/users/signin</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>0.80</priority>
+
+</url>
+
+
+-<url>
+
+<loc>https://thekidsworld.herokuapp.com/products/best-sellers</loc>
+
+<lastmod>2020-06-30T03:46:09+00:00</lastmod>
+
+<priority>0.80</priority>
+
+</url>
 
 </urlset>
