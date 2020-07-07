@@ -307,30 +307,14 @@ module.exports.editUser = async(req, res) => {
     let username = user.username;
     let email = user.email;
     let phone = user.phone;
-    let address = user.address;
-
-    let values = select.revert(address);
-
-    console.log(values[0]);
-    console.log(values[1]);
-    console.log(values[2]);
-    console.log(values[3]);
-
-    let province = values[0];
-    let district = values[1];
-    let ward = values[2];
-    address = values[3];
-
+    let oldaddress = user.address;
 
     res.render('users/edit_user', {
         headTitle: "Thay đổi thông tin người dùng",
         username: username,
         email: email,
         phone: phone,
-        province: parseInt(province),
-        district: parseInt(district),
-        ward: parseInt(ward),
-        address: address
+        oldaddress: oldaddress
     });
 }
 
