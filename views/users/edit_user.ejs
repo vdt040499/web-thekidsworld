@@ -4,61 +4,62 @@
     <div class="row justify-content-center mb-3">
         <div class="editinfo" style="width: 700px;">
             <p style="text-align: center;color:#5CA2A8; font-weight: bold;">THÔNG TIN NGƯỜI DÙNG</p>
-            <div style="color: #5CA2A8; margin: 0px 20px;">
-                <p style="margin-bottom: 0;">Username:</p>
-                <input style="margin-bottom: 10px;" type="text" name="username" class="form-control" id="username" value="jennylin2205" required>
-                <p style="margin-bottom: 0;">Password: </p>
-                <a href="changepass.html" type="button" class="btn btn-md button-back color-1" style="color: white; font-weight: bold;padding: 5px 20px;">
-                    Thay đổi password</a>
-                <p style="margin-bottom: 0; margin-top: 10px;">Email :</p>
-                <input style="margin-bottom: 10px;" type="email" name="reg-email" class="form-control" id="reg-email" value="17520811@gm.uit.edu.vn" required>
-                <p style="margin-bottom: 0;">Số điện thoại :</p>
-                <input style="margin-bottom: 10px;" type="tel" name="reg-email" class="form-control" id="reg-email" value="0909090909" required>
-                <label class="col-sm-3 col-form-label" for="address">Địa chỉ:</label>
-                <input style="margin-bottom: 10px;" type="tel" name="oldaddress" class="form-control" id="oldaddress" value="<%= oldaddress %>" disabled>
-                <div class="row">
-                </div>
-                <div class="ml-5">
-                    <div class="row mt-2 mx-2">
-                        <label class="col-sm-3 col-form-label" for="address">Tỉnh/TP:</label>
-                        <div class="col-sm-5">
-                            <select name="province" id="province_select" class="form-control" style="border: none; outline: none;
-                            background: transparent; border-bottom: 1px solid black;">
+            <form>
+              <div style="color: #5CA2A8; margin: 0px 20px;">
+                  <p style="margin-bottom: 0;">Username:</p>
+                  <input style="margin-bottom: 10px;" type="text" name="username" class="form-control" id="username" value="<%= username %>" required>
+                  <p style="margin-bottom: 0;">Password: </p>
+                  <a href="changepass.html" type="button" class="btn btn-md button-back color-1" style="color: white; font-weight: bold;padding: 5px 20px;">
+                      Thay đổi password</a>
+                  <p style="margin-bottom: 0; margin-top: 10px;">Email :</p>
+                  <input style="margin-bottom: 10px;" type="email" name="email" class="form-control" id="email" value="<%= email %>" required>
+                  <p style="margin-bottom: 0;">Số điện thoại :</p>
+                  <input style="margin-bottom: 10px;" type="tel" name="phone" class="form-control" id="phone" value="<%= phone %>" required>
+                  <label class="col-sm-3 col-form-label" for="address">Địa chỉ:</label>
+                  <input style="margin-bottom: 10px;" type="tel" name="oldaddress" class="form-control" id="oldaddress" value="<%= oldaddress %>" disabled>
+                
+                  <div class="ml-5">
+                      <div class="row mt-2 mx-2">
+                          <label class="col-sm-3 col-form-label" for="address">Tỉnh/TP:</label>
+                          <div class="col-sm-5">
+                              <select name="province" id="province_select" class="form-control" style="border: none; outline: none;
+                              background: transparent; border-bottom: 1px solid black;">
 
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mt-2 mx-2">
-                        <label class="col-sm-3 col-form-label" for="address">Quận/Huyện:</label>
-                        <div class="col-sm-5">
-                            <select name="district" id="district_select"  class="form-control" style="border: none; outline: none;
-                            background: transparent; border-bottom: 1px solid black;">
+                              </select>
+                          </div>
+                      </div>
+                      <div class="row mt-2 mx-2">
+                          <label class="col-sm-3 col-form-label" for="address">Quận/Huyện:</label>
+                          <div class="col-sm-5">
+                              <select name="district" id="district_select"  class="form-control" style="border: none; outline: none;
+                              background: transparent; border-bottom: 1px solid black;">
 
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mt-2 mx-2">
-                        <label class="col-sm-3 col-form-label" for="address">Phường/Xã:</label>
-                        <div class="col-sm-5">
-                            <select name="ward" id="ward_select"  class="form-control" style="border: none; outline: none;
-                            background: transparent; border-bottom: 1px solid black;">
+                              </select>
+                          </div>
+                      </div>
+                      <div class="row mt-2 mx-2">
+                          <label class="col-sm-3 col-form-label" for="address">Phường/Xã:</label>
+                          <div class="col-sm-5">
+                              <select name="ward" id="ward_select"  class="form-control" style="border: none; outline: none;
+                              background: transparent; border-bottom: 1px solid black;">
 
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mt-2 mx-2">
-                        <label class="col-sm-3 col-form-label" for="phone">Số nhà, đường</label>
-                        <div class="col-sm-9">
-                            <input style="border: none; outline: none;
-                                background: transparent; border-bottom: 1px solid black;" type="text"
-                                class="form-control" name="address" id="address" value="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container mt-2" style="text-align: center;">
-                <a href="#" type="button" class="btn btn-md button-back color-1" style=" color: white; font-weight: bold; padding: 5px 20px;">
-                    XÁC NHẬN</a>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="row mt-2 mx-2">
+                          <label class="col-sm-3 col-form-label" for="phone">Số nhà, đường</label>
+                          <div class="col-sm-9">
+                              <input style="border: none; outline: none;
+                                  background: transparent; border-bottom: 1px solid black;" type="text"
+                                  class="form-control" name="address" id="address" value="">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="container mt-2" style="text-align: center;">
+                      <a href="#" type="submit" class="btn btn-md button-back color-1" style=" color: white; font-weight: bold; padding: 5px 20px;">
+                          XÁC NHẬN</a>
+                  </div>
+                </form>
             </div>
         </div>
     </div>

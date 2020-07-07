@@ -318,6 +318,18 @@ module.exports.editUser = async(req, res) => {
     });
 }
 
+//POST edit user infor
+module.exports.editUserPost = async(req, res) => {
+    let username = req.body.username;
+    let email = req.body.email;
+    let phone = req.body.phone;
+    let province = req.body.province;
+    let district = req.body.district;
+    let ward = req.body.ward;
+    let address = req.body.address;
+   
+}
+
 //POST resetpass
 module.exports.resetPassPost = (req, res) => {
     let newPass = req.body.newPass;
