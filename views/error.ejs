@@ -112,7 +112,7 @@
                 <% } %>
 
                 <div class="dropdown">
-                    <% if (typeof user !== "undefined") { %>
+                    <% if (user) { %>
                     <a href="/users/account" class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" onclick="window.location.href='/users/account'" aria-haspopup="true"
                         aria-expanded="false">
@@ -137,7 +137,7 @@
                     </div>
                     <% } %>
                 </div>
-                <% if (typeof user !== "undefined" && user.admin == 1) { %>
+                <% if (user && user.admin == 1) { %>
                 <li class="nav-item">
                     <a class="btn btn-md button" href="/admin/categories">ADMIN AREA</a>
                 </li>

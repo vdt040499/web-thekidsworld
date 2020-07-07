@@ -110,6 +110,7 @@ module.exports.orderPost = async (req, res) => {
                         Product.findOne({slug: handleCart[i].title}, (err, product) => {
                             product.sold += handleCart[i].qty;
                             product.totalQuantity -= handleCart[i].qty;
+                            product.soldUser.push(user.username);
                             product.save();
                         });
                     }

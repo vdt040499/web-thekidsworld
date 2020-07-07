@@ -145,6 +145,9 @@ module.exports.rating = (req, res) => {
   let ratingValue = parseInt(req.body.ratingValue);
   let comment = req.body.comment;
 
+  console.log(comment);
+  console.log(ratingValue);
+
   req.checkBody("ratingValue", "Bạn chưa chọn sao để đánh giá!").notEmpty();
   req.checkBody("comment", "Bạn chưa điền vào khung bình luận!").notEmpty();
 
@@ -155,6 +158,7 @@ module.exports.rating = (req, res) => {
       if (err) {
         console.log(err);
       } else {
+        req.flash('danger', 'Lỗi')
         res.redirect(`/products/${product.category}/${product.slug}`);
       }
     });

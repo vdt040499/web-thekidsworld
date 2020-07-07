@@ -68,7 +68,7 @@
                             <div class="stars-inner"></div>
                         </div>
                         &nbsp;
-                        <span id="number-rating"><%= p.ratingAverage %></span>
+                        <span id="number-rating"><%= p.ratingAverage.toFixed(2) %></span>
                     </div>
                     <p style="padding-left: 20px;"><%= p.ratingQty %> nhận xét</p>
                 </div>
@@ -299,7 +299,8 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>   
+        <input type="hidden" id="rating-value" name="ratingValue">     
     </form>
 </div>
 
@@ -338,7 +339,12 @@
                     <blockquote class="blockquote">
                         <p class="mb-0"><%= rate.comment %>
                         </p>
-                        <footer class="blockquote-footer"><strong><%= user.username %></strong><cite title="Source Title">  <%= rateDate %></cite></footer>
+                        <% var check = p.soldUser.includes(user.username) %>
+                        <% if (check) { %>
+                            <footer class="blockquote-footer"><strong><%= user.username %></strong><cite title="Source Title">  <%= rateDate %></cite> <span style="color: rgb(19, 175, 45);"><i class="fa fa-check-circle"></i>&nbsp;<i>Đã mua hàng</i></span></footer>
+                        <% } else { %>
+                            <footer class="blockquote-footer"><strong><%= user.username %></strong><cite title="Source Title">  <%= rateDate %></cite></footer>
+                        <% } %>
                     </blockquote>
                 </div>
             </div>
@@ -351,42 +357,6 @@
     document.addEventListener('DOMContentLoaded', getRatings);
 
     function getRatings() {
-
-        // let ratings = document.getElementById("ratings").value;
-
-        // ratings.inner
-
-        // ratings.map((rate) => {
-        //     return `<% ratings.forEach((rate) => { %>
-        //     <% var user = JSON.parse(rate.rateBy); %>
-        //     <% var rateDate = rate.date.getDate() + "/" + (rate.date.getMonth()+1)  + "/" + rate.date.getFullYear() + " " + rate.date.getHours() + ":" + rate.date.getMinutes(); %>
-        //     <div class="row">
-        //         <div class="col-md-1 col-md-1 col-sm-1" style="text-align: center; align-self: center; padding: 0px;">
-        //             <div class="avatar">
-        //                 <img src="/images/heart.png" alt="" class="img-fluid" width="70px">
-        //             </div>
-        //         </div>
-        //         <div class="col-md-11 col-lg-11 col-sm-11">
-        //             <div class="star-rate">
-        //                 <span class="fa fa-star checked"></span>
-        //                 <span class="fa fa-star checked"></span>
-        //                 <span class="fa fa-star checked"></span>
-        //                 <span class="fa fa-star"></span>
-        //                 <span class="fa fa-star"></span>
-        //             </div>
-        //             <blockquote class="blockquote">
-        //                 <p class="mb-0"><%= rate.comment %>
-        //                 </p>
-        //                 <footer class="blockquote-footer"><strong><%= user.username %></strong><cite title="Source Title">  <%= rateDate %></cite></footer>
-        //             </blockquote>
-        //         </div>
-        //     </div>
-        // <% }); %>`
-        // });
-
-        // ratings.join("");
-
-        // document.getElementById("ratinglist").innerHTML = ratings;
 
         let rating = parseFloat(document.getElementById("number-rating").textContent);
         
