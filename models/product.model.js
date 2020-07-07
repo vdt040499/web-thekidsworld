@@ -13,6 +13,9 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    detaildesc: {
+        type: String
+    },
     category: {
         type: String,
         required: true
@@ -47,6 +50,9 @@ const productSchema = mongoose.Schema({
     salePrice: {
         type: Number,
         default: 0
+    },
+    soldUser: {
+        type: Array
     },
     date: {
         type: Date,

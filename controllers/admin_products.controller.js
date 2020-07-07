@@ -30,6 +30,7 @@ module.exports.getProducts = (req, res) => {
 module.exports.addProduct = (req, res) => {
     var name = "";
     var desc = "";
+    var detaildesc = "";
     var price = "";
     var category = "";
     var totalQuantity = 50;
@@ -42,6 +43,7 @@ module.exports.addProduct = (req, res) => {
                 headTitle: 'Thêm sản phẩm',
                 name: name,
                 desc: desc,
+                detaildesc: detaildesc,
                 price: price,
                 category: category,
                 totalQuantity: totalQuantity, 
@@ -70,6 +72,7 @@ module.exports.addProductPost = (req, res) => {
     var name = req.body.name;
     var slug = name.replace(/\s+/g, '-').toLowerCase();
     var desc = req.body.desc;
+    var detaildesc = req.body.detaildesc;
     var price = req.body.price;
     var category = req.body.category;
     var totalQuantity = req.body.totalQuantity;
@@ -83,6 +86,7 @@ module.exports.addProductPost = (req, res) => {
                 errors: errors,
                 name: name,
                 desc: desc,
+                detaildesc: detaildesc,
                 price: price,
                 totalQuantity: totalQuantity,
                 cates: cates
@@ -100,6 +104,7 @@ module.exports.addProductPost = (req, res) => {
                             headTitle: 'Thêm sản phẩm',
                             name: name,
                             desc: desc,
+                            detaildesc: detaildesc,
                             price: price,
                             totalQuantity: totalQuantity,
                             cates: cates
@@ -110,6 +115,7 @@ module.exports.addProductPost = (req, res) => {
                         name: name,
                         slug: slug,
                         desc: desc,
+                        detaildesc: detaildesc,
                         price: parseInt(price),
                         category: category,
                         totalQuantity: totalQuantity,
@@ -181,6 +187,7 @@ module.exports.editProduct = (req, res) => {
                             id: p._id,
                             name: p.name,
                             desc: p.desc,
+                            detaildesc: p.detaildesc,
                             price: parseInt(p.price),
                             sale: parseInt(p.sale),
                             ratingAverage: parseFloat(p.ratingAverage),
@@ -218,6 +225,7 @@ module.exports.editProductPost = (req, res) => {
     var name = req.body.name;
     var slug = name.replace(/\s+/g, '-').toLowerCase();
     var desc = req.body.desc;
+    var detaildesc = req.body.detaildesc;
     var price = req.body.price;
     var sale = req.body.sale;
     var category = req.body.category;
@@ -249,6 +257,7 @@ module.exports.editProductPost = (req, res) => {
                         p.name = name;
                         p.slug = slug;
                         p.desc = desc;
+                        p.detaildesc = detaildesc;
                         p.price = parseInt(price);
                         p.sale = parseInt(sale);
                         p.salePrice = parseInt(p.price - ( sale * p.price / 100));
