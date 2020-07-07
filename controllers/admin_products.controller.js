@@ -5,6 +5,22 @@ const resizeImg = require('resize-img');
 const Product = require('../models/product.model');
 const Category = require('../models/category.model');
 
+function stringToSlug(str) {
+    // remove accents
+    var from = "àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ",
+        to   = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+    for (var i=0, l=from.length ; i < l ; i++) {
+      str = str.replace(RegExp(from[i], "gi"), to[i]);
+    }
+  
+    str = str.toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9\-]/g, '-')
+          .replace(/-+/g, '-');
+  
+    return str;
+}
+
 //GET products index
 module.exports.getProducts = (req, res) => {
     var count;
@@ -70,7 +86,7 @@ module.exports.addProductPost = (req, res) => {
     req.checkBody('image', 'Vui lòng chọn hình sản phẩm').isImage(imageFile);
 
     var name = req.body.name;
-    var slug = name.replace(/\s+/g, '-').toLowerCase();
+    var slug = stringToSlug(name);
     var desc = req.body.desc;
     var detaildesc = req.body.detaildesc;
     var price = req.body.price;
@@ -223,7 +239,7 @@ module.exports.editProductPost = (req, res) => {
     req.checkBody('sold', 'Vui lòng nhập số lượng sản phẩm đã bán').isDecimal();
 
     var name = req.body.name;
-    var slug = name.replace(/\s+/g, '-').toLowerCase();
+    var slug = stringToSlug(name);
     var desc = req.body.desc;
     var detaildesc = req.body.detaildesc;
     var price = req.body.price;
