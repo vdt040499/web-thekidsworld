@@ -119,8 +119,7 @@ module.exports.orderPost = async (req, res) => {
                         ID: makeID,
                         orderBy: user,
                         receiver: receiver,
-                        cart: req.session.cart,
-                        delivery
+                        cart: req.session.cart
                     });
     
                     order.save((err) => {
