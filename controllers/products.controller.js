@@ -200,7 +200,7 @@ module.exports.searchProduct = async (req, res) => {
 
   let matchedProducts = products.filter((product) => {
     let rmName = stringToSlug(product.name.toLowerCase());
-    return rmName.indexOf(query) !== -1;
+    return rmName.indexOf(rmQuery) !== -1;
   });
 
   res.render("product/cat_products", {
