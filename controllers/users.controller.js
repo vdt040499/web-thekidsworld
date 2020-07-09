@@ -9,6 +9,7 @@ const select = require('../config/select_address');
 
 const User = require('../models/user.model');
 const Order = require('../models/order.model');
+const { findOne } = require('../models/user.model');
 
 //GET signup
 module.exports.signup = (req, res) => {
@@ -468,6 +469,68 @@ module.exports.resetPassPost = (req, res) => {
                 }
             }
             }
+        });
+    }
+}
+
+//GET changepass
+module.exports.changePass = (req, res) => {
+    let username = req.params.user;
+    let oldpass = "";
+    let newpass = "";
+    let reenternewpass = "";
+
+    res.render('users/changepass', {
+        headTitle: "Thay đổi mật khẩu",
+        oldpass: oldpass,
+        newpass: newpass,
+        reenternewpass: reenternewpass,
+        username: username
+    });
+}
+
+//POST changepass
+module.exports.changePassPost = async(req, res) => {
+    let username = req.params.user;
+    let oldpass = req.body.oldpass;
+    let newpass = req.body.newpass;
+    let reenternewpass = req.body.reenternewpass;
+
+    const user = await User.findOne({username: username});
+    console.log(username);
+    
+    if(oldpass === newpass) {
+        req.flash('danger', 'Mật khẩu mới và mật khẩu cũ trùng nhau! Hãy chọn mật khẩu khác');
+        res.render('users/changepass', {
+            headTitle: "Thay đổi mật khẩu",
+            username: username,
+            oldpass: oldpass,
+            newpass: newpass,
+            reenternewpass: reenternewpass,
+            user: req.user
+        });
+    } else if(newpass !== reenternewpass) {
+        req.flash('danger', 'Mật khẩu và nhập lại mật khẩu không khớp nhau');
+        res.render('users/changepass', {
+            headTitle: "Thay đổi mật khẩu",
+            username: username,
+            oldpass: oldpass,
+            newpass: newpass,
+            reenternewpass: reenternewpass,
+            user: req.user
+        });
+    } else if (await bcrypt.compare(oldpass, user.password)) {
+        req.flash('success', 'Thay đổi mật khẩu thành công');
+        res.redirect('/users/account');
+    } else {
+        req.flash('danger', 'Mật khẩu cũ không đúng');
+        res.render('users/changepass', {
+            headTitle: "Thay đổi mật khẩu",
+            username: username,
+            oldpass: oldpass,
+            newpass: newpass,
+            reenternewpass: reenternewpass,
+            user: req.user
         });
     }
 }

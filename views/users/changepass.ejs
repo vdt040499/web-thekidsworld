@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<div class="container" style="margin-bottom: 40px; margin-top: 40px;">
+    <div class="col-md">
+        <div class="row justify-content-center">
+            <div class="signinform">
+                <p style="text-align: center; color: rgb(117, 228, 222); font-size: 30px; font-weight: bold;">THAY ĐỔI MẬT KHẨU</p>
+                <form action="/users/changepass/<%= username %>" method="POST">
+                    <div class="row mt-2 mx-2">
+                        <label class="col-md-5 col-form-label" for="newpassword">Password hiện tại:</label>
+                        <div class="col-md-7">
+                            <input style="border: none; outline: none;
+                            background: transparent; border-bottom: 1px solid black;" type="password" name="oldpass" class="form-control" id="password" value="<%= oldpass %>" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2 mx-2">
+                        <label class="col-md-5 col-form-label" for="newpassword">Password mới:</label>
+                        <div class="col-md-7">
+                            <input style="border: none; outline: none;
+                            background: transparent; border-bottom: 1px solid black;" type="password" name="newpass" class="form-control" id="password" value="<%= newpass %>" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2 mx-2">
+                        <label class="col-md-5 col-form-label" for="renewpass">Nhập lại Password</label>
+                        <div class="col-md-7">
+                            <input style="border: none; outline: none;
+                            background: transparent; border-bottom: 1px solid black;" type="password" name="reenternewpass" class="form-control" id="repass" value="<%= reenternewpass %>" required>
+                        </div>
+                    </div>
+                    <div class="container" style="text-align: center; margin-top: 20px;">
+                        <button type="submit" class="btn btn-md button-back color-1" style="color: white; font-weight: bold; padding: 10px 20px;">XÁC NHẬN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
