@@ -263,7 +263,7 @@ module.exports.editProductPost = (req, res) => {
             }
 
             if(p) {
-                res.flash('danger', 'Tên sản phẩm đã tồn tại! Vui lòng nhập tên khác');
+                req.flash('danger', 'Tên sản phẩm đã tồn tại! Vui lòng nhập tên khác');
                 res.redirect('/admin/products/edit-product/' + id);
             } else {
                 Product.findById(id, (err, p) => {
