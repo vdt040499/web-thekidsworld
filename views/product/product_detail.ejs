@@ -70,7 +70,11 @@
                         &nbsp;
                         <span id="number-rating"><%= p.ratingAverage.toFixed(2) %></span>
                     </div>
-                    <p style="padding-left: 20px;"><%= p.ratingQty %> nhận xét</p>
+                </div>
+                <div class="row">
+                    <p><%= p.ratingQty %> nhận xét</p>
+                    <p style="padding-left: 20px;"><%= p.sold %> đã bán</p>
+                    <p style="padding-left: 20px;"><%= p.totalQuantity %> còn lại</p>
                 </div>
             </div>
 
