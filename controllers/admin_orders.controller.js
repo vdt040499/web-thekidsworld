@@ -31,7 +31,8 @@ module.exports.getOrder = (req, res) => {
                 user: req.user,
                 orderCart: cart,
                 status: order.status,
-                date: order.date
+                date: order.date,
+                deliveryDate: order.deliveryDate
             });
         } else {
             
@@ -46,7 +47,8 @@ module.exports.getOrder = (req, res) => {
                 orderOwner: orderOwner,
                 orderCart: cart,
                 status: order.status,
-                date: order.date
+                date: order.date,
+                deliveryDate: order.deliveryDate
             });
         }
     });
@@ -87,7 +89,9 @@ module.exports.changeStatus = (req, res) => {
         }
 
         order.status = changeStatus;
-
+        if (changeStatus === "Completed") {
+            order.deliveryDate = Date.now();
+        }
         order.save((err) => {
             if(err) {
                 console.log(err);

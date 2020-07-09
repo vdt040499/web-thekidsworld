@@ -319,7 +319,8 @@ module.exports.checkOrderPost = (req, res) => {
                                     user: req.user,
                                     orderCart: cart,
                                     status: order.status,
-                                    date: order.date
+                                    date: order.date,
+                                    deliveryDate: order.deliveryDate
                                 });
                             }
                         } else {
@@ -341,7 +342,8 @@ module.exports.checkOrderPost = (req, res) => {
                                     user: req.user,
                                     orderCart: cart,
                                     status: order.status,
-                                    date: order.date
+                                    date: order.date,
+                                    deliveryDate: order.deliveryDate
                                 });
                             }
                         }
@@ -376,7 +378,8 @@ module.exports.checkOrderPost = (req, res) => {
                                     user: null,
                                     orderCart: cart,
                                     status: order.status,
-                                    date: order.date
+                                    date: order.date,
+                                    deliveryDate: order.deliveryDate
                                 });
                             }
                         } else {
@@ -399,7 +402,8 @@ module.exports.checkOrderPost = (req, res) => {
                                     user: null,
                                     orderCart: cart,
                                     status: order.status,
-                                    date: order.date
+                                    date: order.date,
+                                    deliveryDate: order.deliveryDate
                                 });
                             }
                         }
@@ -425,7 +429,8 @@ module.exports.getDetailOrder = (req, res) => {
                 user: req.user,
                 orderCart: cart,
                 status: order.status,
-                date: order.date
+                date: order.date,
+                deliveryDate: order.deliveryDate
             });
         } else {
             res.render('order/order_detail', {
@@ -435,7 +440,8 @@ module.exports.getDetailOrder = (req, res) => {
                 user: null,
                 orderCart: cart,
                 status: order.status,
-                date: order.date
+                date: order.date,
+                deliveryDate: order.deliveryDate
             });
         }    
     });

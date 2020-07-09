@@ -26,7 +26,7 @@ const orderSchema = mongoose.Schema({
         default: Date.now
     },
     deliveryDate: {
-        type: Date
+        type: Number
     }
 });
 

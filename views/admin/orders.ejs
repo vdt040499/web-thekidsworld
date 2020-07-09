@@ -14,6 +14,7 @@
             <th>Receiver's Phone</th>
             <th>Receiver's Email</th>
             <th>Created date</th>
+            <th>Estimated delivery date</th>
             <th>Delivery date</th>
             <th>Status</th>
             <th>Delete</th>
@@ -23,14 +24,22 @@
         <% orders.forEach(function(order) {%>
         <% var orderUser = JSON.parse(order.receiver); %>
         <% var orderDate = order.date.getDate() + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
-        <% var deliveryDate = (order.date.getDate()+3) + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
+        <% var estimatedDeliveryDate = (order.date.getDate()+3) + "/" + (order.date.getMonth()+1)  + "/" + order.date.getFullYear(); %>
+        <% var temp = new Date(); %>
+        <% temp.setTime(parseInt(order.deliveryDate)); %>
+        <% var deliveryDate = (temp.getDate()) + "/" + (temp.getMonth()+1)  + "/" + temp.getFullYear(); %>
         <tr class="clickable-row" data-href="/admin/orders/get-order/<%= order.ID %>">
             <td><a href="/admin/orders/get-order/<%= order.ID %>"><%= order.ID %></a></td>
             <td><%= orderUser.username %></td>
             <td><%= orderUser.phone %></td>
             <td><%= orderUser.email %></td>
             <td><%= orderDate %></td>
-            <td><%= deliveryDate %></td>
+            <td><%= estimatedDeliveryDate %></td>
+            <% if (!order.deliveryDate) { %>
+                <td></td>
+            <% } else { %>
+                <td><%= deliveryDate %></td>
+            <% } %>
             <td>
                 <% var proccess = "Processing"; %>
                 <% var ship = "Shipping"; %>

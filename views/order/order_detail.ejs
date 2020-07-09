@@ -82,18 +82,26 @@
         <p class="bill-info-details"><%= parseInt(total).toLocaleString("vi", { style: "currency", currency: "VND", }) %></p>
         <p class="bill-title">THỜI GIAN GIAO HÀNG DỰ KIẾN</p>
         <% var orderDate = date.getDate() + "/" + (date.getMonth()+1)  + "/" + date.getFullYear(); %>
-        <% var deliveryDate = (date.getDate()+3) + "/" + (date.getMonth()+1)  + "/" + date.getFullYear(); %>
-        <p class="bill-info-details">Từ ngày <%= orderDate %> - <%= deliveryDate %></p>
-        <p class="bill-title">TÌNH TRẠNG ĐƠN HÀNG: <h5 class="text-uppercase ml-3"         
-          <% if ( status == "Processing" ) { %>
-              style="color: rgb(219, 172, 18);"
-          <% } else if (status == "Shipping") { %>
-              style="color: rgb(19, 116, 19);"
-          <% } else if (status == "Completed") { %>
-              style="color: rgb(160, 26, 26);"
-          <% } else { %>
-              style="color: rgb(160, 160, 160);"
-          <% } %>><strong><%= status %></strong></h5></p>
+        <% var estimatedDeliveryDate = (date.getDate()+3) + "/" + (date.getMonth()+1)  + "/" + date.getFullYear(); %>
+        <% var temp = new Date(); %>
+        <% temp.setTime(parseInt(deliveryDate)); %>
+        <% var deliveryDate = (temp.getDate()) + "/" + (temp.getMonth()+1)  + "/" + temp.getFullYear(); %>
+        <p class="bill-info-details">Từ ngày <%= orderDate %> - <%= estimatedDeliveryDate %></p>
+        <div class="row">
+            <p class="bill-title">TÌNH TRẠNG ĐƠN HÀNG: <h5 class="text-uppercase ml-3"         
+                <% if ( status == "Processing" ) { %>
+                    style="color: rgb(219, 172, 18);"
+                <% } else if (status == "Shipping") { %>
+                    style="color: rgb(19, 116, 19);"
+                <% } else if (status == "Completed") { %>
+                    style="color: rgb(160, 26, 26);"
+                <% } else { %>
+                    style="color: rgb(160, 160, 160);"
+                <% } %>><strong><%= status %></strong></h5></p>
+            <% if (status === "Completed" ) { %>
+                <p class="bill-info-details">Đã giao ngày:  <%= deliveryDate %></p>
+            <% } %>
+        </div>
 
         <% if (status === "Processing") { %>
           <div class="d-flex justify-content-end">
