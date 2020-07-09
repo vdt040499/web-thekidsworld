@@ -100,48 +100,6 @@
                     </form>
                 <% } %>
 
-                <% if (typeof cart !== "undefined" && cart.length !== 0) { %>
-                <a class="btn my-2 my-sm-0" type="button" href="/cart/cart"><img src="/images/the-cart.png" width="25px"
-                        alt="search button"></a>
-                <div class="d-flex align-items-center mr-3">
-                    <span class="badge badge-pill badge-info"><%= cart.length %></span>
-                </div>
-                <% } else { %>
-                <a class="btn my-2 my-sm-0" type="button" href="/cart/cart"><img src="/images/the-cart.png" width="25px"
-                        alt="search button"></a>
-                <% } %>
-
-                <div class="dropdown">
-                    <% if (user) { %>
-                    <a href="/users/account" class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" onclick="window.location.href='/users/account'" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img src="/images/useravatar.png" alt="account" width="25px">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: rgb(133, 210, 255); 
-                                                    outline: none; border: none; padding: 7px; border-radius: 10px;">
-                        <a class="nav-link" href="#"><%= user.username %></a>
-                        <a class="dropdown-item" id="btn-up" href="/orders/checkorder">KIỂM TRA ĐƠN HÀNG</a>
-                        <a class="dropdown-item mt-1" id="btn-up" href="/users/logout">ĐĂNG XUẤT</a>
-                    </div>
-                    <% } else {%>
-                    <a href="users/signup" class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/images/useravatar.png" alt="account" width="25px">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: rgb(133, 210, 255); 
-                                                    outline: none; border: none; padding: 7px; border-radius: 10px;">
-                        <a class="dropdown-item" id="btn-in" href="/users/signin">ĐĂNG NHẬP</a>
-                        <a class="dropdown-item" id="btn-up" href="/users/signup">ĐĂNG KÝ</a>
-                        <a class="dropdown-item mt-1" id="btn-up" href="/orders/checkorder">KIỂM TRA ĐƠN HÀNG</a>
-                    </div>
-                    <% } %>
-                </div>
-                <% if (user && user.admin == 1) { %>
-                <li class="nav-item">
-                    <a class="btn btn-md button" href="/admin/categories">ADMIN AREA</a>
-                </li>
-                <% } %>
             </div>
             </div>
         </nav>

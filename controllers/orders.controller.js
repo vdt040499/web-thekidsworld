@@ -417,16 +417,27 @@ module.exports.getDetailOrder = (req, res) => {
     Order.findById(orderId, (err, order) => {
         var cart = JSON.parse(JSON.stringify(order.cart.slice()));
         var receiver = JSON.parse(order.receiver);
-            
-        res.render('order/order_detail', {
-            headTitle: 'Đơn hàng của bạn',
-            orderID: order.ID,
-            receiver: receiver,
-            user: req.user,
-            orderCart: cart,
-            status: order.status,
-            date: order.date
-        });
+        if(req.isAuthenticated()) {
+            res.render('order/order_detail', {
+                headTitle: 'Đơn hàng của bạn',
+                orderID: order.ID,
+                receiver: receiver,
+                user: req.user,
+                orderCart: cart,
+                status: order.status,
+                date: order.date
+            });
+        } else {
+            res.render('order/order_detail', {
+                headTitle: 'Đơn hàng của bạn',
+                orderID: order.ID,
+                receiver: receiver,
+                user: null,
+                orderCart: cart,
+                status: order.status,
+                date: order.date
+            });
+        }    
     });
 }
 
@@ -451,3 +462,90 @@ module.exports.thankYou = (req, res) => {
       headTitle: "Cảm ơn"
     });
 };
+
+//GET editreceiver
+module.exports.editReceiver = async(req, res) => {
+    let orderID = req.params.orderID;
+
+    const order = await Order.findOne({ID: orderID});
+
+    const receiver = JSON.parse(order.receiver);
+
+    let username = receiver.username;
+    let address = receiver.address;
+    let phone = receiver.phone;
+    let email = receiver.email;
+
+    res.render('order/edit_receiver', {
+        headTitle: "Thay đổi thông tin giao hàng",
+        orderID: orderID,
+        username: username,
+        address: address,
+        phone: phone,
+        email: email
+    });
+}
+
+//POST editreceiver
+module.exports.editReceiverPost = async(req, res) => {
+    let orderID = req.params.orderID;
+    let username = req.body.username;
+    let phone = req.body.phone;
+    let email = req.body.email;
+
+    const order = await Order.findOne({ID: orderID});
+
+    let receiver = JSON.parse(order.receiver);
+
+    receiver.username = username;
+    receiver.phone = phone;
+    receiver.email = email;
+
+    var editedReceiver = JSON.stringify(receiver);
+
+    order.receiver = editedReceiver;
+
+    await order.save();
+
+    req.flash('success', 'Thay đổi thông tin thành công');
+    res.redirect('/orders/get-detail/' + order._id);
+
+}
+
+//POST editaddressreceiver
+module.exports.editAddressReceiverPost = async(req, res) => {
+    let orderID = req.params.orderID;
+    let province = req.body.province;
+    let district = req.body.district;
+    let ward = req.body.ward;
+    let address = req.body.address;
+
+    req.checkBody('province', 'Vui lòng chọn tỉnh/thành phố').notEmpty();
+    req.checkBody('district', 'Vui lòng chn quận/huyện').notEmpty();
+    req.checkBody('ward', 'Vui lòng nhập phường/xã').notEmpty();
+    req.checkBody('address', 'Vui lòng nhập địa chỉ cụ thể').notEmpty();
+
+    let errors = req.validationErrors();
+
+    if(errors) {
+        req.flash('danger', 'Có lỗi xảy ra vui lòng nhập lại');
+        res.redirect('/users/edit_receiver/' + orderID);
+    } else {
+        let order = await Order.findOne({ID: orderID});
+
+        let receiver = JSON.parse(order.receiver);
+
+        var address2 = select.address(address, province, district, ward);
+
+        receiver.address = address2;
+
+        let editedReceiver = JSON.stringify(receiver);
+
+        order.receiver = editedReceiver;
+
+        await order.save();
+
+        req.flash('success', 'Cập nhật địa chỉ giao hàng thành công');
+        res.redirect('/orders/get-detail/' + order._id);
+    }
+}

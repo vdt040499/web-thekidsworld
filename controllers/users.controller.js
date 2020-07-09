@@ -520,6 +520,12 @@ module.exports.changePassPost = async(req, res) => {
             user: req.user
         });
     } else if (await bcrypt.compare(oldpass, user.password)) {
+        const hashedPassword = await bcrypt.hash(newpass, 10);
+
+        user.password = hashedPassword;
+
+        await user.save();
+        
         req.flash('success', 'Thay đổi mật khẩu thành công');
         res.redirect('/users/account');
     } else {
