@@ -447,7 +447,16 @@ module.exports.cancelOrder = async(req, res) => {
 
     let order = await Order.findOne({ID: orderId});
 
-    console.log(order);
+    if (req.isAuthenticated()) {
+        var user = req.user;
+        var cart = order.cart;
+        console.log(cart);
+        for(let i=0; i < cart.length; i++) {
+            var product = await Product.findOne({slug: cart[i].title});
+            product.soldUser = product.soldUser.filter(e => e !== user.username);
+            await product.save();      
+        }
+    }
 
     order.status = "Cancel";
 

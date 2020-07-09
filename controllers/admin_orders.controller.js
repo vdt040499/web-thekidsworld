@@ -1,5 +1,6 @@
 const Order = require('../models/order.model');
 const User = require('../models/user.model');
+const Product = require('../models/product.model');
 const { order } = require('./orders.controller');
 
 //GET all orders
@@ -56,7 +57,35 @@ module.exports.changeStatus = (req, res) => {
     var changeStatus = req.params.changeStatus;
     var orderId = req.params.orderId;
 
+
     Order.findOne({ID: orderId}, (err, order) => {
+
+        if(order.orderBy) {
+            User.findById(order.orderBy, (err, user) => {
+                if (changeStatus === "Processing" || changeStatus === "Shipping" || changeStatus === "Completed") {
+                    var cart = order.cart;
+                    for(let i=0; i < cart.length; i++) {
+                        Product.findOne({slug: cart[i].title}, (err, product) => {
+                            if (!product.soldUser.includes(user.username)) {
+                                product.soldUser.push(user.username);
+                                product.save();
+                            }
+                        });
+                    }
+                } else {
+                    var cart = order.cart;
+                    for(let i=0; i < cart.length; i++) {
+                        Product.findOne({slug: cart[i].title}, (err, product) => {
+                            if (product.soldUser.includes(user.username)) {
+                                product.soldUser = product.soldUser.filter(e => e !== user.username);
+                                product.save();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
         order.status = changeStatus;
 
         order.save((err) => {
