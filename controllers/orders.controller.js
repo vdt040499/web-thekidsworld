@@ -297,7 +297,8 @@ module.exports.checkOrderPost = (req, res) => {
                         res.render('order/check_order', {
                             headTitle: 'Kiểm tra đơn hàng',
                             orderId: orderId,
-                            email: email
+                            email: email,
+                            user: req.user
                         });
                     } else {
                         if(!order.orderBy) { //Order noaccount
@@ -309,7 +310,8 @@ module.exports.checkOrderPost = (req, res) => {
                                 res.render('order/check_order', {
                                     headTitle: 'Kiểm tra đơn hàng',
                                     orderId: orderId,
-                                    email: email
+                                    email: email,
+                                    user: req.user
                                 }); 
                             } else {
                                 res.render('order/order_detail', {
@@ -332,7 +334,8 @@ module.exports.checkOrderPost = (req, res) => {
                                 res.render('order/check_order', {
                                     headTitle: 'Kiểm tra đơn hàng',
                                     orderId: orderId,
-                                    email: email
+                                    email: email,
+                                    user: req.user
                                 }); 
                             } else {
                                 res.render('order/order_detail', {
