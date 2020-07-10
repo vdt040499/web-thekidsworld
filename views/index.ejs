@@ -58,7 +58,7 @@
         <% if (bestSellerProducts) { %>
             <% bestSellerProducts.forEach((product) => { %>
                 <% if (product.sale != 0) { %>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                         <div class="card">
                             <div class="container" style="text-align: center; margin-top: 20px;">
                                 <a href="/products/<%= product.category %>/<%= product.slug %>">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 <% } else { %>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                         <div class="card">
                             <div class="container" style="text-align: center; margin-top: 20px;">
                                 <a href="/products/<%= product.category %>/<%= product.slug %>">

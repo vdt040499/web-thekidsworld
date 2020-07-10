@@ -57,6 +57,12 @@ router.get('/aboutus', (req, res) => {
   });
 });
 
+router.get('/faq', (req, res) => {
+  res.render('pages/faq', {
+    headTitle: "Những câu hỏi thường gặp"
+  });
+});
+
 router.get('/sales', async(req, res) => {
   let greaterThan50 = [];
   let greaterThan30 = [];
