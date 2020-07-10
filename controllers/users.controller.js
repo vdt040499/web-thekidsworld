@@ -67,7 +67,16 @@ module.exports.signupPost = (req, res) => {
 
             if(user) {
                 req.flash('danger', 'Tên đăng nhập đã tồn tại! Vui chọn tên khác');
-                res.redirect('/users/signup');
+                // res.redirect('/users/signup');
+                res.render('users/signup', {
+                    headTitle: 'Đăng kí',
+                    username: username,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    errors: errors,
+                    user: null
+                });
             } else {
 
                 var prov, dist, ward2;
