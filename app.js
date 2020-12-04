@@ -8,19 +8,31 @@ const session = require('express-session');
 const validator = require('express-validator');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
+const env = require('dotenv');
 
 var app = express();
+env.config();
 
 //Get database
 const config = require('./config/database');
 
-//Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, err => {
-    if(err) throw err
-    console.log('Connect MongoDB Successfully!')
+// //Connect to MongoDB Local
+// mongoose.connect(process.env.MONGODB_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// }, err => {
+//     if(err) throw err
+//     console.log('Connect MongoDB Successfully!')
+// });
+
+// Connect to Cloud MongoDB
+mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.mfg8v.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`, 
+                {
+                    useNewUrlParser: true, 
+                    useUnifiedTopology: true,
+                    useCreateIndex: true
+}).then(() => {
+    console.log("Database connected!");
 });
 
 // view engine setup
